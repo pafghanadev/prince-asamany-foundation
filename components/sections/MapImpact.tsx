@@ -81,15 +81,14 @@ export function MapImpact() {
               {/* Location Pill Selector for Ergonomics */}
               <div
                 className="flex flex-wrap items-center justify-center gap-2 mt-4 pt-4 border-t border-brand-navy/10"
-                role="tablist"
+                role="group"
                 aria-label="Regional impact locations"
               >
                 {MAP_HOTSPOTS.map((h) => (
                   <button
                     key={h.id}
                     type="button"
-                    role="tab"
-                    aria-selected={activeId === h.id}
+                    aria-pressed={activeId === h.id}
                     onClick={() => setActiveId(h.id)}
                     className={`font-body text-xs font-semibold px-3.5 py-1.5 rounded-editorial transition-colors duration-200 focus-visible:outline-2 focus-visible:outline-ink ${
                       activeId === h.id
@@ -103,7 +102,7 @@ export function MapImpact() {
               </div>
 
               {/* Active Location Information Callout */}
-              <div className="mt-4 p-4 rounded-card bg-brand-cream/80 border border-brand-navy/10 transition-all duration-300">
+              <div aria-live="polite" className="mt-4 p-4 rounded-editorial bg-paper-deep border border-rule">
                 <div className="flex flex-wrap items-center justify-between gap-2 mb-1.5">
                   <span className="font-display text-base font-bold text-brand-navy flex items-center gap-1.5">
                     <span className="w-2.5 h-2.5 rounded-full bg-brand-red" aria-hidden="true" />
@@ -130,10 +129,10 @@ export function MapImpact() {
           <div className="grid grid-cols-2 gap-3 sm:gap-6">
             {stats.map((stat, i) => {
               const themeClasses = {
-                red: 'bg-brand-red text-white border-brand-red',
+                red: 'bg-ink text-paper border-ink',
                 gold: 'bg-brand-gold text-brand-navy border-brand-gold',
                 navy: 'bg-brand-navy text-white border-brand-navy',
-                green: 'bg-brand-green text-white border-brand-green',
+                green: 'bg-ink text-paper border-ink',
               }[stat.theme] || 'bg-paper text-ink border-rule';
 
               return (
@@ -155,7 +154,7 @@ export function MapImpact() {
                   <div className="w-8 sm:w-10 h-0.5 sm:h-1 my-2 sm:my-3 bg-white/30" aria-hidden="true" />
                   
                   <div className="font-body text-xs sm:text-lg font-bold sm:font-semibold mb-1 leading-tight">{stat.label}</div>
-                  <div className={`font-body text-[11px] sm:text-sm leading-snug sm:leading-relaxed line-clamp-3 sm:line-clamp-none ${stat.theme === 'gold' ? 'text-brand-navy/90' : 'text-white/90'}`}>
+                  <div className={`font-body text-xs sm:text-sm leading-relaxed ${stat.theme === 'gold' ? 'text-brand-navy/90' : 'text-white/90'}`}>
                     {stat.description}
                   </div>
                 </motion.div>

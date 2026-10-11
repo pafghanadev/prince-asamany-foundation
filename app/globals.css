@@ -143,9 +143,40 @@ h1, h2, h3, h4, h5, h6 {
 .focus-ring-dark:focus-visible {
   outline-color: var(--color-brand-gold);
 }
+.focus-surface-dark :focus-visible {
+  outline-color: var(--color-brand-gold);
+}
 } /* end @layer base */
 
 /* ── Utility classes ─────────────────────────────────────────── */
+
+.hero-campaign-title {
+  font-family: var(--font-body);
+  font-size: clamp(2.15rem, 5.6vw, 5.5rem);
+  font-weight: 700;
+  line-height: 1.03;
+  letter-spacing: -0.055em;
+  text-wrap: initial;
+}
+.hero-highlight {
+  display: inline-block;
+  background: var(--color-brand-gold);
+  color: var(--color-ink-deep);
+  padding: 0.04em 0.13em 0.1em;
+  margin-left: -0.13em;
+}
+.hero-photo-scrim {
+  background: linear-gradient(90deg, rgba(11,37,48,.94) 0%, rgba(11,37,48,.82) 38%, rgba(11,37,48,.25) 72%, rgba(11,37,48,.12) 100%), linear-gradient(0deg, rgba(11,37,48,.75), transparent 35%);
+}
+.hero-paper-edge {
+  clip-path: polygon(0 70%, 32% 100%, 100% 0, 100% 100%, 0 100%);
+}
+@media (max-width: 767px) {
+  .hero-campaign-title { font-size: clamp(2.15rem, 7.8vw, 3.7rem); }
+  .hero-photo-scrim {
+    background: linear-gradient(90deg, rgba(11,37,48,.85), rgba(11,37,48,.48)), linear-gradient(0deg, rgba(11,37,48,.92), transparent 80%);
+  }
+}
 
 /* Brush stroke accent (SVG background) */
 .brush-underline {

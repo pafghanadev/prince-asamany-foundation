@@ -56,7 +56,7 @@ export function Footer() {
               width={800}
               height={427}
               sizes="160px"
-              className="h-10 w-auto"
+              className="h-10 w-auto max-w-[10rem] object-contain"
             />
           </Link>
 
@@ -157,7 +157,7 @@ export function Footer() {
               width={800}
               height={427}
               sizes="160px"
-              className="h-14 w-auto"
+              className="h-14 w-auto max-w-[12rem] object-contain"
             />
           </Link>
           <span className="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-editorial bg-white/10 text-white/80 font-body text-xs font-medium">

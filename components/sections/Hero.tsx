@@ -4,7 +4,7 @@ import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { blurProps } from '@/lib/media';
-import { EditorialHeadline, CtaRow } from '@/components/ui/editorial';
+import { useReducedMotion } from 'framer-motion';
 
 interface HeroSlide {
   src: string;
@@ -49,85 +49,57 @@ const HERO_SLIDES: HeroSlide[] = [
 export function HeroSection() {
   const [currentIndex, setCurrentIndex] = React.useState(0);
   const [isPaused, setIsPaused] = React.useState(false);
-
-  // Auto-rotate every 6.5 seconds, pausing while the pointer or touch is on the hero
+  const [isInteracting, setIsInteracting] = React.useState(false);
+  const reducedMotion = useReducedMotion();
   React.useEffect(() => {
-    if (isPaused) return;
-    const interval = setInterval(() => {
-      setCurrentIndex((prev) => (prev + 1) % HERO_SLIDES.length);
-    }, 6500);
-    return () => clearInterval(interval);
-  }, [isPaused]);
-
-  const slide = HERO_SLIDES[currentIndex];
-
+    if (isPaused || isInteracting || reducedMotion) return;
+    const timer = setInterval(() => setCurrentIndex(i => (i + 1) % HERO_SLIDES.length), 6500);
+    return () => clearInterval(timer);
+  }, [isPaused, isInteracting, reducedMotion]);
   return (
-    <section
-      className="bg-ink text-paper"
-      aria-label="Hero, Prince Asamany Foundation"
-      onMouseEnter={() => setIsPaused(true)}
-      onMouseLeave={() => setIsPaused(false)}
-      onTouchStart={() => setIsPaused(true)}
-      onTouchEnd={() => setIsPaused(false)}
-    >
-      <div className="grid min-h-[100svh] grid-cols-1 lg:grid-cols-[38%_62%]">
-        <div className="flex flex-col justify-center gap-8 px-6 pt-32 pb-16 md:px-12 lg:py-24 lg:pl-[max(3rem,calc((100vw-1440px)/2+3rem))]">
-          <p className="font-body text-xs font-semibold uppercase tracking-[0.18em] text-brand-gold">
-            Akyawkrom, Ejisu, Ashanti Region, Ghana
-          </p>
-          <EditorialHeadline
-            level={1}
-            tone="ink"
-            title="Hope, Development & Opportunity for All."
-            lead="Uplifting underprivileged children, families, and communities across Ghana through healthcare, education, and life-changing opportunity."
-          />
-          <CtaRow
-            primary={{ href: '/donate', label: 'Support the Foundation' }}
-            secondary={{ href: '/about', label: 'Learn more about us' }}
-          />
-        </div>
-
-        <div className="relative min-h-[60svh] overflow-hidden lg:min-h-full">
-          {HERO_SLIDES.map((s, idx) => (
-            <div
-              key={s.src}
-              className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
-                idx === currentIndex ? 'z-[1] opacity-100' : 'pointer-events-none z-0 opacity-0'
-              }`}
-              aria-hidden={idx !== currentIndex}
-            >
-              <Image
-                src={s.src}
-                alt={s.alt}
-                fill
-                className={`object-cover ${s.position}`}
-                priority={idx === 0}
-                quality={88}
-                sizes="(min-width: 1024px) 62vw, 100vw"
-                {...blurProps(s.src)}
-              />
-            </div>
-          ))}
-
-          <p className="absolute bottom-4 left-4 z-[2] bg-ink/85 px-3 py-2 text-sm text-paper" aria-live="polite">
-            {slide.caption}
-          </p>
-
-          <div className="absolute bottom-4 right-4 z-[2] flex gap-2" role="group" aria-label="Choose hero photo">
-            {HERO_SLIDES.map((s, idx) => (
-              <button
-                key={s.src}
-                type="button"
-                onClick={() => setCurrentIndex(idx)}
-                aria-label={`Show photo ${idx + 1}: ${s.caption}`}
-                aria-current={idx === currentIndex}
-                className={`h-3 w-3 rounded-editorial border border-paper ${idx === currentIndex ? 'bg-brand-gold' : 'bg-ink/60'}`}
-              />
-            ))}
+    <section className="focus-surface-dark relative isolate overflow-hidden bg-ink text-white"
+      aria-label="Prince Asamany Foundation" aria-roledescription="carousel"
+      onMouseEnter={() => setIsInteracting(true)} onMouseLeave={() => setIsInteracting(false)}
+      onFocusCapture={() => setIsInteracting(true)}
+      onBlurCapture={e => { if (!e.currentTarget.contains(e.relatedTarget)) setIsInteracting(false); }}>
+      <div className="absolute inset-0 -z-20">
+        {HERO_SLIDES.map((photo, index) => (
+          <div key={photo.src} aria-hidden={index !== currentIndex}
+            className={`absolute inset-0 transition-opacity duration-1000 motion-reduce:transition-none ${index === currentIndex ? 'opacity-100' : 'opacity-0'}`}>
+            <Image src={photo.src} alt={photo.alt} fill className={`object-cover ${photo.position}`}
+              priority={index === 0} quality={88} sizes="100vw" {...blurProps(photo.src)} />
           </div>
+        ))}
+      </div>
+      <div className="hero-photo-scrim absolute inset-0 -z-10" aria-hidden="true" />
+      <div className="mx-auto flex min-h-[min(900px,100svh)] max-w-[1440px] flex-col justify-center px-6 pt-32 pb-36 md:px-12 lg:px-16 lg:pt-36 lg:pb-36">
+        <p className="mb-6 font-body text-[11px] font-semibold uppercase tracking-[0.2em] text-brand-gold md:text-xs">Community-led change &middot; Ejisu, Ghana</p>
+        <h1 className="hero-campaign-title max-w-4xl">
+          <span className="block">Hope.</span><span className="block">Development.</span>
+          <span className="mt-2 block"><span className="hero-highlight">Opportunity</span></span>
+          <span className="mt-2 block">for all.</span>
+        </h1>
+        <p className="mt-7 max-w-lg font-body text-base leading-relaxed text-white/95 md:text-lg">Standing with children, families, and communities across Ghana through healthcare, education, and opportunity.</p>
+        <div className="mt-8 flex flex-wrap items-center gap-x-7 gap-y-4">
+          <Link href="/donate" className="inline-flex min-h-12 items-center gap-4 bg-brand-gold px-6 py-3 font-body text-sm font-bold text-ink transition-colors hover:bg-paper">Help change a life <span aria-hidden="true">&#8599;</span></Link>
+          <Link href="/programs" className="inline-flex min-h-12 items-center gap-3 border-b border-white/60 py-3 font-body text-sm font-semibold text-white transition-colors hover:text-brand-gold">Explore our work <span aria-hidden="true">&#8594;</span></Link>
         </div>
       </div>
+      <div className="absolute inset-x-0 bottom-12 mx-auto flex max-w-[1440px] flex-wrap items-center justify-between gap-3 px-6 md:px-12 lg:px-16">
+        <div className="flex items-center gap-1" role="group" aria-label="Choose community photo">
+          {HERO_SLIDES.map((photo, index) => (
+            <button key={photo.src} type="button" onClick={() => setCurrentIndex(index)}
+              aria-label={`Show photo ${index + 1}: ${photo.caption}`} aria-pressed={index === currentIndex}
+              className="flex h-11 w-9 items-center justify-center">
+              <span className={`h-2.5 w-2.5 rounded-full border border-white ${index === currentIndex ? 'bg-brand-gold border-brand-gold' : 'bg-white/20'}`} />
+            </button>
+          ))}
+          <button type="button" onClick={() => setIsPaused(p => !p)} aria-label={isPaused ? 'Resume photo slideshow' : 'Pause photo slideshow'} aria-pressed={isPaused}
+            className="ml-2 flex h-11 w-11 items-center justify-center border border-white/40 text-sm"><span aria-hidden="true">{isPaused ? '\u25b6' : '\u2161'}</span></button>
+        </div>
+        <p className="font-body text-xs text-white/85" aria-live={isPaused ? 'polite' : 'off'}>{HERO_SLIDES[currentIndex].caption}</p>
+      </div>
+      <div className="hero-paper-edge absolute inset-x-0 bottom-0 h-7 bg-paper md:h-10" aria-hidden="true" />
     </section>
   );
 }
-

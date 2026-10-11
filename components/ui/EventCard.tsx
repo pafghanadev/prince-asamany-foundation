@@ -89,7 +89,7 @@ export function EventCard({ event, featured = false }: EventCardProps) {
 
           {/* Date stamp badge */}
           <div className="absolute top-4 left-4 z-10 flex flex-col items-center justify-center rounded-editorial bg-paper/95 backdrop-blur-md border border-rule px-3 py-1.5  min-w-[54px] text-center">
-            <span className="font-display text-xs font-bold uppercase tracking-wider text-brand-red leading-none">
+            <span className="font-display text-xs font-bold uppercase tracking-wider text-brand-red-dark leading-none">
               {monthName}
             </span>
             <span className="font-display text-2xl font-black text-ink leading-tight">
@@ -183,7 +183,7 @@ export function EventCard({ event, featured = false }: EventCardProps) {
                 href={calendarUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 px-3 py-2 rounded-editorial border border-slate-200 hover:border-brand-navy/40 text-slate-700 hover:text-ink text-xs font-semibold bg-slate-50 hover:bg-slate-100 transition-colors"
+                className="inline-flex items-center gap-1.5 px-3 py-2 rounded-editorial border border-rule hover:border-ink text-ink hover:text-ink text-xs font-semibold bg-slate-50 hover:bg-slate-100 transition-colors"
                 title="Add to Google Calendar"
               >
                 <CalendarPlus className="w-4 h-4 text-brand-red" />

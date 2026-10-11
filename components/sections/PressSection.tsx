@@ -39,7 +39,7 @@ export function PressSection() {
               aria-label={`${item.title}. Read the full article on ${item.outlet} (opens in a new tab)`}
             >
               <div className="flex items-center justify-between gap-3">
-                <span className="px-3 py-1 rounded-full text-xs font-body font-semibold bg-paper text-ink/75">
+                <span className="text-xs font-body font-semibold text-brand-red-dark">
                   {item.tag}
                 </span>
                 <span className="font-body text-xs text-ink/75">{item.date}</span>
@@ -74,7 +74,7 @@ export function PressSection() {
               type="button"
               onClick={() => setExpanded((e) => !e)}
               aria-expanded={expanded}
-              className="inline-flex items-center justify-center gap-2 px-7 py-3 rounded-full font-body font-semibold text-sm bg-ink text-paper border-2 border-brand-navy hover:bg-transparent hover:text-ink transition-colors duration-200 focus-visible:outline-2 focus-visible:outline-brand-navy focus-visible:outline-offset-2"
+              className="inline-flex items-center justify-center gap-2 px-7 py-3 rounded-editorial font-body font-semibold text-sm bg-ink text-paper border-2 border-brand-navy hover:bg-transparent hover:text-ink transition-colors duration-200 focus-visible:outline-2 focus-visible:outline-brand-navy focus-visible:outline-offset-2"
             >
               {expanded ? 'Show fewer' : `View ${hiddenCount} more article${hiddenCount === 1 ? '' : 's'}`}
               <svg

@@ -8,16 +8,9 @@ import { navLinks, siteConfig } from '@/lib/site';
 
 export function Navbar() {
   const pathname = usePathname();
-  const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
 
   const isActive = (href: string) => href === '/' ? pathname === '/' : pathname.startsWith(href);
-
-  useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 40);
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
 
   // Lock body scroll when mobile menu open
   useEffect(() => {
@@ -73,14 +66,12 @@ export function Navbar() {
     return () => document.removeEventListener('keydown', handleTab);
   }, [menuOpen]);
 
-  const navBg = scrolled
-    ? 'bg-ink border-b border-white/10'
-    : 'bg-transparent border-b border-transparent';
+  const navBg = 'bg-ink border-b border-white/10';
 
   return (
     <>
       <header
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ` + navBg}>
+        className={`focus-surface-dark fixed top-0 left-0 right-0 z-50 transition-all duration-300 ` + navBg}>
         <nav
           className="max-w-7xl mx-auto px-5 md:px-8 flex items-center justify-between h-18"
           aria-label="Main navigation"
@@ -93,7 +84,7 @@ export function Navbar() {
               width={800}
               height={427}
               sizes="160px"
-              className="h-10 w-auto"
+              className="h-10 w-auto max-w-[10rem] object-contain"
               priority
             />
           </Link>
@@ -156,7 +147,7 @@ export function Navbar() {
         aria-modal="true"
         aria-label="Navigation menu"
         inert={!menuOpen || undefined}
-        className={`fixed inset-0 z-40 bg-ink flex flex-col overflow-y-auto transition-all duration-400 md:hidden ` + (menuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none')}
+        className={`focus-surface-dark fixed inset-0 z-40 bg-ink flex flex-col overflow-y-auto transition-all duration-400 md:hidden ` + (menuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none')}
       >
         {/* Gold accent bar at top */}
         <div className="absolute top-0 left-0 right-0 h-1 bg-brand-gold" />

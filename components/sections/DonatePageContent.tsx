@@ -144,7 +144,7 @@ export function DonatePageContent() {
                   <span className="block font-display text-xl font-bold text-ink group-hover:text-brand-red-dark transition-colors">{tier.label}</span>
                   <span className="block w-8 h-0.5 bg-brand-gold mx-auto my-2.5" aria-hidden="true" />
                   <span className="block font-body text-sm text-ink/75 leading-relaxed">{tier.impact}</span>
-                  <span className="block mt-3 font-body text-xs font-semibold text-brand-gold opacity-0 group-hover:opacity-100 transition-opacity">Tap to donate this amount</span>
+                  <span className="block mt-3 font-body text-xs font-semibold text-brand-red-dark opacity-0 group-hover:opacity-100 transition-opacity">Tap to donate this amount</span>
                 </button>
               </li>
             ))}
