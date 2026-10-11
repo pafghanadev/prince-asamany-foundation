@@ -48,6 +48,22 @@
   /* Spacing extras */
   --spacing-section: 6rem;
   --spacing-section-sm: 3.5rem;
+
+  /* Editorial surfaces */
+  --color-paper: #FAF6EE;
+  --color-paper-deep: #F2EBDD;
+  --color-ink: #113647;
+  --color-ink-deep: #0B2530;
+  --color-rule: #D9CFBE;
+  --radius-editorial: 0.25rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
 
 /* ── Base Reset & Typography ───────────────────────────────────

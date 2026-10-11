@@ -11,7 +11,7 @@ export function PressSection() {
   const hiddenCount = pressItems.length - INITIAL_COUNT;
 
   return (
-    <section className="bg-white section-padding" aria-labelledby="press-heading">
+    <section className="bg-paper py-20 md:py-28" aria-labelledby="press-heading">
       <div className="max-w-7xl mx-auto px-5 md:px-8">
         <div className="max-w-3xl mx-auto text-center mb-12">
           <span className="font-body text-sm font-semibold uppercase tracking-[0.15em] text-brand-red-dark">
@@ -19,11 +19,11 @@ export function PressSection() {
           </span>
           <h2
             id="press-heading"
-            className="font-display text-3xl md:text-4xl lg:text-5xl font-bold text-brand-navy mt-2 leading-tight"
+            className="font-display text-3xl md:text-4xl lg:text-5xl font-bold text-ink mt-2 leading-tight"
           >
             Our work in the media
           </h2>
-          <p className="font-body text-lg text-brand-navy/70 leading-relaxed mt-4 text-left lg:text-center">
+          <p className="font-body text-lg text-ink/75 leading-relaxed mt-4 text-left lg:text-center">
             Coverage of our programs and impact by Choice News Online.
           </p>
         </div>
@@ -35,19 +35,19 @@ export function PressSection() {
               href={item.href}
               target="_blank"
               rel="noopener noreferrer"
-              className="group flex flex-col gap-3 p-6 rounded-card-lg bg-brand-cream border border-brand-navy/5 hover:-translate-y-1 hover:shadow-lg transition-all duration-300 focus-visible:outline-2 focus-visible:outline-brand-navy focus-visible:outline-offset-2 no-underline"
+              className="group flex flex-col gap-3 p-6 rounded-editorial bg-paper text-ink border border-rule hover:-translate-y-1 transition-all duration-300 focus-visible:outline-2 focus-visible:outline-brand-navy focus-visible:outline-offset-2 no-underline"
               aria-label={`${item.title}. Read the full article on ${item.outlet} (opens in a new tab)`}
             >
               <div className="flex items-center justify-between gap-3">
-                <span className="px-3 py-1 rounded-full text-xs font-body font-semibold bg-white text-brand-navy/70">
+                <span className="px-3 py-1 rounded-full text-xs font-body font-semibold bg-paper text-ink/75">
                   {item.tag}
                 </span>
-                <span className="font-body text-xs text-brand-navy/70">{item.date}</span>
+                <span className="font-body text-xs text-ink/75">{item.date}</span>
               </div>
-              <h3 className="font-display text-lg font-bold text-brand-navy leading-snug group-hover:text-brand-red-dark transition-colors duration-200">
+              <h3 className="font-display text-lg font-bold text-ink leading-snug group-hover:text-brand-red-dark transition-colors duration-200">
                 {item.title}
               </h3>
-              <div className="mt-auto pt-2 flex items-center gap-2 font-body text-sm text-brand-navy/70">
+              <div className="mt-auto pt-2 flex items-center gap-2 font-body text-sm text-ink/75">
                 {item.outlet}
                 <svg
                   width="14"
@@ -74,7 +74,7 @@ export function PressSection() {
               type="button"
               onClick={() => setExpanded((e) => !e)}
               aria-expanded={expanded}
-              className="inline-flex items-center justify-center gap-2 px-7 py-3 rounded-full font-body font-semibold text-sm bg-brand-navy text-white border-2 border-brand-navy hover:bg-transparent hover:text-brand-navy transition-colors duration-200 focus-visible:outline-2 focus-visible:outline-brand-navy focus-visible:outline-offset-2"
+              className="inline-flex items-center justify-center gap-2 px-7 py-3 rounded-full font-body font-semibold text-sm bg-ink text-paper border-2 border-brand-navy hover:bg-transparent hover:text-ink transition-colors duration-200 focus-visible:outline-2 focus-visible:outline-brand-navy focus-visible:outline-offset-2"
             >
               {expanded ? 'Show fewer' : `View ${hiddenCount} more article${hiddenCount === 1 ? '' : 's'}`}
               <svg

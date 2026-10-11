@@ -27,7 +27,7 @@ export function StickyDonate() {
       <Link
         href="/donate"
         aria-label="Donate to Prince Asamany Foundation"
-        className={`fixed bottom-5 right-5 z-30 md:hidden flex items-center gap-2 bg-brand-gold text-brand-navy font-body text-sm font-bold px-5 py-3.5 rounded-full shadow-xl shadow-brand-navy/30 active:scale-95 transition-all duration-300 ${
+        className={`fixed bottom-5 right-5 z-30 md:hidden flex items-center gap-2 bg-brand-gold text-brand-navy font-body text-sm font-bold px-5 py-3.5 rounded-editorial shadow-xl shadow-brand-navy/30 active:scale-95 transition-all duration-300 ${
           visible ? 'translate-y-0 opacity-100' : 'translate-y-24 opacity-0 pointer-events-none'
         }`}
       >

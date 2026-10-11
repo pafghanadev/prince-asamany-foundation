@@ -90,17 +90,17 @@ export default function AboutPage() {
       />
 
       {/* About intro */}
-      <section className="bg-white section-padding">
-        <div className="max-w-7xl mx-auto px-5 md:px-8">
+      <section className="bg-paper text-ink py-20 md:py-28">
+        <div className="mx-auto max-w-6xl px-6 md:px-12">
           <div className="max-w-2xl mx-auto text-center mb-12">
-            <span className="font-body text-sm font-semibold uppercase tracking-[0.15em] text-brand-red-dark">Our Story</span>
-            <h2 className="font-display text-3xl md:text-4xl font-bold text-brand-navy mt-2 leading-tight">
+            <span className="font-body text-xs font-semibold uppercase tracking-[0.18em] text-brand-red-dark">Our Story</span>
+            <h2 className="font-display text-4xl md:text-6xl mt-3 leading-[1.05]">
               Who we are
             </h2>
           </div>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-start">
             <div>
-              <p className="font-body text-lg text-brand-navy/75 leading-relaxed mb-5">
+              <p className="font-body text-lg text-ink/75 leading-relaxed mb-5">
                 The Prince Asamany Foundation was born out of a moment of compassion. While driving
                 with his daughter, Prince Douglas Asamany encountered a beggar asking for food. His
                 daughter&rsquo;s innocent plea, &ldquo;Daddy, why are they begging for food?
@@ -108,15 +108,15 @@ export default function AboutPage() {
                 to create a foundation where kindness meets action.
               </p>
               <blockquote className="border-l-4 border-brand-gold pl-6 mb-5">
-                <p className="font-display text-xl text-brand-navy italic leading-snug">
+                <p className="font-display text-2xl text-ink italic leading-snug">
                   We stand for hope, development and opportunity for all.
                 </p>
               </blockquote>
-              <p className="font-body text-lg text-brand-navy/75 leading-relaxed mb-5">
+              <p className="font-body text-lg text-ink/75 leading-relaxed mb-5">
                 Our purpose is to walk beside underprivileged individuals and families, restoring
                 dignity, hope, and real opportunity.
               </p>
-              <p className="font-body text-lg text-brand-navy/75 leading-relaxed">
+              <p className="font-body text-lg text-ink/75 leading-relaxed">
                 Registered as an official non-profit organization with the Government of Ghana, the
                 Foundation operates with transparency, accountability, and a deep commitment to the
                 dignity of every person we serve.
@@ -127,7 +127,7 @@ export default function AboutPage() {
               {/* Vision */}
               <div className="border-l-4 border-brand-gold pl-6">
                 <h3 className="font-display text-xl font-bold text-brand-red-dark mb-2">Vision</h3>
-                <p className="font-body text-lg text-brand-navy/75 leading-relaxed italic">
+                <p className="font-body text-lg text-ink/75 leading-relaxed italic">
                   Our work aims to break the cycle of poverty and isolation, restoring hope and
                   opportunity for a brighter future.
                 </p>
@@ -136,7 +136,7 @@ export default function AboutPage() {
               {/* Mission */}
               <div className="border-l-4 border-brand-navy pl-6">
                 <h3 className="font-display text-xl font-bold text-brand-red-dark mb-2">Mission</h3>
-                <p className="font-body text-lg text-brand-navy/75 leading-relaxed italic">
+                <p className="font-body text-lg text-ink/75 leading-relaxed italic">
                   Promote community well-being, uplift underprivileged families, and build lasting
                   opportunities for every child and mother across Ghana.
                 </p>
@@ -147,21 +147,21 @@ export default function AboutPage() {
       </section>
 
       {/* Achievements */}
-      <section className="bg-brand-cream section-padding">
-        <div className="max-w-7xl mx-auto px-5 md:px-8">
+      <section className="bg-paper text-ink py-20 md:py-28">
+        <div className="mx-auto max-w-6xl px-6 md:px-12">
           <div className="max-w-2xl mx-auto text-center mb-12">
-            <span className="font-body text-sm font-semibold uppercase tracking-[0.15em] text-brand-red-dark">
+            <span className="font-body text-xs font-semibold uppercase tracking-[0.18em] text-brand-red-dark">
               Milestones
             </span>
-            <h2 className="font-display text-3xl md:text-4xl font-bold text-brand-navy mt-2 leading-tight">
+            <h2 className="font-display text-4xl md:text-6xl mt-3 leading-[1.05]">
               Achievements
             </h2>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {achievements.map((item) => (
-              <div key={item.title} className="bg-white rounded-card-lg border border-brand-navy/10 p-8">
-                <h3 className="font-display text-xl font-bold text-brand-navy mb-3">{item.title}</h3>
-                <p className="font-body text-brand-navy/70 leading-relaxed">{item.text}</p>
+              <div key={item.title} className="border-t border-rule p-8">
+                <h3 className="font-display text-2xl text-ink mb-3">{item.title}</h3>
+                <p className="font-body text-ink/75 leading-relaxed">{item.text}</p>
               </div>
             ))}
           </div>
@@ -169,13 +169,13 @@ export default function AboutPage() {
       </section>
 
       {/* Future Plans */}
-      <section className="bg-white section-padding">
-        <div className="max-w-7xl mx-auto px-5 md:px-8">
+      <section className="bg-paper text-ink py-20 md:py-28">
+        <div className="mx-auto max-w-6xl px-6 md:px-12">
           <div className="max-w-2xl mx-auto text-center mb-12">
-            <span className="font-body text-sm font-semibold uppercase tracking-[0.15em] text-brand-red-dark">
+            <span className="font-body text-xs font-semibold uppercase tracking-[0.18em] text-brand-red-dark">
               What&rsquo;s next
             </span>
-            <h2 className="font-display text-3xl md:text-4xl font-bold text-brand-navy mt-2 leading-tight">
+            <h2 className="font-display text-4xl md:text-6xl mt-3 leading-[1.05]">
               Future Plans
             </h2>
             <p className="font-body text-lg text-brand-navy/70 mt-4">
@@ -184,9 +184,9 @@ export default function AboutPage() {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {futurePlans.map((item) => (
-              <div key={item.title} className="bg-brand-cream rounded-card-lg border border-brand-navy/10 p-8">
-                <h3 className="font-display text-xl font-bold text-brand-navy mb-3">{item.title}</h3>
-                <p className="font-body text-brand-navy/70 leading-relaxed">{item.text}</p>
+              <div key={item.title} className="border-t border-rule p-8">
+                <h3 className="font-display text-2xl text-ink mb-3">{item.title}</h3>
+                <p className="font-body text-ink/75 leading-relaxed">{item.text}</p>
               </div>
             ))}
           </div>
@@ -194,11 +194,11 @@ export default function AboutPage() {
       </section>
 
       {/* Meet the Founder - editorial profile */}
-      <section className="bg-brand-cream section-padding overflow-hidden" aria-labelledby="founder-heading">
-        <div className="max-w-7xl mx-auto px-5 md:px-8">
+      <section className="bg-paper text-ink py-20 md:py-28 overflow-hidden" aria-labelledby="founder-heading">
+        <div className="mx-auto max-w-6xl px-6 md:px-12">
           <div className="max-w-2xl mx-auto text-center mb-12">
-            <span className="font-body text-sm font-semibold uppercase tracking-[0.15em] text-brand-red-dark">Leadership</span>
-            <h2 id="founder-heading" className="font-display text-3xl md:text-4xl font-bold text-brand-navy mt-2 leading-tight">
+            <span className="font-body text-xs font-semibold uppercase tracking-[0.18em] text-brand-red-dark">Leadership</span>
+            <h2 id="founder-heading" className="font-display text-4xl md:text-6xl mt-3 leading-[1.05]">
               Meet our founder
             </h2>
           </div>
@@ -206,7 +206,7 @@ export default function AboutPage() {
 
             {/* Photo stack: portrait + field shot */}
             <div className="relative">
-              <div className="relative rounded-card-lg overflow-hidden aspect-[4/5] shadow-xl max-w-md mx-auto lg:max-w-none">
+              <div className="relative overflow-hidden rounded-editorial aspect-[4/5] max-w-md mx-auto lg:max-w-none">
                 <Image
                   src="/media/opt/IMG_6965.webp"
                   alt="Portrait of Prince Douglas Asamany, Founder and President of the Prince Asamany Foundation, seated outdoors in a foundation T-shirt"
@@ -216,7 +216,7 @@ export default function AboutPage() {
                   {...blurProps('/media/opt/IMG_6965.webp')}
                 />
               </div>
-              <div className="relative mt-6 max-w-xs mx-auto lg:max-w-none lg:mt-0 lg:absolute lg:-bottom-10 lg:-right-4 xl:-right-10 lg:w-56 xl:w-64 rounded-card-lg overflow-hidden border-4 border-white shadow-lg z-10">
+              <div className="relative mt-6 max-w-xs mx-auto lg:max-w-none lg:mt-0 lg:absolute lg:-bottom-10 lg:-right-4 xl:-right-10 lg:w-56 xl:w-64 overflow-hidden border-4 border-paper z-10">
                 <div className="relative aspect-[5/6]">
                   <Image
                     src="/media/opt/IMG_6899_1.webp"
@@ -233,16 +233,16 @@ export default function AboutPage() {
 
             {/* Narrative */}
             <div className="flex flex-col items-start text-left gap-6 mt-8 lg:mt-0">
-              <p className="font-display text-xl md:text-2xl text-brand-navy font-semibold">
+              <p className="font-display text-2xl md:text-3xl text-ink">
                 Prince Douglas Asamany
               </p>
-              <p className="font-body text-lg text-brand-navy/75 leading-relaxed max-w-xl">
+              <p className="font-body text-lg text-ink/75 leading-relaxed max-w-xl">
                 A chemist by training and an advocate by calling, Prince founded the Prince Asamany
                 Foundation to stand in the gap for underprivileged communities across the Ejisu
                 Municipal Assembly, from street children in Kumasi to women in need of preventive
                 healthcare.
               </p>
-              <p className="font-body text-lg text-brand-navy/75 leading-relaxed max-w-xl">
+              <p className="font-body text-lg text-ink/75 leading-relaxed max-w-xl">
                 Whether he is handing relief packages at the annual &ldquo;Joy to the Street&rdquo; campaign or
                 championing Green Chemistry education, his approach is the same: show up in person,
                 listen first, and build solutions the community owns. In recognition of that work, he
@@ -259,14 +259,14 @@ export default function AboutPage() {
       <PressSection />
 
       {/* Strategic Objectives & Core Values */}
-      <section className="bg-brand-cream section-padding">
-        <div className="max-w-7xl mx-auto px-5 md:px-8">
+      <section className="bg-paper text-ink py-20 md:py-28">
+        <div className="mx-auto max-w-6xl px-6 md:px-12">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-20">
             {/* Key Goals for Our Communities */}
             <div>
               <div className="text-left mb-8">
-                <span className="font-body text-sm font-semibold uppercase tracking-[0.15em] text-brand-red-dark">Our Purpose</span>
-                <h2 className="font-display text-2xl md:text-3xl font-bold text-brand-navy mt-2 leading-tight">
+                <span className="font-body text-xs font-semibold uppercase tracking-[0.18em] text-brand-red-dark">Our Purpose</span>
+                <h2 className="font-display text-4xl md:text-5xl text-ink mt-3 leading-[1.05]">
                   Key Goals for Our Communities
                 </h2>
               </div>
@@ -278,7 +278,7 @@ export default function AboutPage() {
                         <path d="M1 4l3 3 5-6" stroke="white" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
                       </svg>
                     </span>
-                    <span className="font-body text-base text-brand-navy/80 leading-relaxed">{obj}</span>
+                    <span className="font-body text-base text-ink/75 leading-relaxed">{obj}</span>
                   </li>
                 ))}
               </ul>
@@ -287,8 +287,8 @@ export default function AboutPage() {
             {/* Core Values */}
             <div>
               <div className="text-left mb-8">
-                <span className="font-body text-sm font-semibold uppercase tracking-[0.15em] text-brand-red-dark">Our Values</span>
-                <h2 className="font-display text-2xl md:text-3xl font-bold text-brand-navy mt-2 leading-tight">
+                <span className="font-body text-xs font-semibold uppercase tracking-[0.18em] text-brand-red-dark">Our Values</span>
+                <h2 className="font-display text-4xl md:text-5xl text-ink mt-3 leading-[1.05]">
                   Core Values
                 </h2>
               </div>
@@ -297,12 +297,12 @@ export default function AboutPage() {
                   <div key={v.title} className="flex gap-5">
                     {/* Decorative numeral - hidden from assistive tech; navy/60 is the
                         faintest shade that still passes WCAG large-text contrast on cream */}
-                    <div className="font-display text-4xl font-black text-brand-navy/60 leading-none shrink-0 w-8" aria-hidden="true">
+                    <div className="font-display text-4xl text-ink/40 leading-none shrink-0 w-8" aria-hidden="true">
                       {String(i + 1).padStart(2, '0')}
                     </div>
                     <div>
-                      <h3 className="font-display text-lg font-bold text-brand-navy">{v.title}</h3>
-                      <p className="font-body text-sm text-brand-navy/70 mt-1 leading-relaxed">{v.desc}</p>
+                      <h3 className="font-display text-xl text-ink">{v.title}</h3>
+                      <p className="font-body text-sm text-ink/75 mt-1 leading-relaxed">{v.desc}</p>
                     </div>
                   </div>
                 ))}
@@ -313,8 +313,8 @@ export default function AboutPage() {
       </section>
 
       {/* Key Program Areas */}
-      <section className="bg-brand-navy section-padding">
-        <div className="max-w-7xl mx-auto px-5 md:px-8">
+      <section className="bg-ink text-paper py-20 md:py-28">
+        <div className="mx-auto max-w-6xl px-6 md:px-12">
           <div className="mb-12 text-center">
             <span className="font-body text-sm font-semibold uppercase tracking-[0.15em] text-brand-gold">Programs</span>
             <h2 className="font-display text-3xl md:text-4xl font-bold text-white mt-2 leading-tight">
@@ -327,7 +327,7 @@ export default function AboutPage() {
                 key={p.title}
                 href={p.href}
                 aria-label={`${p.title}: read more on the Programs page`}
-                className="relative rounded-card-lg overflow-hidden group min-h-[400px] lg:min-h-[480px] block focus-visible:outline-2 focus-visible:outline-brand-gold focus-visible:outline-offset-4"
+                className="relative overflow-hidden rounded-editorial group min-h-[400px] lg:min-h-[480px] block focus-visible:outline-2 focus-visible:outline-brand-gold focus-visible:outline-offset-4"
               >
                 <Image 
                   src={p.image} 
@@ -353,7 +353,7 @@ export default function AboutPage() {
               'Providing tools and training that empower local communities.',
               'Walking together with chiefs, elders, and community members.',
             ].map((item) => (
-              <div key={item} className="bg-white/5 border border-white/10 rounded-card p-4">
+              <div key={item} className="border-t border-white/15 p-4">
                 <p className="font-body text-sm text-white/75 leading-relaxed">{item}</p>
               </div>
             ))}

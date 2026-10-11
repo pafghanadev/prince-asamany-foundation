@@ -74,7 +74,7 @@ export function Navbar() {
   }, [menuOpen]);
 
   const navBg = scrolled
-    ? 'bg-brand-navy/98 backdrop-blur-sm shadow-lg shadow-brand-navy/20 border-b border-white/10'
+    ? 'bg-ink border-b border-white/10'
     : 'bg-transparent border-b border-transparent';
 
   return (
@@ -121,7 +121,7 @@ export function Navbar() {
             <Link
               href="/donate"
               id="nav-donate-cta"
-              className="inline-block micro-press shimmer-sheen font-body text-sm font-semibold bg-brand-red text-white px-5 py-2.5 rounded-btn hover:bg-brand-red-dark border-2 border-brand-red hover:border-brand-red-dark shadow-sm"
+              className="inline-block micro-press font-body text-sm font-semibold bg-brand-gold text-brand-navy px-5 py-2.5 rounded-editorial hover:bg-brand-gold-light"
             >
               Donate
             </Link>
@@ -131,7 +131,7 @@ export function Navbar() {
           <button
             id="mobile-menu-toggle"
             onClick={() => setMenuOpen(!menuOpen)}
-            className="md:hidden relative flex flex-col justify-center items-center gap-1.5 w-11 h-11 rounded-btn text-white z-[60]"
+            className="md:hidden relative flex flex-col justify-center items-center gap-1.5 w-11 h-11 rounded-editorial text-white z-[60]"
             aria-label={menuOpen ? 'Close menu' : 'Open menu'}
             aria-expanded={menuOpen}
             aria-controls="mobile-menu"
@@ -156,7 +156,7 @@ export function Navbar() {
         aria-modal="true"
         aria-label="Navigation menu"
         inert={!menuOpen || undefined}
-        className={`fixed inset-0 z-40 bg-brand-navy flex flex-col overflow-y-auto transition-all duration-400 md:hidden ` + (menuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none')}
+        className={`fixed inset-0 z-40 bg-ink flex flex-col overflow-y-auto transition-all duration-400 md:hidden ` + (menuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none')}
       >
         {/* Gold accent bar at top */}
         <div className="absolute top-0 left-0 right-0 h-1 bg-brand-gold" />
@@ -206,7 +206,7 @@ export function Navbar() {
             <Link
               href="/donate"
               onClick={() => setMenuOpen(false)}
-              className="micro-press inline-flex items-center justify-center w-full max-w-xs font-body font-semibold text-base bg-brand-red text-white py-3.5 px-6 rounded-btn border-2 border-brand-red hover:bg-brand-red-dark shadow-md active:scale-[0.98] transition-all"
+              className="micro-press inline-flex items-center justify-center w-full max-w-xs font-body font-semibold text-base bg-brand-gold text-brand-navy py-3.5 px-6 rounded-editorial hover:bg-brand-gold-light active:scale-[0.98] transition-all"
             >
               Donate Now
             </Link>

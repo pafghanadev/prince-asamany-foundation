@@ -34,7 +34,7 @@ export function EventCard({ event, featured = false }: EventCardProps) {
     if (lower.includes('health')) return 'bg-brand-red text-white';
     if (lower.includes('welfare') || lower.includes('relief') || lower.includes('joy')) return 'bg-amber-600 text-white';
     if (lower.includes('empower') || lower.includes('farm') || lower.includes('train')) return 'bg-brand-green text-white';
-    return 'bg-brand-navy text-white';
+    return 'bg-ink text-paper';
   };
 
   const calendarUrl = getGoogleCalendarUrl(event);
@@ -42,7 +42,7 @@ export function EventCard({ event, featured = false }: EventCardProps) {
   return (
     <>
       <article
-        className={`group relative flex flex-col overflow-hidden rounded-2xl bg-white border border-brand-navy/10 shadow-md hover:shadow-xl transition-all duration-300 ${
+        className={`group relative flex flex-col overflow-hidden rounded-editorial bg-paper border border-rule  transition-all duration-300 ${
           featured ? 'md:grid md:grid-cols-12 md:gap-6' : ''
         }`}
       >
@@ -73,7 +73,7 @@ export function EventCard({ event, featured = false }: EventCardProps) {
               <button
                 type="button"
                 onClick={() => setLightboxOpen(true)}
-                className="absolute bottom-3 right-3 z-10 inline-flex items-center gap-1 px-2.5 py-1 rounded-md bg-brand-navy/80 hover:bg-brand-navy text-white text-xs font-medium backdrop-blur-md opacity-0 group-hover:opacity-100 transition-opacity duration-200"
+                className="absolute bottom-3 right-3 z-10 inline-flex items-center gap-1 px-2.5 py-1 rounded-md bg-brand-navy/80 hover:bg-ink text-paper text-xs font-medium backdrop-blur-md opacity-0 group-hover:opacity-100 transition-opacity duration-200"
                 aria-label={`Enlarge flyer for ${event.title}`}
               >
                 <ZoomIn className="w-3.5 h-3.5" />
@@ -88,11 +88,11 @@ export function EventCard({ event, featured = false }: EventCardProps) {
           )}
 
           {/* Date stamp badge */}
-          <div className="absolute top-4 left-4 z-10 flex flex-col items-center justify-center rounded-xl bg-white/95 backdrop-blur-md border border-brand-navy/10 px-3 py-1.5 shadow-md min-w-[54px] text-center">
+          <div className="absolute top-4 left-4 z-10 flex flex-col items-center justify-center rounded-editorial bg-paper/95 backdrop-blur-md border border-rule px-3 py-1.5  min-w-[54px] text-center">
             <span className="font-display text-xs font-bold uppercase tracking-wider text-brand-red leading-none">
               {monthName}
             </span>
-            <span className="font-display text-2xl font-black text-brand-navy leading-tight">
+            <span className="font-display text-2xl font-black text-ink leading-tight">
               {dayNumber}
             </span>
           </div>
@@ -113,37 +113,37 @@ export function EventCard({ event, featured = false }: EventCardProps) {
               {event.category}
             </span>
             {featured && (
-              <span className="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-brand-gold/20 text-brand-navy border border-brand-gold/30">
+              <span className="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-brand-gold/20 text-ink border border-brand-gold/30">
                 Featured Event
               </span>
             )}
           </div>
 
           {/* Event Title */}
-          <h3 className="font-display text-xl md:text-2xl font-bold text-brand-navy leading-snug mb-3 group-hover:text-brand-red transition-colors duration-200">
+          <h3 className="font-display text-xl md:text-2xl font-bold text-ink leading-snug mb-3 group-hover:text-brand-red transition-colors duration-200">
             {event.title}
           </h3>
 
           {/* Date, Time & Venue metadata */}
-          <div className="space-y-1.5 mb-4 text-sm text-slate-600 font-body">
+          <div className="space-y-1.5 mb-4 text-sm text-ink/75 font-body">
             <div className="flex items-center gap-2">
-              <Calendar className="w-4 h-4 text-brand-navy/70 shrink-0" />
+              <Calendar className="w-4 h-4 text-ink/75 shrink-0" />
               <span>{fullDateDisplay}</span>
             </div>
             {event.time && (
               <div className="flex items-center gap-2">
-                <Clock className="w-4 h-4 text-brand-navy/70 shrink-0" />
+                <Clock className="w-4 h-4 text-ink/75 shrink-0" />
                 <span>{event.time}</span>
               </div>
             )}
             <div className="flex items-start gap-2">
-              <MapPin className="w-4 h-4 text-brand-navy/70 shrink-0 mt-0.5" />
+              <MapPin className="w-4 h-4 text-ink/75 shrink-0 mt-0.5" />
               <span className="leading-tight">{event.location}</span>
             </div>
           </div>
 
           {/* Description */}
-          <p className="text-slate-600 text-sm md:text-base leading-relaxed mb-6 font-body flex-grow line-clamp-3">
+          <p className="text-ink/75 text-sm md:text-base leading-relaxed mb-6 font-body flex-grow line-clamp-3">
             {event.description}
           </p>
 
@@ -163,7 +163,7 @@ export function EventCard({ event, featured = false }: EventCardProps) {
                   href={href}
                   target={isExternal ? '_blank' : undefined}
                   rel={isExternal ? 'noopener noreferrer' : undefined}
-                  className="inline-flex items-center justify-center gap-1.5 px-4 py-2 rounded-xl bg-brand-navy hover:bg-brand-navy/90 text-white text-sm font-semibold shadow-sm transition-all duration-200"
+                  className="inline-flex items-center justify-center gap-1.5 px-4 py-2 rounded-editorial bg-ink text-paper hover:bg-brand-navy/90 text-paper text-sm font-semibold  transition-all duration-200"
                 >
                   <span>{buttonText}</span>
                   <ExternalLink className="w-3.5 h-3.5" />
@@ -172,7 +172,7 @@ export function EventCard({ event, featured = false }: EventCardProps) {
             })() : (
               <Link
                 href="/contact"
-                className="inline-flex items-center justify-center gap-1.5 px-4 py-2 rounded-xl bg-brand-navy hover:bg-brand-navy/90 text-white text-sm font-semibold shadow-sm transition-all duration-200"
+                className="inline-flex items-center justify-center gap-1.5 px-4 py-2 rounded-editorial bg-ink text-paper hover:bg-brand-navy/90 text-paper text-sm font-semibold  transition-all duration-200"
               >
                 <span>{event.isPast ? 'Learn More' : 'Inquire / Join'}</span>
               </Link>
@@ -183,7 +183,7 @@ export function EventCard({ event, featured = false }: EventCardProps) {
                 href={calendarUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl border border-slate-200 hover:border-brand-navy/40 text-slate-700 hover:text-brand-navy text-xs font-semibold bg-slate-50 hover:bg-slate-100 transition-colors"
+                className="inline-flex items-center gap-1.5 px-3 py-2 rounded-editorial border border-slate-200 hover:border-brand-navy/40 text-slate-700 hover:text-ink text-xs font-semibold bg-slate-50 hover:bg-slate-100 transition-colors"
                 title="Add to Google Calendar"
               >
                 <CalendarPlus className="w-4 h-4 text-brand-red" />
@@ -207,12 +207,12 @@ export function EventCard({ event, featured = false }: EventCardProps) {
             <button
               type="button"
               onClick={() => setLightboxOpen(false)}
-              className="absolute -top-12 right-0 p-2 text-white/80 hover:text-white rounded-full bg-white/10 hover:bg-white/20 transition-colors"
+              className="absolute -top-12 right-0 p-2 text-white/80 hover:text-white rounded-full bg-paper/10 hover:bg-paper/20 transition-colors"
               aria-label="Close flyer preview"
             >
               <X className="w-6 h-6" />
             </button>
-            <div className="relative w-full h-[75vh] rounded-xl overflow-hidden bg-slate-900">
+            <div className="relative w-full h-[75vh] rounded-editorial overflow-hidden bg-slate-900">
               <Image
                 src={event.imageUrl}
                 alt={`Flyer for ${event.title}`}

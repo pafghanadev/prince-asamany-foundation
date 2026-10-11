@@ -12,29 +12,13 @@ import { blurProps } from '@/lib/media';
 export function StoryGrid() {
   const [showAllMobile, setShowAllMobile] = useState(false);
   return (
-    <section className="relative overflow-hidden bg-brand-navy section-padding" aria-labelledby="stories-heading">
-      {/* Subtle dot texture with Aceternity radial falloff mask */}
-      <div className="absolute inset-0 opacity-15 radial-mask-falloff pointer-events-none" aria-hidden="true">
-        <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <pattern id="storyDotPattern" x="0" y="0" width="24" height="24" patternUnits="userSpaceOnUse">
-              <circle cx="2" cy="2" r="1.5" fill="#FFFFFF" />
-            </pattern>
-          </defs>
-          <rect x="0" y="0" width="100%" height="100%" fill="url(#storyDotPattern)" />
-        </svg>
-      </div>
-
-      <div className="relative z-10 max-w-7xl mx-auto px-5 md:px-8">
-        {/* Heading - centered "moment" statement */}
-        <div className="max-w-2xl mx-auto mb-12 md:mb-16 text-center">
-          <span className="font-body text-sm font-semibold uppercase tracking-[0.15em] text-brand-gold">
+    <section className="bg-paper text-ink py-20 md:py-28" aria-labelledby="stories-heading">
+      <div className="mx-auto max-w-6xl px-6 md:px-12">
+        <div className="mb-14 max-w-2xl">
+          <p className="font-body text-xs font-semibold uppercase tracking-[0.18em] text-brand-red-dark">
             Impact Stories
-          </span>
-          <h2
-            id="stories-heading"
-            className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-white mt-3 leading-[1.08] max-w-[20ch]"
-          >
+          </p>
+          <h2 id="stories-heading" className="mt-3 font-display text-4xl leading-[1.05] md:text-6xl">
             Stories that show our impact
           </h2>
         </div>
@@ -48,13 +32,11 @@ export function StoryGrid() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: '-40px' }}
               transition={{ duration: 0.5, delay: i * 0.1, ease: 'easeOut' }}
-              className={`spotlight-card group relative flex flex-col overflow-hidden rounded-card-lg bg-white border border-brand-navy/5 hover:border-brand-gold/40 shadow-xl hover:shadow-2xl hover:-translate-y-1.5 transition-all duration-300 focus-within:outline-2 focus-within:outline-brand-navy focus-within:outline-offset-4 ${
+              className={`group relative flex flex-col overflow-hidden rounded-editorial border-t border-rule bg-paper focus-within:outline-2 focus-within:outline-ink focus-within:outline-offset-4 ${
                 i > 0 ? (showAllMobile ? 'flex' : 'hidden sm:flex') : 'flex'
               }`}
             >
-              {/* Top specular highlight */}
-              <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-brand-gold/50 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100 z-20" aria-hidden="true" />
-              <div className="relative h-56 overflow-hidden shrink-0">
+              <div className="relative h-64 overflow-hidden shrink-0 rounded-editorial">
                 <Image
                   src={story.image}
                   alt={story.imageAlt}
@@ -63,20 +45,20 @@ export function StoryGrid() {
                   sizes="(max-width: 768px) 100vw, 33vw"
                   {...blurProps(story.image)}
                 />
-                <div className={`absolute top-4 left-4 px-3.5 py-1 rounded-full text-xs font-body font-semibold backdrop-blur-sm shadow-sm ${story.tagColor}`}>
+                <div className="absolute top-4 left-4 bg-ink px-3 py-1 font-body text-xs font-semibold text-paper">
                   {story.tag}
                 </div>
               </div>
 
-              <div className="flex flex-col flex-grow p-6 text-center">
-                <h3 className="font-display text-xl font-bold text-brand-navy leading-snug">
+              <div className="flex flex-grow flex-col p-6 text-left">
+                <h3 className="font-display text-2xl leading-snug text-ink">
                   {story.name}
                 </h3>
-                <div className="font-body text-xs text-brand-navy/70 mt-1">
+                <div className="mt-1 font-body text-xs text-ink/70">
                   {story.role}
                 </div>
                 {story.date && (
-                  <div className="font-body text-xs font-semibold text-brand-red-dark mt-1">{story.date}</div>
+                  <div className="mt-1 font-body text-xs font-semibold text-brand-red-dark">{story.date}</div>
                 )}
 
                 {story.location && (
@@ -85,13 +67,13 @@ export function StoryGrid() {
                     {story.location}
                   </div>
                 )}
-                <blockquote className="font-display italic text-base text-brand-navy/80 leading-relaxed mt-4">
+                <blockquote className="mt-4 font-display text-base italic leading-relaxed text-ink/80">
                   &ldquo;{story.quote}&rdquo;
                 </blockquote>
 
                 <Link
                   href={`/stories/${story.id}`}
-                  className="mt-6 font-body text-sm font-semibold text-brand-red-dark transition-colors duration-200 after:absolute after:inset-0 after:content-[''] focus-visible:outline-none inline-flex items-center justify-center gap-1.5"
+                  className="mt-6 inline-flex items-center gap-1.5 font-body text-sm font-semibold text-brand-red-dark after:absolute after:inset-0 after:content-[''] focus-visible:outline-none"
                   aria-label={`Read ${story.name}'s full story`}
                 >
                   <span>Read full story</span>
@@ -110,16 +92,16 @@ export function StoryGrid() {
               <button
                 type="button"
                 onClick={() => setShowAllMobile(true)}
-                className="sm:hidden w-full max-w-xs inline-flex items-center justify-center gap-2 py-3 px-6 rounded-btn bg-white/10 hover:bg-white/15 border border-white/20 text-white font-body text-sm font-semibold transition-colors duration-200"
+                className="sm:hidden inline-flex w-full max-w-xs items-center justify-center gap-2 border border-ink px-6 py-3 font-body text-sm font-semibold text-ink"
               >
                 <span>View more stories</span>
-                <ChevronDown className="w-4 h-4 text-brand-gold" />
+                <ChevronDown className="h-4 w-4 text-brand-red-dark" />
               </button>
 
               {/* Desktop button */}
               <Link
                 href="/stories"
-                className="hidden sm:inline-flex micro-press items-center justify-center font-body text-sm font-semibold text-white border-2 border-white/40 hover:bg-white hover:text-brand-navy px-6 py-3 rounded-btn"
+                className="hidden sm:inline-flex items-center justify-center rounded-editorial border border-ink px-6 py-3 font-body text-sm font-semibold text-ink hover:bg-ink hover:text-paper"
               >
                 View all stories
               </Link>
@@ -128,7 +110,7 @@ export function StoryGrid() {
             /* Follow-up button shown after expanding on mobile (and on desktop) */
             <Link
               href="/stories"
-              className="micro-press inline-flex items-center justify-center font-body text-sm font-semibold text-white border-2 border-white/40 hover:bg-white hover:text-brand-navy px-6 py-3 rounded-btn w-full max-w-xs sm:w-auto"
+              className="inline-flex w-full max-w-xs items-center justify-center rounded-editorial border border-ink px-6 py-3 font-body text-sm font-semibold text-ink hover:bg-ink hover:text-paper sm:w-auto"
             >
               View all stories
             </Link>

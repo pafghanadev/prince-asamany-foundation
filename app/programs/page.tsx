@@ -105,7 +105,7 @@ export default function ProgramsPage() {
         <section
           key={program.id}
           id={program.id}
-          className={`section-padding ${i % 2 === 0 ? 'bg-white' : 'bg-brand-cream'}`}
+          className={`py-20 md:py-28 ${i % 2 === 0 ? 'bg-paper' : 'bg-paper text-ink'}`}
           aria-labelledby={`program-${program.id}-heading`}
         >
           <div className="max-w-7xl mx-auto px-5 md:px-8">
@@ -113,7 +113,7 @@ export default function ProgramsPage() {
 
               {/* Image - editorial stack when a secondary photo exists */}
               <div className="relative">
-                <div className="relative rounded-card-lg overflow-hidden aspect-[4/3] group">
+                <div className="relative rounded-editorial overflow-hidden aspect-[4/3] group">
                   <Image
                     src={program.image}
                     alt={program.imageAlt}
@@ -122,7 +122,7 @@ export default function ProgramsPage() {
                     sizes="(max-width: 1024px) 100vw, 50vw"
                     {...blurProps(program.image)}
                   />
-                  <div className={`absolute top-5 left-5 px-3 py-1.5 rounded-btn text-xs font-body font-bold uppercase tracking-wider ${colorMap[program.color]} text-white`}>
+                  <div className={`absolute top-5 left-5 px-3 py-1.5 rounded-editorial text-xs font-body font-bold uppercase tracking-wider ${colorMap[program.color]} text-white`}>
                     {program.tag}
                   </div>
                 </div>
@@ -130,7 +130,7 @@ export default function ProgramsPage() {
                 {image2 && (
                   <>
                     {/* Overlapping inset on desktop */}
-                    <div className="hidden lg:block absolute -bottom-10 -right-6 w-44 xl:w-56 rounded-card-lg overflow-hidden border-4 border-white shadow-xl z-10">
+                    <div className="hidden lg:block absolute -bottom-10 -right-6 w-44 xl:w-56 rounded-editorial overflow-hidden border-4 border-white  z-10">
                       <div className="relative aspect-[4/3]">
                         <Image
                           src={image2}
@@ -143,7 +143,7 @@ export default function ProgramsPage() {
                       </div>
                     </div>
                     {/* Stacked below on mobile/tablet */}
-                    <div className="lg:hidden mt-4 relative rounded-card-lg overflow-hidden aspect-[16/9]">
+                    <div className="lg:hidden mt-4 relative rounded-editorial overflow-hidden aspect-[16/9]">
                       <Image
                         src={image2}
                         alt={image2Alt}
@@ -167,21 +167,21 @@ export default function ProgramsPage() {
                   </span>
                   <h2
                     id={`program-${program.id}-heading`}
-                    className="font-display text-3xl md:text-4xl font-bold text-brand-navy mt-2 leading-tight"
+                    className="font-display text-3xl md:text-4xl font-bold text-ink mt-2 leading-tight"
                   >
                     {program.title}
                   </h2>
                 </div>
-                <p className="font-body text-lg text-brand-navy/70 leading-relaxed">
+                <p className="font-body text-lg text-ink/75 leading-relaxed">
                   {program.description}
                 </p>
                 <div>
-                  <h3 className="font-body text-sm font-bold uppercase tracking-wider text-brand-navy mb-4">Our Approach</h3>
+                  <h3 className="font-body text-sm font-bold uppercase tracking-wider text-ink mb-4">Our Approach</h3>
                   <ul className="flex flex-col gap-3 list-none m-0 p-0" role="list">
                     {program.approach.map((item) => (
                       <li key={item} className="flex items-start gap-3">
                         <span className="w-1.5 h-1.5 rounded-full bg-brand-gold shrink-0 mt-2" aria-hidden="true" />
-                        <span className="font-body text-sm text-brand-navy/70 leading-relaxed">{item}</span>
+                        <span className="font-body text-sm text-ink/75 leading-relaxed">{item}</span>
                       </li>
                     ))}
                   </ul>
@@ -196,7 +196,7 @@ export default function ProgramsPage() {
                   {program.story && (
                     <Link
                       href={program.story.href}
-                      className="inline-flex items-center font-body text-sm font-semibold text-brand-navy border-b-2 border-brand-navy/30 pb-1 py-1 hover:border-brand-red-dark hover:text-brand-red-dark transition-colors duration-200 self-start"
+                      className="inline-flex items-center font-body text-sm font-semibold text-ink border-b-2 border-brand-navy/30 pb-1 py-1 hover:border-brand-red-dark hover:text-brand-red-dark transition-colors duration-200 self-start"
                     >
                       Read {program.story.label} →
                     </Link>

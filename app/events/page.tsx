@@ -35,7 +35,7 @@ export default async function EventsPage() {
       </section>
 
       {/* Bottom Partner / Sponsor CTA */}
-      <section className="bg-brand-green section-padding">
+      <section className="bg-brand-green py-20 md:py-28">
         <div className="max-w-3xl mx-auto px-5 md:px-8 text-center flex flex-col items-center gap-6">
           <h2 className="font-display text-3xl md:text-4xl font-bold text-white leading-tight">
             Partner With Us on an Upcoming Outreach
@@ -46,13 +46,13 @@ export default async function EventsPage() {
           <div className="flex flex-col sm:flex-row gap-4 pt-2">
             <Link
               href="/contact"
-              className="inline-flex items-center justify-center font-body font-semibold text-base bg-brand-gold text-brand-navy px-8 py-4 rounded-btn hover:bg-brand-gold-light transition-all duration-200 w-full sm:w-auto shadow-md"
+              className="inline-flex items-center justify-center font-body font-semibold text-base bg-brand-gold text-ink px-8 py-4 rounded-editorial hover:bg-brand-gold-light transition-all duration-200 w-full sm:w-auto "
             >
               Contact Our Outreach Team
             </Link>
             <Link
               href="/donate"
-              className="inline-flex items-center justify-center font-body font-semibold text-base bg-transparent text-white px-8 py-4 rounded-btn border-2 border-white/60 hover:bg-white/10 transition-all duration-200 w-full sm:w-auto"
+              className="inline-flex items-center justify-center font-body font-semibold text-base bg-transparent text-white px-8 py-4 rounded-editorial border-2 border-white/60 hover:bg-paper/10 transition-all duration-200 w-full sm:w-auto"
             >
               Support an Event
             </Link>

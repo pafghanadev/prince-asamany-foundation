@@ -28,7 +28,7 @@ export function LeadershipRecognition() {
   };
 
   return (
-    <section id="leadership" className="bg-brand-navy section-padding overflow-hidden">
+    <section id="leadership" className="bg-ink text-paper py-20 md:py-28 overflow-hidden">
       <div className="max-w-7xl mx-auto px-5 md:px-8">
 
         {/* Text left · video right (alternates with the founder profile above;
@@ -88,7 +88,7 @@ export function LeadershipRecognition() {
                 data-video-card
                 onClick={startVideo}
                 aria-label="Watch the award night highlights video"
-                className="group relative block w-full overflow-hidden rounded-card-lg shadow-2xl border border-white/10 bg-brand-navy focus-visible:outline-2 focus-visible:outline-brand-gold focus-visible:outline-offset-2 transition-transform duration-300 hover:-translate-y-1 active:scale-[0.99]"
+                className="group relative block w-full overflow-hidden rounded-editorial  border border-white/10 bg-ink text-paper focus-visible:outline-2 focus-visible:outline-brand-gold focus-visible:outline-offset-2 transition-transform duration-300 hover:-translate-y-1 active:scale-[0.99]"
               >
                 <div className="relative aspect-video">
                   <Image
@@ -118,14 +118,14 @@ export function LeadershipRecognition() {
 
                   {/* Play chip */}
                   <span className="absolute inset-0 flex items-center justify-center pointer-events-none">
-                    <span className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-brand-gold/95 text-brand-navy flex items-center justify-center shadow-2xl backdrop-blur-sm transition-transform duration-300 group-hover:scale-110 group-hover:bg-white">
+                    <span className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-brand-gold/95 text-ink flex items-center justify-center  backdrop-blur-sm transition-transform duration-300 group-hover:scale-110 group-hover:bg-paper">
                       <PlayChipIcon />
                     </span>
                   </span>
 
                   {/* Label */}
                   <span className="absolute bottom-0 left-0 right-0 p-4 md:p-6 text-left pointer-events-none">
-                    <span className="block font-body text-sm md:text-base font-medium text-white/90 drop-shadow-lg">
+                    <span className="block font-body text-sm md:text-base font-medium text-white/90 drop-">
                       Award Night Highlights, Marriott Hotel, Nov 15, 2025
                     </span>
                   </span>
@@ -136,7 +136,7 @@ export function LeadershipRecognition() {
 
               /* ---------- Inline player (user-initiated: controls + sound) ---------- */
               <div>
-                <div className="relative overflow-hidden rounded-card-lg shadow-2xl bg-black border border-white/10">
+                <div className="relative overflow-hidden rounded-editorial  bg-black border border-white/10">
                   <video
                     controls
                     autoPlay

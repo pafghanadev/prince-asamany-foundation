@@ -42,19 +42,15 @@ export function MapImpact() {
   const activeHotspot = MAP_HOTSPOTS.find((h) => h.id === activeId) ?? MAP_HOTSPOTS[0];
 
   return (
-    <section
-      className="bg-brand-cream section-padding"
-      aria-labelledby="map-heading"
-    >
-      <div className="max-w-7xl mx-auto px-5 md:px-8">
-        {/* Heading - centered "moment" statement */}
-        <div className="mb-12 text-center">
-          <span className="font-body text-sm font-semibold uppercase tracking-[0.15em] text-brand-red-dark">
+    <section className="bg-paper text-ink py-20 md:py-28" aria-labelledby="map-heading">
+      <div className="mx-auto max-w-6xl px-6 md:px-12">
+        <div className="mb-12 max-w-2xl">
+          <p className="font-body text-xs font-semibold uppercase tracking-[0.18em] text-brand-red-dark">
             Where We Work
-          </span>
+          </p>
           <h2
             id="map-heading"
-            className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-brand-navy mt-2 leading-[1.08]"
+            className="mt-3 font-display text-4xl leading-[1.05] md:text-6xl"
           >
             Always where others need help.
           </h2>
@@ -70,7 +66,7 @@ export function MapImpact() {
             transition={{ duration: 0.7, ease: 'easeOut' }}
             className="relative flex flex-col"
           >
-            <div className="bg-white/80 backdrop-blur-sm rounded-card-lg border border-brand-navy/10 p-6 shadow-sm">
+            <div className="border border-rule p-6">
               <div className="flex items-center justify-between mb-3">
                 <span className="font-body text-xs font-bold uppercase tracking-wider text-brand-red-dark">
                   Community Focus Areas
@@ -95,10 +91,10 @@ export function MapImpact() {
                     role="tab"
                     aria-selected={activeId === h.id}
                     onClick={() => setActiveId(h.id)}
-                    className={`font-body text-xs font-semibold px-3.5 py-1.5 rounded-full transition-all duration-200 focus-visible:outline-2 focus-visible:outline-brand-navy ${
+                    className={`font-body text-xs font-semibold px-3.5 py-1.5 rounded-editorial transition-colors duration-200 focus-visible:outline-2 focus-visible:outline-ink ${
                       activeId === h.id
-                        ? 'bg-brand-navy text-white shadow-sm'
-                        : 'bg-white text-brand-navy/70 border border-brand-navy/15 hover:bg-brand-cream hover:text-brand-navy'
+                        ? 'bg-ink text-paper'
+                        : 'border border-rule text-ink/70 hover:text-ink'
                     }`}
                   >
                     {h.name}
@@ -113,7 +109,7 @@ export function MapImpact() {
                     <span className="w-2.5 h-2.5 rounded-full bg-brand-red" aria-hidden="true" />
                     {activeHotspot.name}
                   </span>
-                  <span className={`px-2.5 py-0.5 rounded-full text-[11px] font-body font-bold ${activeHotspot.tagColor}`}>
+                  <span className={`px-2.5 py-0.5 text-[11px] font-body font-bold ${activeHotspot.tagColor}`}>
                     {activeHotspot.tag}
                   </span>
                 </div>
@@ -138,7 +134,7 @@ export function MapImpact() {
                 gold: 'bg-brand-gold text-brand-navy border-brand-gold',
                 navy: 'bg-brand-navy text-white border-brand-navy',
                 green: 'bg-brand-green text-white border-brand-green',
-              }[stat.theme] || 'bg-white text-brand-navy border-brand-navy/5';
+              }[stat.theme] || 'bg-paper text-ink border-rule';
 
               return (
                 <motion.div
@@ -147,16 +143,16 @@ export function MapImpact() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: '-40px' }}
                   transition={{ duration: 0.5, delay: i * 0.1, ease: 'easeOut' }}
-                  className={`flex flex-col items-center text-center md:items-start md:text-left p-4 sm:p-6 min-h-[9rem] sm:min-h-[10rem] rounded-card sm:rounded-card-lg border shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group focus-visible:outline-2 focus-visible:outline-brand-navy focus-visible:outline-offset-2 ${themeClasses}`}
+                  className={`flex flex-col items-center text-center md:items-start md:text-left p-4 sm:p-6 min-h-[9rem] sm:min-h-[10rem] rounded-editorial border transition-colors duration-300 group focus-visible:outline-2 focus-visible:outline-ink focus-visible:outline-offset-2 ${themeClasses}`}
                 >
-                  <div className="flex items-center justify-center w-9 h-9 sm:w-12 sm:h-12 rounded-full bg-white/20 mb-2 sm:mb-4 backdrop-blur-sm [&>svg]:w-4.5 [&>svg]:h-4.5 sm:[&>svg]:w-6 sm:[&>svg]:h-6">
+                  <div className="flex items-center justify-center w-9 h-9 sm:w-12 sm:h-12 mb-2 sm:mb-4 bg-white/10 [&>svg]:w-4.5 [&>svg]:h-4.5 sm:[&>svg]:w-6 sm:[&>svg]:h-6">
                     {stat.icon}
                   </div>
                   <div className="font-display text-2xl sm:text-3xl md:text-4xl font-black leading-none mb-1.5 sm:mb-2">
                     <CountUp value={stat.value} />
                   </div>
                   
-                  <div className="w-8 sm:w-10 h-0.5 sm:h-1 rounded-full my-2 sm:my-3 bg-white/30" aria-hidden="true" />
+                  <div className="w-8 sm:w-10 h-0.5 sm:h-1 my-2 sm:my-3 bg-white/30" aria-hidden="true" />
                   
                   <div className="font-body text-xs sm:text-lg font-bold sm:font-semibold mb-1 leading-tight">{stat.label}</div>
                   <div className={`font-body text-[11px] sm:text-sm leading-snug sm:leading-relaxed line-clamp-3 sm:line-clamp-none ${stat.theme === 'gold' ? 'text-brand-navy/90' : 'text-white/90'}`}>

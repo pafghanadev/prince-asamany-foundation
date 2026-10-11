@@ -130,7 +130,7 @@ const [active, setActive] = useState<number | null>(null);
             type="button"
             onClick={() => openLightbox(i)}
             aria-label={`View photo: ${img.caption}`}
-            className="group relative shrink-0 snap-center w-[85vw] sm:w-full mb-0 sm:mb-4 md:mb-6 break-inside-avoid block overflow-hidden rounded-card-lg border border-white/15 shadow-2xl bg-brand-navy focus-visible:outline-2 focus-visible:outline-brand-gold focus-visible:outline-offset-2"
+            className="group relative shrink-0 snap-center w-[85vw] sm:w-full mb-0 sm:mb-4 md:mb-6 break-inside-avoid block overflow-hidden rounded-editorial border border-white/15  bg-ink text-paper focus-visible:outline-2 focus-visible:outline-brand-gold focus-visible:outline-offset-2"
           >
             {/* Main Image - natural aspect ratio, never cropped */}
             <Image
@@ -151,7 +151,7 @@ const [active, setActive] = useState<number | null>(null);
             
             {/* Caption */}
             <div className="absolute bottom-0 left-0 right-0 p-5 md:p-6 z-20 text-left transform transition-transform duration-300 translate-y-2 group-hover:translate-y-0">
-              <span className="font-body text-sm md:text-base font-medium text-white drop-shadow-lg">
+              <span className="font-body text-sm md:text-base font-medium text-white drop-">
                 {img.caption}
               </span>
             </div>
@@ -181,7 +181,7 @@ const [active, setActive] = useState<number | null>(null);
           <button
             ref={closeBtnRef}
             onClick={closeLightbox}
-            className="absolute top-4 right-4 md:top-6 md:right-6 w-11 h-11 rounded-full bg-white/10 border border-white/20 text-white hover:bg-brand-gold hover:text-brand-navy flex items-center justify-center transition-colors duration-200 z-10"
+            className="absolute top-4 right-4 md:top-6 md:right-6 w-11 h-11 rounded-full bg-paper/10 border border-white/20 text-white hover:bg-brand-gold hover:text-ink flex items-center justify-center transition-colors duration-200 z-10"
             aria-label="Close photo viewer"
           >
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
@@ -191,7 +191,7 @@ const [active, setActive] = useState<number | null>(null);
 
           <button
             onClick={prev}
-            className="absolute left-3 md:left-6 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-white/10 border border-white/20 text-white hover:bg-brand-gold hover:text-brand-navy flex items-center justify-center transition-colors duration-200"
+            className="absolute left-3 md:left-6 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-paper/10 border border-white/20 text-white hover:bg-brand-gold hover:text-ink flex items-center justify-center transition-colors duration-200"
             aria-label="Previous photo"
           >
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
@@ -201,7 +201,7 @@ const [active, setActive] = useState<number | null>(null);
 
           <button
             onClick={next}
-            className="absolute right-3 md:right-6 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-white/10 border border-white/20 text-white hover:bg-brand-gold hover:text-brand-navy flex items-center justify-center transition-colors duration-200"
+            className="absolute right-3 md:right-6 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-paper/10 border border-white/20 text-white hover:bg-brand-gold hover:text-ink flex items-center justify-center transition-colors duration-200"
             aria-label="Next photo"
           >
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">

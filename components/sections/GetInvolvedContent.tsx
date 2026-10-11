@@ -76,27 +76,27 @@ export function GetInvolvedContent() {
   return (
     <>
       {/* Opportunities */}
-      <section className="bg-white section-padding" aria-labelledby="opportunities-heading">
+      <section className="bg-paper py-20 md:py-28" aria-labelledby="opportunities-heading">
         <div className="max-w-7xl mx-auto px-5 md:px-8">
           <div className="mb-12 text-center">
             <span className="font-body text-sm font-semibold uppercase tracking-[0.15em] text-brand-red-dark">Volunteer</span>
-            <h2 id="opportunities-heading" className="font-display text-3xl md:text-4xl font-bold text-brand-navy mt-2 leading-tight">
+            <h2 id="opportunities-heading" className="font-display text-3xl md:text-4xl font-bold text-ink mt-2 leading-tight">
               Volunteer Opportunities
             </h2>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {opportunities.map((opp) => (
-              <div key={opp.title} className="p-6 bg-brand-cream rounded-card-lg flex flex-col gap-4 border border-brand-navy/5 hover:-translate-y-1 hover:shadow-lg transition-all duration-300">
-                <h3 className="font-display text-xl font-bold text-brand-navy leading-tight">{opp.title}</h3>
-                <p className="font-body text-sm text-brand-navy/70 leading-relaxed">{opp.description}</p>
+              <div key={opp.title} className="p-6 bg-paper text-ink rounded-editorial flex flex-col gap-4 border border-rule hover:-translate-y-1 transition-all duration-300">
+                <h3 className="font-display text-xl font-bold text-ink leading-tight">{opp.title}</h3>
+                <p className="font-body text-sm text-ink/75 leading-relaxed">{opp.description}</p>
                 <div className="flex flex-col gap-1.5 mt-auto">
                   <div className="flex items-center gap-2">
                     <span className="w-1.5 h-1.5 rounded-full bg-brand-gold" aria-hidden="true" />
-                    <span className="font-body text-xs text-brand-navy/75"><strong className="font-semibold">Commitment:</strong> {opp.commitment}</span>
+                    <span className="font-body text-xs text-ink/75"><strong className="font-semibold">Commitment:</strong> {opp.commitment}</span>
                   </div>
                   <div className="flex items-center gap-2">
                     <span className="w-1.5 h-1.5 rounded-full bg-brand-red" aria-hidden="true" />
-                    <span className="font-body text-xs text-brand-navy/75"><strong className="font-semibold">Location:</strong> {opp.location}</span>
+                    <span className="font-body text-xs text-ink/75"><strong className="font-semibold">Location:</strong> {opp.location}</span>
                   </div>
                 </div>
               </div>
@@ -106,19 +106,19 @@ export function GetInvolvedContent() {
       </section>
 
       {/* Volunteer Form */}
-      <section className="bg-brand-cream section-padding" aria-labelledby="form-heading">
+      <section className="bg-paper text-ink py-20 md:py-28" aria-labelledby="form-heading">
         <div className="max-w-2xl mx-auto px-5 md:px-8">
           <div className="mb-10 text-center">
             <span className="font-body text-sm font-semibold uppercase tracking-[0.15em] text-brand-red-dark">Express Interest</span>
-            <h2 id="form-heading" className="font-display text-3xl font-bold text-brand-navy mt-2 leading-tight">
+            <h2 id="form-heading" className="font-display text-3xl font-bold text-ink mt-2 leading-tight">
               Register as a Volunteer
             </h2>
           </div>
 
           {submitted ? (
-            <div role="status" className="bg-brand-green/10 border-2 border-brand-green rounded-card-lg p-10 text-center">
+            <div role="status" className="bg-brand-green/10 border-2 border-brand-green rounded-editorial p-10 text-center">
               <div className="font-display text-2xl font-bold text-brand-green mb-3">Thank you for reaching out.</div>
-              <p className="font-body text-lg text-brand-navy/70 leading-relaxed">
+              <p className="font-body text-lg text-ink/75 leading-relaxed">
                 We have received your interest. A member of our team will contact you at the details
                 you provided. We look forward to working with you.
               </p>
@@ -126,13 +126,13 @@ export function GetInvolvedContent() {
           ) : (
             <form onSubmit={handleSubmit} className="flex flex-col gap-5">
               {error && (
-                <div role="alert" className="bg-brand-red/10 border-2 border-brand-red rounded-card-lg p-4 font-body text-sm text-brand-red-dark">
+                <div role="alert" className="bg-brand-red/10 border-2 border-brand-red rounded-editorial p-4 font-body text-sm text-brand-red-dark">
                   {error}
                 </div>
               )}
               {/* Name */}
               <div>
-                <label htmlFor="volunteer-name" className="block font-body text-sm font-semibold text-brand-navy mb-1.5">
+                <label htmlFor="volunteer-name" className="block font-body text-sm font-semibold text-ink mb-1.5">
                   Full Name <span className="text-brand-red-dark" aria-hidden="true">*</span>
                 </label>
                 <input
@@ -144,14 +144,14 @@ export function GetInvolvedContent() {
                   value={formData.name}
                   onChange={handleChange}
                   placeholder="Your full name"
-                  className="w-full px-4 py-3 rounded-btn border-2 border-brand-navy/20 bg-white font-body text-base text-brand-navy placeholder:text-brand-navy/55 focus:border-brand-navy transition-colors duration-200 min-h-[52px]"
+                  className="w-full px-4 py-3 rounded-editorial border-2 border-brand-navy/20 bg-paper font-body text-base text-ink placeholder:text-ink/55 focus:border-brand-navy transition-colors duration-200 min-h-[52px]"
                 />
               </div>
 
               {/* Email + Phone */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                 <div>
-                  <label htmlFor="volunteer-email" className="block font-body text-sm font-semibold text-brand-navy mb-1.5">
+                  <label htmlFor="volunteer-email" className="block font-body text-sm font-semibold text-ink mb-1.5">
                     Email Address <span className="text-brand-red-dark" aria-hidden="true">*</span>
                   </label>
                   <input
@@ -163,11 +163,11 @@ export function GetInvolvedContent() {
                     value={formData.email}
                     onChange={handleChange}
                     placeholder="you@example.com"
-                    className="w-full px-4 py-3 rounded-btn border-2 border-brand-navy/20 bg-white font-body text-base text-brand-navy placeholder:text-brand-navy/55 focus:border-brand-navy transition-colors duration-200 min-h-[52px]"
+                    className="w-full px-4 py-3 rounded-editorial border-2 border-brand-navy/20 bg-paper font-body text-base text-ink placeholder:text-ink/55 focus:border-brand-navy transition-colors duration-200 min-h-[52px]"
                   />
                 </div>
                 <div>
-                  <label htmlFor="volunteer-phone" className="block font-body text-sm font-semibold text-brand-navy mb-1.5">
+                  <label htmlFor="volunteer-phone" className="block font-body text-sm font-semibold text-ink mb-1.5">
                     Phone Number
                   </label>
                   <input
@@ -178,14 +178,14 @@ export function GetInvolvedContent() {
                     value={formData.phone}
                     onChange={handleChange}
                     placeholder="+233..."
-                    className="w-full px-4 py-3 rounded-btn border-2 border-brand-navy/20 bg-white font-body text-base text-brand-navy placeholder:text-brand-navy/55 focus:border-brand-navy transition-colors duration-200 min-h-[52px]"
+                    className="w-full px-4 py-3 rounded-editorial border-2 border-brand-navy/20 bg-paper font-body text-base text-ink placeholder:text-ink/55 focus:border-brand-navy transition-colors duration-200 min-h-[52px]"
                   />
                 </div>
               </div>
 
               {/* Opportunity */}
               <div>
-<label htmlFor="volunteer-opportunity" className="block font-body text-sm font-semibold text-brand-navy mb-1.5">
+<label htmlFor="volunteer-opportunity" className="block font-body text-sm font-semibold text-ink mb-1.5">
                     Area of Interest
                   </label>
                   <div className="relative">
@@ -194,7 +194,7 @@ export function GetInvolvedContent() {
                       name="opportunity"
                       value={formData.opportunity}
                       onChange={handleChange}
-                      className="w-full px-4 py-3 pr-12 rounded-btn border-2 border-brand-navy/20 bg-white font-body text-base text-brand-navy focus:border-brand-navy transition-colors duration-200 min-h-[52px] appearance-none"
+                      className="w-full px-4 py-3 pr-12 rounded-editorial border-2 border-brand-navy/20 bg-paper font-body text-base text-ink focus:border-brand-navy transition-colors duration-200 min-h-[52px] appearance-none"
                     >
                       <option value="">Select an opportunity...</option>
                       {opportunities.map((opp) => (
@@ -212,7 +212,7 @@ export function GetInvolvedContent() {
                       strokeLinecap="round"
                       strokeLinejoin="round"
                       aria-hidden="true"
-                      className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-brand-navy"
+                      className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-ink"
                     >
                       <path d="m6 9 6 6 6-6" />
                     </svg>
@@ -221,7 +221,7 @@ export function GetInvolvedContent() {
 
               {/* Message */}
               <div>
-                <label htmlFor="volunteer-message" className="block font-body text-sm font-semibold text-brand-navy mb-1.5">
+                <label htmlFor="volunteer-message" className="block font-body text-sm font-semibold text-ink mb-1.5">
                   Tell us about yourself
                 </label>
                 <textarea
@@ -231,7 +231,7 @@ export function GetInvolvedContent() {
                   onChange={handleChange}
                   rows={4}
                   placeholder="Your skills, availability, and why you want to volunteer..."
-                  className="w-full px-4 py-3 rounded-[1.25rem] border-2 border-brand-navy/20 bg-white font-body text-base text-brand-navy placeholder:text-brand-navy/55 focus:border-brand-navy transition-colors duration-200 resize-none"
+                  className="w-full px-4 py-3 rounded-[1.25rem] border-2 border-brand-navy/20 bg-paper font-body text-base text-ink placeholder:text-ink/55 focus:border-brand-navy transition-colors duration-200 resize-none"
                 />
               </div>
 
@@ -250,7 +250,7 @@ export function GetInvolvedContent() {
                 type="submit"
                 id="volunteer-submit"
                 disabled={sending}
-                className="font-body font-semibold text-base bg-brand-red text-white px-8 py-4 rounded-btn border-2 border-brand-red hover:bg-brand-red-dark hover:border-brand-red-dark transition-all duration-200 active:scale-[0.98] min-h-[52px] disabled:opacity-60 disabled:cursor-not-allowed"
+                className="font-body font-semibold text-base bg-brand-red text-white px-8 py-4 rounded-editorial border-2 border-brand-red hover:bg-brand-red-dark hover:border-brand-red-dark transition-all duration-200 active:scale-[0.98] min-h-[52px] disabled:opacity-60 disabled:cursor-not-allowed"
               >
                 {sending ? 'Submitting…' : 'Submit Application'}
               </button>

@@ -40,20 +40,8 @@ export function FounderHighlight() {
     return () => clearInterval(id);
   }, [active, prefersReduced, paused]);
   return (
-    <section id="founder" className="bg-brand-navy text-white section-padding overflow-hidden relative">
-      {/* Subtle background texture/pattern */}
-      <div className="absolute inset-0 opacity-[0.03]" aria-hidden="true">
-        <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <pattern id="founder-pattern" width="40" height="40" patternUnits="userSpaceOnUse">
-              <circle cx="2" cy="2" r="1.5" fill="currentColor" />
-            </pattern>
-          </defs>
-          <rect width="100%" height="100%" fill="url(#founder-pattern)" />
-        </svg>
-      </div>
-
-      <div className="relative z-10 max-w-7xl mx-auto px-5 md:px-8">
+    <section id="founder" className="bg-ink text-paper py-20 md:py-28 overflow-hidden">
+      <div className="mx-auto max-w-6xl px-6 md:px-12">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-stretch">
           
           {/* Left Column: Portrait & Moments */}
@@ -65,14 +53,7 @@ export function FounderHighlight() {
             className="flex flex-col gap-4 lg:col-span-7"
           >
             {/* Single auto-rotating frame - portrait ratio suits the source photos. Video lives on the About page. */}
-            <div className="relative">
-              {/* Gold warmth halo behind the portrait */}
-              <div
-                className="absolute -inset-4 rounded-full blur-3xl pointer-events-none"
-                style={{ background: "radial-gradient(ellipse at 60% 60%, rgba(248,166,20,0.18) 0%, transparent 70%)" }}
-                aria-hidden="true"
-              />
-            <div className="relative rounded-card-lg overflow-hidden shadow-2xl">
+            <div className="relative overflow-hidden rounded-editorial">
               <div
                 className="relative aspect-[4/3] sm:aspect-[16/10] lg:aspect-[4/5] group"
                 onMouseEnter={() => setPaused(true)}
@@ -97,7 +78,7 @@ export function FounderHighlight() {
                     {...blurProps(current.src)}
                   />
                 </motion.div>
-                <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-brand-navy/60 via-transparent to-transparent" aria-hidden="true" />
+                <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-ink/60 via-transparent to-transparent" aria-hidden="true" />
 
                 {/* Slide indicators - 40px hit areas around the visual dots */}
                 <div className="absolute bottom-2 left-1/2 -translate-x-1/2 flex items-center gap-1 z-10">
@@ -120,7 +101,6 @@ export function FounderHighlight() {
                 </div>
               </div>
             </div>
-            </div>
           </motion.div>
 
           {/* Right Column: Text Content - stretched to share one height with the imagery */}
@@ -132,10 +112,10 @@ export function FounderHighlight() {
             className="flex flex-col items-center justify-between gap-8 text-center lg:col-span-5 lg:items-start lg:text-left"
           >
             <div>
-              <span className="font-body text-sm font-semibold uppercase tracking-[0.15em] text-brand-gold mb-3 block">
+              <span className="font-body text-xs font-semibold uppercase tracking-[0.18em] text-brand-gold mb-3 block">
                 Meet Our Founder
               </span>
-              <h2 className="font-display text-4xl md:text-5xl font-bold leading-tight">
+              <h2 className="font-display text-4xl md:text-6xl leading-[1.05]">
                 Prince Douglas Asamany
               </h2>
             </div>
@@ -167,7 +147,7 @@ export function FounderHighlight() {
 
             <Link 
               href="/about"
-              className="inline-flex items-center gap-2 font-body text-sm font-semibold bg-brand-gold text-brand-navy px-6 py-3 rounded-btn hover:bg-white transition-colors duration-300"
+              className="inline-flex items-center gap-2 font-body text-sm font-semibold bg-brand-gold text-brand-navy px-6 py-3 rounded-editorial hover:bg-white transition-colors duration-300"
             >
               Read Full Story
               <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">

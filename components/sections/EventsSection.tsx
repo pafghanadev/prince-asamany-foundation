@@ -17,15 +17,15 @@ export function EventsSection({ events }: EventsSectionProps) {
   const secondaryEvents = upcomingEvents.filter((e) => e.id !== featuredEvent?.id);
 
   return (
-    <section className="relative overflow-hidden bg-surface-alt section-padding" aria-labelledby="events-heading">
+    <section className="relative overflow-hidden bg-paper-deep text-ink py-20 md:py-28" aria-labelledby="events-heading">
       {/* Background ambient accents */}
-      <div className="absolute top-0 right-0 w-96 h-96 bg-brand-gold/5 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute bottom-0 left-0 w-96 h-96 bg-brand-red/5 rounded-full blur-3xl pointer-events-none" />
+      <div className="" />
+      <div className="" />
 
-      <div className="relative z-10 max-w-7xl mx-auto px-5 md:px-8">
+      <div className="relative z-10 mx-auto max-w-6xl px-6 md:px-12">
         {/* Section Header */}
-        <div className="max-w-3xl mx-auto text-center mb-12 md:mb-16">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-brand-gold/15 text-brand-navy border border-brand-gold/30 mb-4">
+        <div className="max-w-2xl mb-12 md:mb-16">
+          <div className="inline-flex items-center gap-2 mb-4">
             <Users className="w-3.5 h-3.5 text-brand-red" />
             <span className="font-body text-xs font-semibold uppercase tracking-[0.15em]">
               Upcoming Gatherings & Outreaches
@@ -33,11 +33,11 @@ export function EventsSection({ events }: EventsSectionProps) {
           </div>
           <h2
             id="events-heading"
-            className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-brand-navy leading-[1.12]"
+            className="font-display text-4xl md:text-6xl leading-[1.05]"
           >
             Join us on the ground
           </h2>
-          <p className="mt-4 font-body text-lg text-slate-600 leading-relaxed max-w-2xl mx-auto">
+          <p className="mt-4 font-body text-lg text-ink/75 leading-relaxed max-w-2xl">
             From free community health screenings and deworming initiatives to rural farmer workshops - explore our schedules and community actions.
           </p>
         </div>
@@ -75,10 +75,10 @@ export function EventsSection({ events }: EventsSectionProps) {
             )}
 
             {/* Centered CTA */}
-            <div className="mt-12 flex justify-center">
+            <div className="mt-12 flex justify-start">
               <Link
                 href="/events"
-                className="group inline-flex items-center gap-2 px-6 py-3.5 rounded-xl border border-brand-navy/15 bg-white hover:bg-brand-navy hover:text-white text-brand-navy font-display text-sm font-bold shadow-sm hover:shadow transition-all duration-200"
+                className="group inline-flex items-center gap-2 rounded-editorial border border-ink px-6 py-3.5 font-body text-sm font-semibold text-ink hover:bg-ink hover:text-paper"
               >
                 <span>View All Events & Archives</span>
                 <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
@@ -87,12 +87,12 @@ export function EventsSection({ events }: EventsSectionProps) {
           </div>
         ) : (
           /* Rich, Balanced Outreach Spotlight */
-          <div className="relative rounded-3xl border border-brand-navy/10 bg-white/95 backdrop-blur-sm p-8 sm:p-12 md:p-14 text-center max-w-3xl mx-auto shadow-lg shadow-brand-navy/5 overflow-hidden">
+          <div className="relative border-t-4 border-ink bg-paper p-8 sm:p-12 md:p-14 max-w-3xl">
             {/* Tricolor top border accent */}
             <div className="absolute top-0 inset-x-0 h-1.5 bg-gradient-to-r from-brand-red via-brand-gold to-brand-green" />
 
             {/* Active status badge */}
-            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200/70 text-xs font-semibold mb-6">
+            <div className="inline-flex items-center gap-2 text-xs font-semibold mb-6">
               <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
               <span>Active Field Preparation & Planning</span>
             </div>
@@ -101,56 +101,56 @@ export function EventsSection({ events }: EventsSectionProps) {
               <Calendar className="w-8 h-8 text-brand-navy" />
             </div>
 
-            <h3 className="font-display text-2xl md:text-3xl font-bold text-brand-navy mb-3">
+            <h3 className="font-display text-3xl md:text-4xl mb-3">
               New Outreaches Currently in Planning
             </h3>
-            <p className="font-body text-slate-600 mb-8 max-w-lg mx-auto text-base md:text-lg leading-relaxed">
+            <p className="font-body text-ink/75 mb-8 max-w-lg text-base md:text-lg leading-relaxed">
               Our medical teams and welfare coordinators are actively organizing our next round of healthcare screenings and rural community assistance in the Ejisu Municipality.
             </p>
 
             {/* Active focus chips */}
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-8 max-w-xl mx-auto text-left">
-              <div className="p-3.5 rounded-xl bg-surface-alt/70 border border-brand-navy/5 flex items-center gap-3">
-                <div className="w-8 h-8 rounded-lg bg-white flex items-center justify-center shadow-sm shrink-0">
+              <div className="p-3.5 border-t border-rule flex items-center gap-3">
+                <div className="w-8 h-8 flex items-center justify-center shrink-0">
                   <Stethoscope className="w-4 h-4 text-brand-red" />
                 </div>
                 <div>
                   <p className="font-display text-xs font-bold text-brand-navy">Health Screenings</p>
-                  <p className="text-[11px] text-slate-500">Ejisu & rural clinics</p>
+                  <p className="text-[11px] text-ink/60">Ejisu & rural clinics</p>
                 </div>
               </div>
-              <div className="p-3.5 rounded-xl bg-surface-alt/70 border border-brand-navy/5 flex items-center gap-3">
-                <div className="w-8 h-8 rounded-lg bg-white flex items-center justify-center shadow-sm shrink-0">
+              <div className="p-3.5 border-t border-rule flex items-center gap-3">
+                <div className="w-8 h-8 flex items-center justify-center shrink-0">
                   <Wheat className="w-4 h-4 text-amber-600" />
                 </div>
                 <div>
                   <p className="font-display text-xs font-bold text-brand-navy">Farmer Support</p>
-                  <p className="text-[11px] text-slate-500">Equipment & training</p>
+                  <p className="text-[11px] text-ink/60">Equipment & training</p>
                 </div>
               </div>
-              <div className="p-3.5 rounded-xl bg-surface-alt/70 border border-brand-navy/5 flex items-center gap-3">
-                <div className="w-8 h-8 rounded-lg bg-white flex items-center justify-center shadow-sm shrink-0">
+              <div className="p-3.5 border-t border-rule flex items-center gap-3">
+                <div className="w-8 h-8 flex items-center justify-center shrink-0">
                   <Backpack className="w-4 h-4 text-brand-navy" />
                 </div>
                 <div>
                   <p className="font-display text-xs font-bold text-brand-navy">Youth Welfare</p>
-                  <p className="text-[11px] text-slate-500">Relief distribution</p>
+                  <p className="text-[11px] text-ink/60">Relief distribution</p>
                 </div>
               </div>
             </div>
 
             {/* Balanced CTA buttons */}
-            <div className="flex flex-wrap items-center justify-center gap-4">
+            <div className="flex flex-wrap items-center justify-start gap-4">
               <Link
                 href="/get-involved"
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-brand-navy hover:bg-brand-navy/90 text-white font-semibold text-sm shadow-sm transition-all"
+                className="inline-flex items-center gap-2 rounded-editorial bg-ink px-6 py-3 font-body text-sm font-semibold text-paper hover:bg-ink-deep"
               >
                 <HeartHandshake className="w-4 h-4 text-brand-gold" />
                 <span>Partner or Volunteer</span>
               </Link>
               <Link
                 href="/events"
-                className="group inline-flex items-center gap-2 px-6 py-3 rounded-xl border border-slate-200 hover:border-brand-navy/30 bg-white hover:bg-slate-50 text-slate-700 hover:text-brand-navy font-semibold text-sm shadow-sm transition-all"
+                className="group inline-flex items-center gap-2 rounded-editorial border border-ink px-6 py-3 font-body text-sm font-semibold text-ink hover:bg-ink hover:text-paper"
               >
                 <span>Explore All Past Outreaches</span>
                 <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5" />

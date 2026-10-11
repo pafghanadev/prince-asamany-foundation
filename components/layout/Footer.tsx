@@ -43,7 +43,7 @@ const socialLinks = Object.entries(siteConfig.social)
 
 export function Footer() {
   return (
-    <footer className="bg-brand-navy text-white" role="contentinfo">
+    <footer className="bg-ink text-paper" role="contentinfo">
       {/* ── Mobile-Optimized Compact Footer (md:hidden) ── */}
       <div className="md:hidden px-5 py-6 flex flex-col gap-4">
         {/* Brand Header Block: Centered Logo, Slogan, Status & Socials */}
@@ -66,7 +66,7 @@ export function Footer() {
           </p>
 
           {/* Centered Status Badge */}
-          <span className="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-white/10 text-white/85 font-body text-[11px] font-medium">
+            <span className="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-editorial bg-white/10 text-white/85 font-body text-[11px] font-medium">
             <span className="w-1.5 h-1.5 rounded-full bg-brand-green shrink-0 animate-pulse" aria-hidden="true" />
             Registered NGO · Ejisu, Ghana
           </span>
@@ -80,7 +80,7 @@ export function Footer() {
                 aria-label={s.label}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-8.5 h-8.5 flex items-center justify-center rounded-btn border border-white/20 text-white/80 hover:text-brand-gold hover:border-brand-gold transition-colors active:scale-95"
+                className="w-8.5 h-8.5 flex items-center justify-center rounded-editorial border border-white/20 text-white/80 hover:text-brand-gold hover:border-brand-gold transition-colors active:scale-95"
               >
                 {s.icon}
               </a>
@@ -118,7 +118,7 @@ export function Footer() {
           <div className="grid grid-cols-2 gap-2.5">
             <a
               href={`tel:${siteConfig.phone.tel}`}
-              className="inline-flex items-center justify-center gap-2 py-2.5 px-3 rounded-btn bg-white/10 hover:bg-brand-gold hover:text-brand-navy border border-white/15 text-xs font-body font-semibold text-white transition-all active:scale-[0.98]"
+              className="inline-flex items-center justify-center gap-2 py-2.5 px-3 rounded-editorial bg-white/10 hover:bg-brand-gold hover:text-brand-navy border border-white/15 text-xs font-body font-semibold text-white transition-all active:scale-[0.98]"
             >
               <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-brand-gold shrink-0">
                 <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.49 2 2 0 0 1 3.6 1.27h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.91a16 16 0 0 0 6.1 6.1l.95-.95a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z" />
@@ -127,7 +127,7 @@ export function Footer() {
             </a>
             <a
               href={`mailto:${siteConfig.email}`}
-              className="inline-flex items-center justify-center gap-2 py-2.5 px-3 rounded-btn bg-white/10 hover:bg-brand-gold hover:text-brand-navy border border-white/15 text-xs font-body font-semibold text-white transition-all active:scale-[0.98]"
+              className="inline-flex items-center justify-center gap-2 py-2.5 px-3 rounded-editorial bg-white/10 hover:bg-brand-gold hover:text-brand-navy border border-white/15 text-xs font-body font-semibold text-white transition-all active:scale-[0.98]"
             >
               <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-brand-gold shrink-0">
                 <rect x="2" y="4" width="20" height="16" rx="2" /><path d="m22 7-10 6L2 7" />
@@ -160,7 +160,7 @@ export function Footer() {
               className="h-14 w-auto"
             />
           </Link>
-          <span className="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-white/10 text-white/80 font-body text-xs font-medium">
+          <span className="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-editorial bg-white/10 text-white/80 font-body text-xs font-medium">
             <span className="w-1.5 h-1.5 rounded-full bg-brand-green" aria-hidden="true" />
             Registered NGO · Ejisu, Ghana
           </span>
@@ -176,7 +176,7 @@ export function Footer() {
                 aria-label={s.label}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-10 h-10 flex items-center justify-center rounded-btn border border-white/20 text-white/75 hover:text-brand-gold hover:border-brand-gold hover:scale-110 transition-all duration-200"
+                className="w-10 h-10 flex items-center justify-center rounded-editorial border border-white/20 text-white/75 hover:text-brand-gold hover:border-brand-gold hover:scale-110 transition-all duration-200"
               >
                 {s.icon}
               </a>

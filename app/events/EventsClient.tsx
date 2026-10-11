@@ -61,21 +61,21 @@ export function EventsClient({ events }: EventsClientProps) {
       <div className="flex flex-col gap-6 mb-10">
         {/* Main Tab Toggle: Upcoming vs Past */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-200 pb-5">
-          <div className="flex items-center gap-2 p-1.5 bg-slate-100/90 rounded-2xl w-fit">
+          <div className="flex items-center gap-2 p-1.5 bg-slate-100/90 rounded-editorial w-fit">
             <button
               type="button"
               onClick={() => setActiveTab('upcoming')}
-              className={`flex items-center gap-2 px-5 py-2.5 rounded-xl font-display text-sm font-bold transition-all duration-200 ${
+              className={`flex items-center gap-2 px-5 py-2.5 rounded-editorial font-display text-sm font-bold transition-all duration-200 ${
                 activeTab === 'upcoming'
-                  ? 'bg-brand-navy text-white shadow-md'
-                  : 'text-slate-600 hover:text-brand-navy'
+                  ? 'bg-ink text-paper '
+                  : 'text-ink/75 hover:text-ink'
               }`}
             >
               <span>Upcoming</span>
               <span
                 className={`px-2 py-0.5 rounded-full text-xs font-semibold ${
                   activeTab === 'upcoming'
-                    ? 'bg-brand-gold text-brand-navy'
+                    ? 'bg-brand-gold text-ink'
                     : 'bg-slate-200 text-slate-700'
                 }`}
               >
@@ -86,17 +86,17 @@ export function EventsClient({ events }: EventsClientProps) {
             <button
               type="button"
               onClick={() => setActiveTab('past')}
-              className={`flex items-center gap-2 px-5 py-2.5 rounded-xl font-display text-sm font-bold transition-all duration-200 ${
+              className={`flex items-center gap-2 px-5 py-2.5 rounded-editorial font-display text-sm font-bold transition-all duration-200 ${
                 activeTab === 'past'
-                  ? 'bg-brand-navy text-white shadow-md'
-                  : 'text-slate-600 hover:text-brand-navy'
+                  ? 'bg-ink text-paper '
+                  : 'text-ink/75 hover:text-ink'
               }`}
             >
               <span>Past Outreaches</span>
               <span
                 className={`px-2 py-0.5 rounded-full text-xs font-semibold ${
                   activeTab === 'past'
-                    ? 'bg-brand-gold text-brand-navy'
+                    ? 'bg-brand-gold text-ink'
                     : 'bg-slate-200 text-slate-700'
                 }`}
               >
@@ -107,17 +107,17 @@ export function EventsClient({ events }: EventsClientProps) {
             <button
               type="button"
               onClick={() => setActiveTab('all')}
-              className={`hidden md:flex items-center gap-2 px-4 py-2.5 rounded-xl font-display text-sm font-bold transition-all duration-200 ${
+              className={`hidden md:flex items-center gap-2 px-4 py-2.5 rounded-editorial font-display text-sm font-bold transition-all duration-200 ${
                 activeTab === 'all'
-                  ? 'bg-brand-navy text-white shadow-md'
-                  : 'text-slate-600 hover:text-brand-navy'
+                  ? 'bg-ink text-paper '
+                  : 'text-ink/75 hover:text-ink'
               }`}
             >
               <span>All</span>
               <span
                 className={`px-2 py-0.5 rounded-full text-xs font-semibold ${
                   activeTab === 'all'
-                    ? 'bg-brand-gold text-brand-navy'
+                    ? 'bg-brand-gold text-ink'
                     : 'bg-slate-200 text-slate-700'
                 }`}
               >
@@ -134,13 +134,13 @@ export function EventsClient({ events }: EventsClientProps) {
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search by keyword, city..."
-              className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-200 focus:border-brand-navy focus:ring-2 focus:ring-brand-navy/10 text-sm outline-none bg-white transition-all"
+              className="w-full pl-10 pr-4 py-2.5 rounded-editorial border border-slate-200 focus:border-brand-navy focus:ring-2 focus:ring-brand-navy/10 text-sm outline-none bg-paper transition-all"
             />
             {searchQuery && (
               <button
                 type="button"
                 onClick={() => setSearchQuery('')}
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-xs text-slate-400 hover:text-slate-600"
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-xs text-slate-400 hover:text-ink/75"
               >
                 Clear
               </button>
@@ -157,10 +157,10 @@ export function EventsClient({ events }: EventsClientProps) {
                 key={cat}
                 type="button"
                 onClick={() => setSelectedCategory(cat)}
-                className={`px-3.5 py-1.5 rounded-xl text-xs font-semibold transition-all shrink-0 ${
+                className={`px-3.5 py-1.5 rounded-editorial text-xs font-semibold transition-all shrink-0 ${
                   selectedCategory === cat
-                    ? 'bg-brand-gold text-brand-navy shadow-sm'
-                    : 'bg-white border border-slate-200 text-slate-600 hover:border-brand-navy/30'
+                    ? 'bg-brand-gold text-ink '
+                    : 'bg-paper border border-slate-200 text-ink/75 hover:border-brand-navy/30'
                 }`}
               >
                 {cat}
@@ -195,19 +195,19 @@ export function EventsClient({ events }: EventsClientProps) {
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            className="rounded-3xl border border-slate-200 bg-white p-12 text-center max-w-xl mx-auto shadow-sm"
+            className="rounded-editorial border border-slate-200 bg-paper p-12 text-center max-w-xl mx-auto "
           >
-            <div className="w-14 h-14 rounded-2xl bg-slate-100 text-slate-400 flex items-center justify-center mx-auto mb-4">
+            <div className="w-14 h-14 rounded-editorial bg-slate-100 text-slate-400 flex items-center justify-center mx-auto mb-4">
               <Calendar className="w-7 h-7" />
             </div>
-            <h3 className="font-display text-xl font-bold text-brand-navy mb-2">
+            <h3 className="font-display text-xl font-bold text-ink mb-2">
               {searchQuery
                 ? 'No matching events found'
                 : activeTab === 'upcoming'
                 ? 'No upcoming events scheduled right now'
                 : 'No past events in this category'}
             </h3>
-            <p className="text-sm text-slate-600 mb-6 leading-relaxed">
+            <p className="text-sm text-ink/75 mb-6 leading-relaxed">
               {searchQuery
                 ? `We couldn't find any events matching "${searchQuery}". Try a different keyword or clear your filter.`
                 : 'Stay tuned! We are currently finalizing schedules for our upcoming healthcare and welfare outreaches.'}
@@ -219,14 +219,14 @@ export function EventsClient({ events }: EventsClientProps) {
                   setSearchQuery('');
                   setSelectedCategory('All');
                 }}
-                className="px-4 py-2 rounded-xl bg-brand-navy text-white text-xs font-semibold hover:bg-brand-navy/90 transition-colors"
+                className="px-4 py-2 rounded-editorial bg-ink text-paper text-xs font-semibold hover:bg-brand-navy/90 transition-colors"
               >
                 Reset Search Filters
               </button>
             ) : (
               <Link
                 href="/contact"
-                className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-brand-navy text-white text-xs font-semibold hover:bg-brand-navy/90 transition-colors"
+                className="inline-flex items-center gap-1.5 px-4 py-2 rounded-editorial bg-ink text-paper text-xs font-semibold hover:bg-brand-navy/90 transition-colors"
               >
                 <HeartHandshake className="w-4 h-4 text-brand-gold" />
                 <span>Contact Foundation Office</span>
@@ -237,14 +237,14 @@ export function EventsClient({ events }: EventsClientProps) {
       </AnimatePresence>
 
       {/* Synchronized Notice Footer */}
-      <div className="mt-16 pt-8 border-t border-slate-200/80 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500 font-body">
+      <div className="mt-16 pt-8 border-t border-slate-200/80 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-ink/60 font-body">
         <div className="flex items-center gap-2">
           <FileSpreadsheet className="w-4 h-4 text-brand-green" />
           <span>Events updated live directly from the Prince Asamany Foundation field calendar.</span>
         </div>
         <div>
           <span>Questions regarding community schedules? </span>
-          <Link href="/contact" className="text-brand-navy font-semibold underline hover:text-brand-red">
+          <Link href="/contact" className="text-ink font-semibold underline hover:text-brand-red">
             Reach out to our team
           </Link>
         </div>

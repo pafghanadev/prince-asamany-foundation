@@ -63,7 +63,7 @@ export function StoryGallery({ photos, storyName }: StoryGalleryProps) {
             type="button"
             onClick={() => openAt(i)}
             aria-label={`View photo ${i + 1}: ${img.alt}`}
-            className={`group relative rounded-card-lg overflow-hidden shrink-0 snap-center w-[85vw] sm:w-auto focus-visible:outline-2 focus-visible:outline-brand-gold focus-visible:outline-offset-2 ${
+            className={`group relative rounded-editorial overflow-hidden shrink-0 snap-center w-[85vw] sm:w-auto focus-visible:outline-2 focus-visible:outline-brand-gold focus-visible:outline-offset-2 ${
               i === 0 ? 'sm:col-span-2 sm:row-span-2 aspect-[4/3] sm:aspect-auto' : 'aspect-[4/3]'
             }`}
           >
@@ -81,7 +81,7 @@ export function StoryGallery({ photos, storyName }: StoryGalleryProps) {
             />
             {/* Hover overlay with zoom icon */}
             <div className="absolute inset-0 bg-brand-navy/0 group-hover:bg-brand-navy/40 transition-all duration-300 flex items-center justify-center">
-              <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-200 w-10 h-10 rounded-full bg-white/20 backdrop-blur-sm border border-white/30 flex items-center justify-center">
+              <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-200 w-10 h-10 rounded-full bg-paper/20 backdrop-blur-sm border border-white/30 flex items-center justify-center">
                 <ZoomIn className="w-5 h-5 text-white" aria-hidden="true" />
               </div>
             </div>
@@ -111,7 +111,7 @@ export function StoryGallery({ photos, storyName }: StoryGalleryProps) {
               <button
                 type="button"
                 onClick={close}
-                className="w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 border border-white/20 flex items-center justify-center text-white transition-colors focus-visible:outline-2 focus-visible:outline-brand-gold"
+                className="w-10 h-10 rounded-full bg-paper/10 hover:bg-paper/20 border border-white/20 flex items-center justify-center text-white transition-colors focus-visible:outline-2 focus-visible:outline-brand-gold"
                 aria-label="Close photo viewer"
               >
                 <X className="w-5 h-5" />
@@ -143,7 +143,7 @@ export function StoryGallery({ photos, storyName }: StoryGalleryProps) {
                   type="button"
                   onClick={prev}
                   aria-label="Previous photo"
-                  className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-1 w-12 h-12 rounded-full bg-white/10 hover:bg-white/25 border border-white/20 flex items-center justify-center text-white transition-all duration-150 active:scale-95 focus-visible:outline-2 focus-visible:outline-brand-gold"
+                  className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-1 w-12 h-12 rounded-full bg-paper/10 hover:bg-paper/25 border border-white/20 flex items-center justify-center text-white transition-all duration-150 active:scale-95 focus-visible:outline-2 focus-visible:outline-brand-gold"
                 >
                   <ChevronLeft className="w-6 h-6" />
                 </button>
@@ -151,7 +151,7 @@ export function StoryGallery({ photos, storyName }: StoryGalleryProps) {
                   type="button"
                   onClick={next}
                   aria-label="Next photo"
-                  className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-1 w-12 h-12 rounded-full bg-white/10 hover:bg-white/25 border border-white/20 flex items-center justify-center text-white transition-all duration-150 active:scale-95 focus-visible:outline-2 focus-visible:outline-brand-gold"
+                  className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-1 w-12 h-12 rounded-full bg-paper/10 hover:bg-paper/25 border border-white/20 flex items-center justify-center text-white transition-all duration-150 active:scale-95 focus-visible:outline-2 focus-visible:outline-brand-gold"
                 >
                   <ChevronRight className="w-6 h-6" />
                 </button>
@@ -167,7 +167,7 @@ export function StoryGallery({ photos, storyName }: StoryGalleryProps) {
                       aria-label={`Go to photo ${i + 1}`}
                       onClick={() => setLightboxIndex(i)}
                       className={`h-1.5 rounded-full transition-all duration-200 focus-visible:outline-2 focus-visible:outline-brand-gold ${
-                        i === lightboxIndex ? 'w-6 bg-brand-gold' : 'w-1.5 bg-white/40 hover:bg-white/70'
+                        i === lightboxIndex ? 'w-6 bg-brand-gold' : 'w-1.5 bg-paper/40 hover:bg-paper/70'
                       }`}
                     />
                   ))}
