@@ -342,7 +342,7 @@ export const PaystackDonateButton = React.forwardRef<PaystackDonateButtonHandle,
                             type="button"
                             aria-pressed={selected}
                             onClick={() => { setAmount(tier.amount); setFieldErrors((f) => ({ ...f, amount: undefined })); }}
-                            className={`rounded-btn border-2 px-3 py-2.5 text-left transition-colors duration-150 ${
+                            className={`rounded-btn border-2 px-3 py-2.5 text-center lg:text-left transition-colors duration-150 ${
                               selected
                                 ? 'border-brand-gold bg-brand-gold/10'
                                 : 'border-brand-navy/15 hover:border-brand-navy/40'

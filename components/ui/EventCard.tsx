@@ -108,7 +108,7 @@ export function EventCard({ event, featured = false }: EventCardProps) {
         {/* Content Area */}
         <div className={`flex flex-col flex-grow p-6 md:p-7 ${featured ? 'md:col-span-7' : ''}`}>
           {/* Category & Status */}
-          <div className="flex flex-wrap items-center gap-2 mb-3">
+          <div className="flex flex-wrap items-center justify-center lg:justify-start gap-2 mb-3">
             <span className={`px-2.5 py-0.5 rounded-full text-xs font-semibold ${getCategoryColor(event.category)}`}>
               {event.category}
             </span>
@@ -126,17 +126,17 @@ export function EventCard({ event, featured = false }: EventCardProps) {
 
           {/* Date, Time & Venue metadata */}
           <div className="space-y-1.5 mb-4 text-sm text-ink/75 font-body">
-            <div className="flex items-center gap-2">
+            <div className="flex items-center justify-center lg:justify-start gap-2">
               <Calendar className="w-4 h-4 text-ink/75 shrink-0" />
               <span>{fullDateDisplay}</span>
             </div>
             {event.time && (
-              <div className="flex items-center gap-2">
+              <div className="flex items-center justify-center lg:justify-start gap-2">
                 <Clock className="w-4 h-4 text-ink/75 shrink-0" />
                 <span>{event.time}</span>
               </div>
             )}
-            <div className="flex items-start gap-2">
+            <div className="flex items-start justify-center lg:justify-start gap-2">
               <MapPin className="w-4 h-4 text-ink/75 shrink-0 mt-0.5" />
               <span className="leading-tight">{event.location}</span>
             </div>
@@ -148,7 +148,7 @@ export function EventCard({ event, featured = false }: EventCardProps) {
           </p>
 
           {/* Actions */}
-          <div className="pt-4 border-t border-slate-100 flex flex-wrap items-center justify-between gap-3 mt-auto">
+          <div className="pt-4 border-t border-slate-100 flex flex-wrap items-center justify-center md:justify-between gap-3 mt-auto">
             {event.registrationUrl ? (() => {
               const raw = event.registrationUrl.trim();
               const isHttp = raw.startsWith('http');

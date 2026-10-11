@@ -14,12 +14,12 @@ export function StoryGrid() {
   return (
     <section className="bg-paper text-ink py-20 md:py-28" aria-labelledby="stories-heading">
       <div className="mx-auto max-w-6xl px-6 md:px-12">
-        <div className="mb-14 max-w-2xl">
+        <div className="mb-14 flex max-w-2xl flex-col items-center text-center lg:items-start lg:text-left">
           <p className="font-body text-xs font-semibold uppercase tracking-[0.18em] text-brand-red-dark">
             Impact Stories
           </p>
           <h2 id="stories-heading" className="mt-3 font-display text-4xl leading-[1.05] md:text-6xl">
-            Stories that show our impact
+            From the field. In their communities.
           </h2>
         </div>
 
@@ -50,7 +50,7 @@ export function StoryGrid() {
                 </div>
               </div>
 
-              <div className="flex flex-grow flex-col p-6 text-left">
+              <div className="flex flex-grow flex-col items-center p-6 text-center lg:items-start lg:text-left">
                 <h3 className="font-display text-2xl leading-snug text-ink">
                   {story.name}
                 </h3>
@@ -62,14 +62,12 @@ export function StoryGrid() {
                 )}
 
                 {story.location && (
-                  <div className="font-body text-xs text-brand-navy/50 mt-1 flex items-center justify-center gap-1">
+                  <div className="font-body text-xs text-brand-navy/50 mt-1 flex items-center justify-center lg:justify-start gap-1">
                     <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
                     {story.location}
                   </div>
                 )}
-                <blockquote className="mt-4 font-display text-base italic leading-relaxed text-ink/80">
-                  &ldquo;{story.quote}&rdquo;
-                </blockquote>
+                <p className="mt-4 line-clamp-3 font-body text-sm leading-relaxed text-ink/75">{story.body[0]}</p>
 
                 <Link
                   href={`/stories/${story.id}`}

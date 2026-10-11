@@ -6,6 +6,7 @@ import { notFound } from 'next/navigation';
 import { stories } from '@/lib/content';
 import { blurProps } from '@/lib/media';
 import { StoryGallery } from '@/components/ui/StoryGallery';
+import { PageHeader } from '@/components/ui/PageHeader';
 
 type StoryPageProps = {
   params: Promise<{ slug: string }>;
@@ -79,46 +80,9 @@ export default async function StoryDetailPage({ params }: StoryPageProps) {
 
   return (
     <>
-      {/* ── Cinematic Hero ── */}
-      <section className="relative h-[70vh] min-h-[480px] bg-brand-navy overflow-hidden">
-        <Image
-          src={story.image}
-          alt={story.imageAlt}
-          fill
-          className="premium-reveal object-cover object-center"
-          priority
-          sizes="100vw"
-        />
-        {/* Strong gradient scrim so text is always legible */}
-        <div className="absolute inset-0 bg-gradient-to-t from-brand-navy via-brand-navy/60 to-brand-navy/10" />
-        <div className="absolute top-0 left-0 right-0 h-1 bg-brand-gold" aria-hidden="true" />
-
-        {/* Hero text - anchored to bottom */}
-        <div className="absolute inset-x-0 bottom-0 max-w-7xl mx-auto px-5 md:px-8 pb-12 md:pb-16">
-          <nav aria-label="Breadcrumb" className="mb-5">
-            <Link
-              href="/stories"
-              className="inline-flex items-center gap-2 font-body text-sm font-semibold text-white/75 hover:text-white transition-colors duration-200"
-            >
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                <path d="m15 18-6-6 6-6" />
-              </svg>
-              All stories
-            </Link>
-          </nav>
-          <span className={`inline-block px-3 py-1.5 rounded-full text-xs font-body font-bold mb-4 ${story.tagColor}`}>
-            {story.tag}
-          </span>
-          <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl font-black text-white leading-tight max-w-4xl mb-3">
-            {story.name}
-          </h1>
-          <p className="font-body text-sm text-white/60">{story.role} · {story.location}</p>
-          {story.date && (
-            <p className="font-body text-sm font-semibold text-brand-gold mt-1">{story.date}</p>
-          )}
-        </div>
-      </section>
-
+      <PageHeader overline={story.tag} title={story.name} description={`${story.role} · ${story.location}`}
+        bgImage={story.image} imageAlt={story.imageAlt} imageCaption={story.date ? `${story.location} · ${story.date}` : story.location}
+        action={{ href: '/stories', label: 'All impact stories' }} />
       {/* ── Article body ── */}
       <article className="bg-brand-cream">
         <div className="max-w-7xl mx-auto px-5 md:px-8 py-16 md:py-20">
@@ -127,14 +91,14 @@ export default async function StoryDetailPage({ params }: StoryPageProps) {
           <div className="grid grid-cols-1 lg:grid-cols-[1fr_320px] xl:grid-cols-[1fr_360px] gap-12 xl:gap-20">
 
             {/* ── Left: Article prose ── */}
-            <div className="min-w-0">
+            <div className="min-w-0 max-w-3xl mx-auto lg:mx-0">
               {/* About this story - mobile only (desktop uses the sticky sidebar) */}
               <div className="lg:hidden bg-white rounded-card-lg border border-brand-navy/10 p-6 mb-10">
                 {aboutMeta}
               </div>
 
               {/* Pull quote */}
-              <blockquote className="border-l-4 border-brand-gold pl-6 mb-10">
+              <blockquote className="border-y border-rule py-8 mb-10">
                 <p className="font-display italic text-xl md:text-2xl text-brand-navy leading-relaxed">
                   &ldquo;{story.quote}&rdquo;
                 </p>
@@ -150,7 +114,7 @@ export default async function StoryDetailPage({ params }: StoryPageProps) {
               </div>
 
               {/* Bottom CTA */}
-              <div className="mt-14 pt-8 border-t border-brand-navy/15 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-5">
+              <div className="mt-14 pt-8 border-t border-brand-navy/15 flex flex-col md:flex-row items-center justify-between gap-5">
                 <Link
                   href="/stories"
                   className="font-body text-sm font-semibold text-brand-navy border-b-2 border-brand-gold pb-1 py-1 hover:text-brand-red-dark transition-colors duration-200"
@@ -203,7 +167,7 @@ export default async function StoryDetailPage({ params }: StoryPageProps) {
         {/* ── Photo gallery - full width ── */}
         {story.gallery && story.gallery.length > 0 && (
           <section className="pb-20 max-w-7xl mx-auto px-5 md:px-8" aria-label={`Photo gallery from ${story.name}`}>
-            <div className="border-t border-brand-navy/10 pt-14 mb-10 flex items-center justify-between">
+            <div className="border-t border-brand-navy/10 pt-14 mb-10 flex flex-col items-center gap-4 md:flex-row md:justify-between">
               <div>
                 <span className="font-body text-sm font-semibold uppercase tracking-[0.12em] text-brand-red-dark">Gallery</span>
                 <h2 className="font-display text-3xl font-bold text-brand-navy mt-1">From the field</h2>
@@ -233,7 +197,7 @@ export default async function StoryDetailPage({ params }: StoryPageProps) {
             {/* Previous Story */}
             <Link
               href={`/stories/${prevStory.id}`}
-              className="group relative flex items-center gap-5 p-5 bg-white rounded-card-lg border border-brand-navy/10 hover:border-brand-gold/60 shadow-sm hover:shadow-md transition-all duration-300 focus-visible:outline-2 focus-visible:outline-brand-navy"
+              className="group relative flex flex-col md:flex-row items-center gap-5 p-5 bg-white rounded-card-lg border border-brand-navy/10 hover:border-brand-gold/60 shadow-sm hover:shadow-md transition-all duration-300 focus-visible:outline-2 focus-visible:outline-brand-navy"
             >
               <div className="relative w-20 h-20 sm:w-24 sm:h-24 rounded-card overflow-hidden shrink-0">
                 <Image
@@ -261,9 +225,9 @@ export default async function StoryDetailPage({ params }: StoryPageProps) {
             {/* Next Story */}
             <Link
               href={`/stories/${nextStory.id}`}
-              className="group relative flex items-center justify-between gap-5 p-5 bg-white rounded-card-lg border border-brand-navy/10 hover:border-brand-gold/60 shadow-sm hover:shadow-md transition-all duration-300 focus-visible:outline-2 focus-visible:outline-brand-navy text-right"
+              className="group relative flex flex-col md:flex-row items-center justify-center md:justify-between gap-5 p-5 bg-white rounded-card-lg border border-brand-navy/10 hover:border-brand-gold/60 shadow-sm hover:shadow-md transition-all duration-300 focus-visible:outline-2 focus-visible:outline-brand-navy text-center md:text-right"
             >
-              <div className="min-w-0 flex-1 order-2 sm:order-1 text-left sm:text-right">
+              <div className="min-w-0 flex-1 order-2 md:order-1 text-center md:text-right">
                 <span className="inline-flex items-center gap-1 font-body text-xs font-bold uppercase tracking-wider text-brand-navy/60 group-hover:text-brand-red-dark transition-colors">
                   Next Story <span aria-hidden="true">→</span>
                 </span>

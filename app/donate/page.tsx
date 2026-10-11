@@ -14,9 +14,10 @@ export default function DonatePage() {
       {/* Hero */}
       <PageHeader
         overline="Support Our Work"
-        title="Support Prince Asamany Foundation"
-        description="Donate via bank transfer or MoMo, every gift makes a difference."
+        title="Put your kindness into action."
+        description="Support community health, education, and practical relief. Choose Paystack, bank transfer, or MTN MoMo below."
         bgImage="/media/opt/IMG_6863.webp"
+        imageCaption="Community relief · Ghana"
       />
 
       <DonatePageContent />

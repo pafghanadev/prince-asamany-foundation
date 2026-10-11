@@ -1,6 +1,8 @@
 'use client';
 
 import React, { useState } from 'react';
+import Link from 'next/link';
+import { FoundationSymbol } from '@/components/ui/FoundationSymbol';
 import { CTABanner } from '@/components/sections/CTABanner';
 
 const opportunities = [
@@ -86,19 +88,21 @@ export function GetInvolvedContent() {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {opportunities.map((opp) => (
-              <div key={opp.title} className="p-6 bg-paper text-ink rounded-editorial flex flex-col gap-4 border border-rule hover:-translate-y-1 transition-all duration-300">
+              <div key={opp.title} className="py-8 text-ink flex flex-col items-center gap-4 border-t border-rule lg:items-start">
+                <FoundationSymbol kind="volunteer" className="size-12 text-ink" />
                 <h3 className="font-display text-xl font-bold text-ink leading-tight">{opp.title}</h3>
                 <p className="font-body text-sm text-ink/75 leading-relaxed">{opp.description}</p>
                 <div className="flex flex-col gap-1.5 mt-auto">
-                  <div className="flex items-center gap-2">
+                  <div className="flex items-center justify-center lg:justify-start gap-2">
                     <span className="w-1.5 h-1.5 rounded-full bg-brand-gold" aria-hidden="true" />
                     <span className="font-body text-xs text-ink/75"><strong className="font-semibold">Commitment:</strong> {opp.commitment}</span>
                   </div>
-                  <div className="flex items-center gap-2">
+                  <div className="flex items-center justify-center lg:justify-start gap-2">
                     <span className="w-1.5 h-1.5 rounded-full bg-brand-red" aria-hidden="true" />
                     <span className="font-body text-xs text-ink/75"><strong className="font-semibold">Location:</strong> {opp.location}</span>
                   </div>
                 </div>
+                <Link href="#form-heading" onClick={() => setFormData(current => ({ ...current, opportunity: opp.title }))} className="inline-flex min-h-11 items-center justify-center border-b border-brand-red-dark font-body text-sm font-semibold text-brand-red-dark">Express interest ↗</Link>
               </div>
             ))}
           </div>

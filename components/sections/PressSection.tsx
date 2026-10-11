@@ -23,7 +23,7 @@ export function PressSection() {
           >
             Our work in the media
           </h2>
-          <p className="font-body text-lg text-ink/75 leading-relaxed mt-4 text-left lg:text-center">
+          <p className="font-body text-lg text-ink/75 leading-relaxed mt-4 text-center lg:text-left lg:text-center">
             Coverage of our programs and impact by Choice News Online.
           </p>
         </div>
@@ -38,7 +38,7 @@ export function PressSection() {
               className="group flex flex-col gap-3 p-6 rounded-editorial bg-paper text-ink border border-rule hover:-translate-y-1 transition-all duration-300 focus-visible:outline-2 focus-visible:outline-brand-navy focus-visible:outline-offset-2 no-underline"
               aria-label={`${item.title}. Read the full article on ${item.outlet} (opens in a new tab)`}
             >
-              <div className="flex items-center justify-between gap-3">
+              <div className="flex flex-col items-center gap-3 md:flex-row md:justify-between">
                 <span className="text-xs font-body font-semibold text-brand-red-dark">
                   {item.tag}
                 </span>
@@ -47,7 +47,7 @@ export function PressSection() {
               <h3 className="font-display text-lg font-bold text-ink leading-snug group-hover:text-brand-red-dark transition-colors duration-200">
                 {item.title}
               </h3>
-              <div className="mt-auto pt-2 flex items-center gap-2 font-body text-sm text-ink/75">
+              <div className="mt-auto pt-2 flex items-center justify-center lg:justify-start gap-2 font-body text-sm text-ink/75">
                 {item.outlet}
                 <svg
                   width="14"

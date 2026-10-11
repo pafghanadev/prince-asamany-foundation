@@ -93,20 +93,20 @@ export function PhotoCollage() {
               </h2>
             </div>
 
-            <p className="font-body text-lg text-brand-navy/70 leading-relaxed text-left">
+            <p className="font-body text-lg text-brand-navy/70 leading-relaxed text-center lg:text-left">
               The Prince Asamany Foundation stands as a bridge between need and compassion. If you
               are seeking support, do not hesitate to call on us. If you have a heart to uplift the
               less privileged, join hands with us, together we can restore hope and change lives.
             </p>
 
-            <ul className="flex flex-col items-start text-left gap-4 list-none m-0 p-0" role="list">
+            <ul className="flex flex-col items-center lg:items-start text-center lg:text-left gap-4 list-none m-0 p-0" role="list">
 {[
   'Free health screenings and preventive care in partnership with local hospitals',
   'Annual "Joy to the Street" relief for vulnerable families and street children',
   'Skills training and economic empowerment for sustainable local livelihoods',
   'Environmental projects and reforestation in the Ashanti Region',
 ].map((item) => (
-                <li key={item} className="flex items-start gap-3">
+                <li key={item} className="flex flex-col items-center md:flex-row lg:items-start gap-3">
                   <span
                     className="mt-1 w-5 h-5 rounded-full bg-brand-gold shrink-0 flex items-center justify-center"
                     aria-hidden="true"
@@ -120,7 +120,7 @@ export function PhotoCollage() {
               ))}
             </ul>
 
-            <div className="flex flex-wrap items-center justify-center md:justify-start gap-6 mt-4">
+            <div className="flex flex-wrap items-center justify-center lg:justify-start gap-6 mt-4">
               <Link
                 href="/about"
                 className="font-body text-sm font-semibold text-brand-navy border-b-2 border-brand-navy pt-[6px] pb-1 hover:text-brand-red-dark transition-colors duration-200"

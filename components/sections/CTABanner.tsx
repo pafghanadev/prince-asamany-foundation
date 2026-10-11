@@ -28,13 +28,13 @@ export function CTABanner({
             aria-hidden="true"
           />
         </div>
-        <div className="flex flex-col items-start gap-8 md:col-span-7 md:justify-center">
+        <div className="flex flex-col items-center gap-8 text-center md:col-span-7 lg:items-start md:justify-center lg:text-left">
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-40px' }}
           transition={{ duration: 0.6, ease: 'easeOut' }}
-          className="flex flex-col items-center gap-4"
+          className="flex flex-col items-center gap-4 lg:items-start"
         >
           <span className="font-body text-xs font-semibold uppercase tracking-[0.18em] text-brand-gold">
             Join Our Action
@@ -46,8 +46,8 @@ export function CTABanner({
             Everyone can help.
           </h2>
           <p className="max-w-xl font-body text-lg leading-relaxed text-paper/75">
-            The Prince Asamany Foundation stands as a bridge between need and compassion. Whether
-            you give, volunteer, or simply share, your contribution restores hope.
+            Help a family access care. Support a young person’s education. Join an outreach team.
+            There are many ways to stand with our communities.
           </p>
         </motion.div>
 
@@ -56,7 +56,7 @@ export function CTABanner({
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-40px' }}
           transition={{ duration: 0.6, delay: 0.2, ease: 'easeOut' }}
-          className="flex w-full flex-col gap-4 sm:flex-row"
+          className="flex w-full flex-col items-center gap-4 sm:flex-row sm:justify-center lg:justify-start"
         >
           <Link
             href={primaryAction.href}

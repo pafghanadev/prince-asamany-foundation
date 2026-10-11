@@ -1,5 +1,7 @@
 import type { Metadata } from 'next';
 import { HeroSection } from '@/components/sections/Hero';
+import { ProofStrip } from '@/components/sections/ProofStrip';
+import { CommunityAction } from '@/components/sections/CommunityAction';
 import { ProgramIconRow } from '@/components/sections/ProgramIconRow';
 import { AsymmetricCards } from '@/components/sections/AsymmetricCards';
 import { FounderHighlight } from '@/components/sections/FounderHighlight';
@@ -24,6 +26,8 @@ export default async function HomePage() {
   return (
     <>
       <HeroSection />
+      <ProofStrip />
+      <CommunityAction />
       <ProgramIconRow />
       <AsymmetricCards />
       <FounderHighlight />

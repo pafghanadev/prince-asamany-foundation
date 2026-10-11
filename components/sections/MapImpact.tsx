@@ -31,7 +31,7 @@ interface Stat {
 }
 
 const stats: Stat[] = [
-  { value: '800+', label: 'Lives Touched in 2024', description: 'Street children and vulnerable persons reached during the Joy to the Street campaign', theme: 'red', icon: <HeartIcon /> },
+  { value: 'Relief', label: 'Joy to the Street', description: 'Outreach for street children and vulnerable families in Kumasi', theme: 'red', icon: <HeartIcon /> },
   { value: 'Free', label: 'Health Screenings', description: 'Cervical cancer screening and health education with Mansa Memorial Hospital', theme: 'green', icon: <ShieldIcon /> },
   { value: '2025', label: 'Social Change Advocate', description: 'Founder honored by AFLAG for impact-driven community leadership', theme: 'gold', icon: <AwardIcon /> },
   { value: 'Ejisu', label: 'Our Base', description: 'Akyawkrom, Ejisu Municipal Assembly, Ashanti Region', theme: 'navy', icon: <MapPinIcon /> },
@@ -44,7 +44,7 @@ export function MapImpact() {
   return (
     <section className="bg-paper text-ink py-20 md:py-28" aria-labelledby="map-heading">
       <div className="mx-auto max-w-6xl px-6 md:px-12">
-        <div className="mb-12 max-w-2xl">
+        <div className="mx-auto mb-12 max-w-2xl text-center md:mx-0 lg:text-left">
           <p className="font-body text-xs font-semibold uppercase tracking-[0.18em] text-brand-red-dark">
             Where We Work
           </p>
@@ -52,8 +52,9 @@ export function MapImpact() {
             id="map-heading"
             className="mt-3 font-display text-4xl leading-[1.05] md:text-6xl"
           >
-            Always where others need help.
+            Rooted in Ejisu. Connected to our neighbours.
           </h2>
+          <p className="mt-5 font-body text-base leading-relaxed text-ink/75">Explore the communities behind our outreach. Select a location to see the work taking place there.</p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
@@ -67,7 +68,7 @@ export function MapImpact() {
             className="relative flex flex-col"
           >
             <div className="border border-rule p-6">
-              <div className="flex items-center justify-between mb-3">
+              <div className="mb-3 flex flex-col items-center gap-2 text-center md:flex-row md:justify-between lg:text-left">
                 <span className="font-body text-xs font-bold uppercase tracking-wider text-brand-red-dark">
                   Community Focus Areas
                 </span>
@@ -90,7 +91,7 @@ export function MapImpact() {
                     type="button"
                     aria-pressed={activeId === h.id}
                     onClick={() => setActiveId(h.id)}
-                    className={`font-body text-xs font-semibold px-3.5 py-1.5 rounded-editorial transition-colors duration-200 focus-visible:outline-2 focus-visible:outline-ink ${
+                    className={`min-h-11 font-body text-xs font-semibold px-3.5 py-1.5 rounded-editorial transition-colors duration-200 focus-visible:outline-2 focus-visible:outline-ink ${
                       activeId === h.id
                         ? 'bg-ink text-paper'
                         : 'border border-rule text-ink/70 hover:text-ink'
@@ -102,8 +103,8 @@ export function MapImpact() {
               </div>
 
               {/* Active Location Information Callout */}
-              <div aria-live="polite" className="mt-4 p-4 rounded-editorial bg-paper-deep border border-rule">
-                <div className="flex flex-wrap items-center justify-between gap-2 mb-1.5">
+              <div aria-live="polite" className="mt-4 p-4 text-center lg:text-left rounded-editorial bg-paper-deep border border-rule">
+                <div className="mb-1.5 flex flex-col items-center gap-2 md:flex-row md:flex-wrap md:justify-between">
                   <span className="font-display text-base font-bold text-brand-navy flex items-center gap-1.5">
                     <span className="w-2.5 h-2.5 rounded-full bg-brand-red" aria-hidden="true" />
                     {activeHotspot.name}
@@ -112,7 +113,7 @@ export function MapImpact() {
                     {activeHotspot.tag}
                   </span>
                 </div>
-                <p className="font-body text-xs text-brand-navy/70 font-medium mb-1 flex items-center gap-1.5">
+                <p className="font-body text-xs text-brand-navy/70 font-medium mb-1 flex items-center justify-center lg:justify-start gap-1.5">
                   <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" className="text-brand-red-dark shrink-0">
                     <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" /><circle cx="12" cy="10" r="3" />
                   </svg>
@@ -130,7 +131,7 @@ export function MapImpact() {
             {stats.map((stat, i) => {
               const themeClasses = {
                 red: 'bg-ink text-paper border-ink',
-                gold: 'bg-brand-gold text-brand-navy border-brand-gold',
+                gold: 'bg-ink text-paper border-ink',
                 navy: 'bg-brand-navy text-white border-brand-navy',
                 green: 'bg-ink text-paper border-ink',
               }[stat.theme] || 'bg-paper text-ink border-rule';
@@ -142,7 +143,7 @@ export function MapImpact() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: '-40px' }}
                   transition={{ duration: 0.5, delay: i * 0.1, ease: 'easeOut' }}
-                  className={`flex flex-col items-center text-center md:items-start md:text-left p-4 sm:p-6 min-h-[9rem] sm:min-h-[10rem] rounded-editorial border transition-colors duration-300 group focus-visible:outline-2 focus-visible:outline-ink focus-visible:outline-offset-2 ${themeClasses}`}
+                  className={`flex flex-col items-center text-center lg:items-start lg:text-left p-4 sm:p-6 min-h-[9rem] sm:min-h-[10rem] rounded-editorial border transition-colors duration-300 group focus-visible:outline-2 focus-visible:outline-ink focus-visible:outline-offset-2 ${themeClasses}`}
                 >
                   <div className="flex items-center justify-center w-9 h-9 sm:w-12 sm:h-12 mb-2 sm:mb-4 bg-white/10 [&>svg]:w-4.5 [&>svg]:h-4.5 sm:[&>svg]:w-6 sm:[&>svg]:h-6">
                     {stat.icon}
@@ -154,7 +155,7 @@ export function MapImpact() {
                   <div className="w-8 sm:w-10 h-0.5 sm:h-1 my-2 sm:my-3 bg-white/30" aria-hidden="true" />
                   
                   <div className="font-body text-xs sm:text-lg font-bold sm:font-semibold mb-1 leading-tight">{stat.label}</div>
-                  <div className={`font-body text-xs sm:text-sm leading-relaxed ${stat.theme === 'gold' ? 'text-brand-navy/90' : 'text-white/90'}`}>
+                  <div className="font-body text-xs sm:text-sm leading-relaxed text-white/90">
                     {stat.description}
                   </div>
                 </motion.div>

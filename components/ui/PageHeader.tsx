@@ -1,5 +1,5 @@
-import React from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import { blurProps } from '@/lib/media';
 
 interface PageHeaderProps {
@@ -7,75 +7,30 @@ interface PageHeaderProps {
   title: string;
   description: string;
   bgImage?: string;
+  imageAlt?: string;
+  imageCaption?: string;
+  action?: { href: string; label: string };
   tone?: 'navy' | 'green';
   className?: string;
 }
 
-const toneClasses = {
-  navy: {
-    bg: 'bg-brand-navy',
-    // Bottom-heaviest scrim: content is centered, so protect the middle/bottom
-    // and let the top breathe.
-    overlay: 'bg-gradient-to-b from-brand-navy/60 via-brand-navy/80 to-brand-navy/95',
-  },
-  green: {
-    bg: 'bg-brand-green',
-    overlay: 'bg-gradient-to-b from-brand-green/60 via-brand-green/80 to-brand-green/95',
-  },
-};
-
-export function PageHeader({ overline, title, description, bgImage, tone = 'navy', className = '' }: PageHeaderProps) {
-  const toneCls = toneClasses[tone];
+export function PageHeader({ overline, title, description, bgImage, imageAlt = '', imageCaption, action, tone = 'navy', className = '' }: PageHeaderProps) {
   return (
-    <section className={`relative ${toneCls.bg} overflow-hidden pt-32 pb-20 md:pt-40 md:pb-28 ${className}`}>
-      {/* Background Image / Overlay */}
-      {bgImage ? (
-        <div className="absolute inset-0 opacity-20">
-          <Image
-            src={bgImage}
-            alt=""
-            fill
-            sizes="100vw"
-            className="object-cover object-center"
-            aria-hidden="true"
-            {...blurProps(bgImage)}
-          />
+    <section className={`pt-18 ${tone === 'green' ? 'bg-brand-green' : 'bg-ink'} text-paper ${className}`}>
+      <div className={`mx-auto grid max-w-[1440px] ${bgImage ? 'lg:min-h-[560px] lg:grid-cols-12 lg:items-stretch' : ''}`}>
+        <div className={`flex flex-col items-center justify-center px-6 py-12 text-center md:px-12 md:py-16 lg:items-start lg:px-16 lg:py-20 lg:text-left ${bgImage ? 'lg:col-span-5' : ''}`}>
+          <p className="font-body text-xs font-semibold uppercase text-brand-gold">{overline}</p>
+          <h1 className="mt-5 max-w-3xl font-display text-4xl leading-[1.08] text-balance sm:text-5xl lg:text-5xl xl:text-6xl">{title}</h1>
+          <p className="mt-6 max-w-xl font-body text-base leading-relaxed text-paper/80 text-pretty md:text-lg">{description}</p>
+          {action && <Link href={action.href} className="mt-7 inline-flex min-h-12 items-center justify-center gap-3 bg-brand-gold px-6 py-3 font-body text-sm font-semibold text-ink">{action.label}<span aria-hidden="true">↗</span></Link>}
         </div>
-      ) : (
-        /* Abstract pattern if no image */
-        <div className="absolute inset-0 opacity-[0.06] radial-mask-falloff pointer-events-none" aria-hidden="true">
-          <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
-            <defs>
-              <pattern id="dotPattern" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
-                <circle cx="2" cy="2" r="1.5" fill="#FFFFFF" />
-              </pattern>
-            </defs>
-            <rect x="0" y="0" width="100%" height="100%" fill="url(#dotPattern)" />
-          </svg>
-        </div>
-      )}
-      
-      <div className={`absolute inset-0 ${toneCls.overlay}`} aria-hidden="true" />
-      <div className="absolute top-0 left-0 right-0 h-1 bg-brand-gold" aria-hidden="true" />
-
-      {/* Content */}
-      <div className="relative z-10 max-w-7xl mx-auto px-5 md:px-8">
-        <div className="max-w-3xl mx-auto flex flex-col items-center text-center">
-          <span className="font-body text-sm font-semibold uppercase tracking-[0.15em] text-brand-gold mb-3">
-            {overline}
-          </span>
-          <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight">
-            {title}
-          </h1>
-
-          <div className="mt-5 h-1 w-12 rounded-full bg-brand-gold opacity-80" aria-hidden="true" />
-
-          <p className="mt-6 font-body text-lg md:text-xl text-white/80 leading-relaxed max-w-2xl text-center">
-            {description}
-          </p>
-        </div>
+        {bgImage && <figure className="relative lg:col-span-7 lg:min-h-[560px]">
+          <div className="relative aspect-[4/3] lg:absolute lg:inset-0 lg:h-full">
+            <Image src={bgImage} alt={imageAlt} fill priority sizes="(min-width: 1024px) 58vw, 100vw" className="object-cover object-center" {...blurProps(bgImage)} />
+          </div>
+          {imageCaption && <figcaption className="absolute inset-x-0 bottom-0 bg-ink/85 px-5 py-3 text-center font-body text-xs text-paper lg:text-left">{imageCaption}</figcaption>}
+        </figure>}
       </div>
     </section>
   );
 }
-

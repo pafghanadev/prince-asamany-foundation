@@ -120,26 +120,26 @@ export function FounderHighlight() {
               </h2>
             </div>
 
-            <blockquote className="border-l-4 border-brand-gold pl-6 text-left">
+            <blockquote className="border-l-0 border-brand-gold pl-0 text-center lg:border-l-4 lg:pl-6 lg:text-left">
               <p className="font-display text-2xl italic leading-snug text-white/95">
                 &ldquo;Our mission is simple: to stand as a bridge between need and compassion, bringing hope to those who need it most.&rdquo;
               </p>
             </blockquote>
 
-            <p className="font-body text-lg text-white/75 leading-relaxed max-w-xl text-left">
+            <p className="font-body text-lg text-white/75 leading-relaxed max-w-xl text-center lg:text-left">
               Awarded the 2025 Social Change Advocate Award, Prince Asamany has dedicated his life to uplifting communities across the Ashanti Region through initiatives like &ldquo;Joy to the Street&rdquo; and preventive healthcare programs.
             </p>
 
             <div className="border-t border-white/15 pt-6 pb-2 grid grid-cols-1 sm:grid-cols-3 gap-x-6 gap-y-5 w-full" role="list">
-              <div className="sm:text-left">
+              <div className="text-center lg:text-left">
                 <p className="font-display text-xl font-bold text-brand-gold">2025</p>
                 <p className="font-body text-xs uppercase tracking-wider text-white/60 mt-1">Social Change Advocate honoree</p>
               </div>
-              <div className="sm:text-left">
+              <div className="text-center lg:text-left">
                 <p className="font-display text-xl font-bold text-brand-gold">Ashanti Region</p>
                 <p className="font-body text-xs uppercase tracking-wider text-white/60 mt-1">Communities uplifted</p>
               </div>
-              <div className="sm:text-left">
+              <div className="text-center lg:text-left">
                 <p className="font-display text-xl font-bold text-brand-gold">Joy to the Street</p>
                 <p className="font-body text-xs uppercase tracking-wider text-white/60 mt-1">Signature outreach</p>
               </div>

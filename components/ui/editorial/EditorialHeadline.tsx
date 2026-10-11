@@ -17,7 +17,7 @@ const titleSize = {
 
 export function EditorialHeadline({ eyebrow, title, level = 2, lead, tone = 'paper', align = 'left' }: EditorialHeadlineProps) {
   const eyebrowColor = tone === 'ink' ? 'text-brand-gold' : 'text-brand-red-dark';
-  const alignClass = align === 'right' ? 'ml-auto text-right' : 'text-left';
+  const alignClass = align === 'right' ? 'ml-auto text-center md:text-right' : 'mx-auto text-center md:mx-0 lg:text-left';
   const Tag = level === 1 ? 'h1' : level === 2 ? 'h2' : 'h3';
   return (
     <div className={`max-w-3xl ${alignClass}`}>
@@ -25,7 +25,7 @@ export function EditorialHeadline({ eyebrow, title, level = 2, lead, tone = 'pap
         <p className={`mb-4 text-xs font-semibold uppercase tracking-[0.18em] ${eyebrowColor}`}>{eyebrow}</p>
       )}
       <Tag className={`font-display leading-[1.02] ${titleSize[level]}`}>{title}</Tag>
-      {lead && <p className="mt-6 max-w-xl font-body text-lg opacity-75">{lead}</p>}
+      {lead && <p className="mx-auto mt-6 max-w-xl font-body text-lg opacity-75 md:mx-0">{lead}</p>}
     </div>
   );
 }

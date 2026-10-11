@@ -13,8 +13,11 @@ export default function ContactPage() {
     <>
       <PageHeader
         overline="Reach Out"
-        title="Contact Us"
+        title="Let’s start with a conversation."
         description="If you are seeking support, do not hesitate to call on us. We're here to help."
+        bgImage="/media/opt/IMG_6846.webp"
+        imageAlt="Prince Asamany speaking with a mother and child during outreach"
+        imageCaption="Connecting with families · Ejisu"
       />
 
       <ContactForm />

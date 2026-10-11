@@ -1,6 +1,5 @@
 import type { Metadata } from 'next';
 import Image from 'next/image';
-import Link from 'next/link';
 import { PageHeader } from '@/components/ui/PageHeader';
 import { LeadershipRecognition } from '@/components/sections/LeadershipRecognition';
 import { PressSection } from '@/components/sections/PressSection';
@@ -24,12 +23,6 @@ const objectives = [
   'Hands-on vocational tools and community mentorship.',
   'Local and international partnerships for sustainable community support.',
   'Close collaboration with local chiefs, healthcare workers, and families.',
-];
-
-const programs = [
-  { title: 'Preventive Healthcare.', image: '/media/opt/IMG_8259.webp', alt: 'Health workers and foundation team posing by a free cervical cancer screening banner', href: '/programs#health-screenings' },
-  { title: 'Social Welfare & Relief.', image: '/media/opt/IMG_6851.webp', alt: 'Foundation volunteers handing relief items to mothers and children during a Joy to the Street outreach in Kumasi', href: '/programs#social-welfare' },
-  { title: 'Economic Empowerment.', image: '/media/opt/IMG_8208.webp', alt: 'Foundation volunteers standing beside the foundation mission and vision banner during a community skills training event', href: '/programs#economic-empowerment' },
 ];
 
 const achievements = [
@@ -84,13 +77,16 @@ export default function AboutPage() {
       {/* Hero */}
       <PageHeader
         overline="Our Foundation"
-        title="About Prince Asamany Foundation"
-        description="The Prince Asamany Foundation stands as a bridge between need and compassion. If you have a heart to uplift the less privileged, join hands with us."
+        title="From our community. For our community."
+        description="Based in Akyawkrom, Ejisu, we bring people together around practical care, education, and opportunities for families across Ghana."
         bgImage="/media/opt/IMG_6885.webp"
+        imageAlt="Foundation volunteers and residents gathered during community outreach"
+        imageCaption="Community outreach · Ashanti Region, Ghana"
+        action={{ href: '#founder-heading', label: 'Meet our founder' }}
       />
 
       {/* About intro */}
-      <section className="bg-paper text-ink py-20 md:py-28">
+      <section className="bg-paper text-ink py-14 md:py-20">
         <div className="mx-auto max-w-6xl px-6 md:px-12">
           <div className="max-w-2xl mx-auto text-center mb-12">
             <span className="font-body text-xs font-semibold uppercase tracking-[0.18em] text-brand-red-dark">Our Story</span>
@@ -107,7 +103,7 @@ export default function AboutPage() {
                 Let&rsquo;s take them home and give them something to eat,&rdquo; sparked the vision
                 to create a foundation where kindness meets action.
               </p>
-              <blockquote className="border-l-4 border-brand-gold pl-6 mb-5">
+              <blockquote className="border-t md:border-t-0 md:border-l-4 border-brand-gold pt-5 md:pt-0 md:pl-6 mb-5">
                 <p className="font-display text-2xl text-ink italic leading-snug">
                   We stand for hope, development and opportunity for all.
                 </p>
@@ -125,7 +121,7 @@ export default function AboutPage() {
 
             <div className="flex flex-col gap-8">
               {/* Vision */}
-              <div className="border-l-4 border-brand-gold pl-6">
+              <div className="border-t md:border-t-0 md:border-l-4 border-brand-gold pt-5 md:pt-0 md:pl-6">
                 <h3 className="font-display text-xl font-bold text-brand-red-dark mb-2">Vision</h3>
                 <p className="font-body text-lg text-ink/75 leading-relaxed italic">
                   Our work aims to break the cycle of poverty and isolation, restoring hope and
@@ -134,7 +130,7 @@ export default function AboutPage() {
               </div>
 
               {/* Mission */}
-              <div className="border-l-4 border-brand-navy pl-6">
+              <div className="border-t md:border-t-0 md:border-l-4 border-brand-navy pt-5 md:pt-0 md:pl-6">
                 <h3 className="font-display text-xl font-bold text-brand-red-dark mb-2">Mission</h3>
                 <p className="font-body text-lg text-ink/75 leading-relaxed italic">
                   Promote community well-being, uplift underprivileged families, and build lasting
@@ -147,7 +143,7 @@ export default function AboutPage() {
       </section>
 
       {/* Achievements */}
-      <section className="bg-paper text-ink py-20 md:py-28">
+      <section className="bg-paper text-ink py-14 md:py-20">
         <div className="mx-auto max-w-6xl px-6 md:px-12">
           <div className="max-w-2xl mx-auto text-center mb-12">
             <span className="font-body text-xs font-semibold uppercase tracking-[0.18em] text-brand-red-dark">
@@ -169,7 +165,7 @@ export default function AboutPage() {
       </section>
 
       {/* Future Plans */}
-      <section className="bg-paper text-ink py-20 md:py-28">
+      <section className="bg-paper text-ink py-14 md:py-20">
         <div className="mx-auto max-w-6xl px-6 md:px-12">
           <div className="max-w-2xl mx-auto text-center mb-12">
             <span className="font-body text-xs font-semibold uppercase tracking-[0.18em] text-brand-red-dark">
@@ -194,7 +190,7 @@ export default function AboutPage() {
       </section>
 
       {/* Meet the Founder - editorial profile */}
-      <section className="bg-paper text-ink py-20 md:py-28 overflow-hidden" aria-labelledby="founder-heading">
+      <section className="bg-paper text-ink py-14 md:py-20 overflow-hidden" aria-labelledby="founder-heading">
         <div className="mx-auto max-w-6xl px-6 md:px-12">
           <div className="max-w-2xl mx-auto text-center mb-12">
             <span className="font-body text-xs font-semibold uppercase tracking-[0.18em] text-brand-red-dark">Leadership</span>
@@ -232,7 +228,7 @@ export default function AboutPage() {
             </div>
 
             {/* Narrative */}
-            <div className="flex flex-col items-start text-left gap-6 mt-8 lg:mt-0">
+            <div className="flex flex-col items-center lg:items-start text-center lg:text-left gap-6 mt-8 lg:mt-0">
               <p className="font-display text-2xl md:text-3xl text-ink">
                 Prince Douglas Asamany
               </p>
@@ -259,12 +255,12 @@ export default function AboutPage() {
       <PressSection />
 
       {/* Strategic Objectives & Core Values */}
-      <section className="bg-paper text-ink py-20 md:py-28">
+      <section className="bg-paper text-ink py-14 md:py-20">
         <div className="mx-auto max-w-6xl px-6 md:px-12">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-20">
             {/* Key Goals for Our Communities */}
             <div>
-              <div className="text-left mb-8">
+              <div className="text-center lg:text-left mb-8">
                 <span className="font-body text-xs font-semibold uppercase tracking-[0.18em] text-brand-red-dark">Our Purpose</span>
                 <h2 className="font-display text-4xl md:text-5xl text-ink mt-3 leading-[1.05]">
                   Key Goals for Our Communities
@@ -272,7 +268,7 @@ export default function AboutPage() {
               </div>
               <ul className="flex flex-col gap-4 list-none m-0 p-0" role="list">
                 {objectives.map((obj) => (
-                  <li key={obj} className="flex items-start gap-4">
+                  <li key={obj} className="flex flex-col items-center md:flex-row lg:items-start gap-4">
                     <span className="w-6 h-6 rounded-full bg-brand-red shrink-0 flex items-center justify-center mt-0.5" aria-hidden="true">
                       <svg width="10" height="8" viewBox="0 0 10 8" fill="none">
                         <path d="M1 4l3 3 5-6" stroke="white" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
@@ -286,7 +282,7 @@ export default function AboutPage() {
 
             {/* Core Values */}
             <div>
-              <div className="text-left mb-8">
+              <div className="text-center lg:text-left mb-8">
                 <span className="font-body text-xs font-semibold uppercase tracking-[0.18em] text-brand-red-dark">Our Values</span>
                 <h2 className="font-display text-4xl md:text-5xl text-ink mt-3 leading-[1.05]">
                   Core Values
@@ -308,55 +304,6 @@ export default function AboutPage() {
                 ))}
               </div>
             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Key Program Areas */}
-      <section className="bg-ink text-paper py-20 md:py-28">
-        <div className="mx-auto max-w-6xl px-6 md:px-12">
-          <div className="mb-12 text-center">
-            <span className="font-body text-sm font-semibold uppercase tracking-[0.15em] text-brand-gold">Programs</span>
-            <h2 className="font-display text-3xl md:text-4xl font-bold text-white mt-2 leading-tight">
-              Key Program Areas
-            </h2>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {programs.map((p) => (
-              <Link
-                key={p.title}
-                href={p.href}
-                aria-label={`${p.title}: read more on the Programs page`}
-                className="relative overflow-hidden rounded-editorial group min-h-[400px] lg:min-h-[480px] block focus-visible:outline-2 focus-visible:outline-brand-gold focus-visible:outline-offset-4"
-              >
-                <Image 
-                  src={p.image} 
-                  alt={p.alt} 
-                  fill 
-                  className="object-cover object-top group-hover:scale-105 transition-transform duration-700" 
-                  sizes="(max-width: 768px) 100vw, 33vw" 
-                  {...blurProps(p.image)}
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-brand-navy/90 via-brand-navy/30 to-transparent" />
-                <div className="absolute bottom-0 left-0 right-0 p-6">
-                  <h3 className="font-display text-xl md:text-2xl font-bold text-white leading-tight">{p.title}</h3>
-                </div>
-              </Link>
-            ))}
-          </div>
-
-          {/* Key Program Areas list */}
-          <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-2xl mx-auto text-left">
-            {[
-              'Listening closely to the direct needs of local families.',
-              'Designing practical, long-term health and education programs.',
-              'Providing tools and training that empower local communities.',
-              'Walking together with chiefs, elders, and community members.',
-            ].map((item) => (
-              <div key={item} className="border-t border-white/15 p-4">
-                <p className="font-body text-sm text-white/75 leading-relaxed">{item}</p>
-              </div>
-            ))}
           </div>
         </div>
       </section>

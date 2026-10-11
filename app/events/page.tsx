@@ -20,9 +20,11 @@ export default async function EventsPage() {
       {/* Hero Page Header */}
       <PageHeader
         overline="Community Calendar"
-        title="Events & Outreaches"
+        title="Meet us on the ground."
         description="Discover where we are serving next. Join us on the ground, volunteer your skills, or connect with our health and welfare teams in your district."
         bgImage="/media/opt/IMG-20260727-WA0008.webp"
+        imageAlt="Students holding health packages during the foundation’s deworming outreach"
+        imageCaption="Youth health outreach · Akyawkrom"
         tone="navy"
       />
 

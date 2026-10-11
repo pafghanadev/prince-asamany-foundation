@@ -150,7 +150,7 @@ const [active, setActive] = useState<number | null>(null);
             />
             
             {/* Caption */}
-            <div className="absolute bottom-0 left-0 right-0 p-5 md:p-6 z-20 text-left transform transition-transform duration-300 translate-y-2 group-hover:translate-y-0">
+            <div className="absolute bottom-0 left-0 right-0 p-5 md:p-6 z-20 text-center lg:text-left transform transition-transform duration-300 translate-y-2 group-hover:translate-y-0">
               <span className="font-body text-sm md:text-base font-medium text-white drop-">
                 {img.caption}
               </span>

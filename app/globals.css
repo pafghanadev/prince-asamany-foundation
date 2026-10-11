@@ -152,7 +152,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .hero-campaign-title {
   font-family: var(--font-body);
-  font-size: clamp(2.15rem, 5.6vw, 5.5rem);
+  font-size: clamp(2.15rem, 5.2vw, 4.75rem);
   font-weight: 700;
   line-height: 1.03;
   letter-spacing: -0.055em;
@@ -174,7 +174,7 @@ h1, h2, h3, h4, h5, h6 {
 @media (max-width: 767px) {
   .hero-campaign-title { font-size: clamp(2.15rem, 7.8vw, 3.7rem); }
   .hero-photo-scrim {
-    background: linear-gradient(90deg, rgba(11,37,48,.85), rgba(11,37,48,.48)), linear-gradient(0deg, rgba(11,37,48,.92), transparent 80%);
+    background: linear-gradient(180deg, rgba(11,37,48,.7), rgba(11,37,48,.6) 50%, rgba(11,37,48,.92)), linear-gradient(0deg, rgba(11,37,48,.92), transparent 80%);
   }
 }
 
@@ -204,10 +204,9 @@ h1, h2, h3, h4, h5, h6 {
   }
 }
 
-/* Scrollbar */
-::-webkit-scrollbar { width: 6px; }
-::-webkit-scrollbar-track { background: var(--color-brand-cream); }
-::-webkit-scrollbar-thumb { background: var(--color-brand-gold); border-radius: 3px; }
+/* Keep page and menu scrolling available without a visible scrollbar. */
+* { scrollbar-width: none; }
+::-webkit-scrollbar { display: none; width: 0; height: 0; }
 
 /* Nicer paragraph rag — prevents orphans/awkward last-line breaks */
 p { text-wrap: pretty; }

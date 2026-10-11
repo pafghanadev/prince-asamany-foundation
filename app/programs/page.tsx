@@ -93,9 +93,19 @@ export default function ProgramsPage() {
     <>
       <PageHeader
         overline="What We Do"
-        title="Core Programs"
-        description="The Prince Asamany Foundation stands as a bridge between need and compassion. Our community work is focused on these three core pillars."
+        title="Care today. Opportunity tomorrow."
+        description="Preventive healthcare, relief for families, and support for local livelihoods. Explore the work we do alongside our communities."
+        bgImage="/media/opt/IMG_8116.webp"
+        imageAlt="Health educator presenting a cervical cancer guide at a community screening"
+        imageCaption="Preventive health education · Ejisu"
+        action={{ href: '#health-screenings', label: 'Explore our programs' }}
       />
+
+      <nav aria-label="Program topics" className="border-b border-rule bg-paper px-6 py-6">
+        <div className="mx-auto flex max-w-7xl flex-wrap justify-center gap-x-8 gap-y-3">
+          {programs.map(program => <Link key={program.id} href={`#${program.id}`} className="inline-flex min-h-11 items-center justify-center border-b border-brand-red-dark font-body text-sm font-semibold text-ink">{program.tag} ↓</Link>)}
+        </div>
+      </nav>
 
       {/* Program details */}
       {programs.map((program, i) => {
@@ -105,7 +115,7 @@ export default function ProgramsPage() {
         <section
           key={program.id}
           id={program.id}
-          className={`py-20 md:py-28 ${i % 2 === 0 ? 'bg-paper' : 'bg-paper text-ink'}`}
+          className={`py-14 md:py-20 ${i % 2 === 0 ? 'bg-paper' : 'bg-paper text-ink'}`}
           aria-labelledby={`program-${program.id}-heading`}
         >
           <div className="max-w-7xl mx-auto px-5 md:px-8">
@@ -179,14 +189,14 @@ export default function ProgramsPage() {
                   <h3 className="font-body text-sm font-bold uppercase tracking-wider text-ink mb-4">Our Approach</h3>
                   <ul className="flex flex-col gap-3 list-none m-0 p-0" role="list">
                     {program.approach.map((item) => (
-                      <li key={item} className="flex items-start gap-3">
+                      <li key={item} className="flex flex-col items-center gap-3 md:flex-row lg:items-start">
                         <span className="w-1.5 h-1.5 rounded-full bg-brand-gold shrink-0 mt-2" aria-hidden="true" />
                         <span className="font-body text-sm text-ink/75 leading-relaxed">{item}</span>
                       </li>
                     ))}
                   </ul>
                 </div>
-                <div className="flex flex-wrap items-center gap-x-6 gap-y-3">
+                <div className="flex flex-wrap items-center justify-center lg:justify-start gap-x-6 gap-y-3">
                   <Link
                     href="/donate"
                     className="inline-flex items-center font-body text-sm font-semibold text-brand-red-dark border-b-2 border-brand-gold pb-1 py-1 transition-colors duration-200 self-start"

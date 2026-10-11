@@ -76,7 +76,7 @@ export default function RootLayout({
         <MotionConfig reducedMotion="user">
           <a href="#main-content" className="skip-link">Skip to content</a>
           <Navbar />
-          <main id="main-content">
+          <main id="main-content" className="text-center lg:text-left">
             {children}
           </main>
           <Footer />

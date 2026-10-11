@@ -13,9 +13,12 @@ export default function GetInvolvedPage() {
     <>
       <PageHeader
         overline="Take Action"
-        title="Get Involved"
+        title="Bring what you can. Be part of the work."
         description="If you have a heart to uplift the less privileged, join hands with us. There are many ways to contribute, choose the one that fits your skills and time."
         tone="green"
+        bgImage="/media/opt/IMG_6871.webp"
+        imageAlt="Foundation volunteers standing with children and families in the community"
+        imageCaption="People make this work possible · Ashanti Region"
       />
 
       <GetInvolvedContent />

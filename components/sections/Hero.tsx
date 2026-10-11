@@ -48,14 +48,13 @@ const HERO_SLIDES: HeroSlide[] = [
 
 export function HeroSection() {
   const [currentIndex, setCurrentIndex] = React.useState(0);
-  const [isPaused, setIsPaused] = React.useState(false);
   const [isInteracting, setIsInteracting] = React.useState(false);
   const reducedMotion = useReducedMotion();
   React.useEffect(() => {
-    if (isPaused || isInteracting || reducedMotion) return;
+    if (isInteracting || reducedMotion) return;
     const timer = setInterval(() => setCurrentIndex(i => (i + 1) % HERO_SLIDES.length), 6500);
     return () => clearInterval(timer);
-  }, [isPaused, isInteracting, reducedMotion]);
+  }, [isInteracting, reducedMotion]);
   return (
     <section className="focus-surface-dark relative isolate overflow-hidden bg-ink text-white"
       aria-label="Prince Asamany Foundation" aria-roledescription="carousel"
@@ -72,21 +71,21 @@ export function HeroSection() {
         ))}
       </div>
       <div className="hero-photo-scrim absolute inset-0 -z-10" aria-hidden="true" />
-      <div className="mx-auto flex min-h-[min(900px,100svh)] max-w-[1440px] flex-col justify-center px-6 pt-32 pb-36 md:px-12 lg:px-16 lg:pt-36 lg:pb-36">
+      <div className="mx-auto flex min-h-[min(760px,calc(100svh-4.5rem))] max-w-[1440px] flex-col items-center justify-center px-6 pt-24 pb-28 text-center md:px-12 lg:items-start lg:text-left lg:px-16 lg:pt-24 lg:pb-28">
         <p className="mb-6 font-body text-[11px] font-semibold uppercase tracking-[0.2em] text-brand-gold md:text-xs">Community-led change &middot; Ejisu, Ghana</p>
-        <h1 className="hero-campaign-title max-w-4xl">
+        <h1 className="hero-campaign-title w-full max-w-4xl">
           <span className="block">Hope.</span><span className="block">Development.</span>
           <span className="mt-2 block"><span className="hero-highlight">Opportunity</span></span>
           <span className="mt-2 block">for all.</span>
         </h1>
         <p className="mt-7 max-w-lg font-body text-base leading-relaxed text-white/95 md:text-lg">Standing with children, families, and communities across Ghana through healthcare, education, and opportunity.</p>
-        <div className="mt-8 flex flex-wrap items-center gap-x-7 gap-y-4">
-          <Link href="/donate" className="inline-flex min-h-12 items-center gap-4 bg-brand-gold px-6 py-3 font-body text-sm font-bold text-ink transition-colors hover:bg-paper">Help change a life <span aria-hidden="true">&#8599;</span></Link>
-          <Link href="/programs" className="inline-flex min-h-12 items-center gap-3 border-b border-white/60 py-3 font-body text-sm font-semibold text-white transition-colors hover:text-brand-gold">Explore our work <span aria-hidden="true">&#8594;</span></Link>
+        <div className="mt-8 flex w-full flex-col items-stretch gap-4 sm:w-auto sm:flex-row sm:flex-wrap sm:items-center sm:justify-center sm:gap-x-7 lg:justify-start">
+          <Link href="/donate" className="inline-flex min-h-12 items-center justify-center gap-4 bg-brand-gold px-6 py-3 font-body text-sm font-bold text-ink transition-colors hover:bg-paper">Help change a life <span aria-hidden="true">&#8599;</span></Link>
+          <Link href="/programs" className="inline-flex min-h-12 items-center justify-center gap-3 border-b border-white/60 py-3 font-body text-sm font-semibold text-white transition-colors hover:text-brand-gold">Explore our work <span aria-hidden="true">&#8594;</span></Link>
         </div>
       </div>
-      <div className="absolute inset-x-0 bottom-12 mx-auto flex max-w-[1440px] flex-wrap items-center justify-between gap-3 px-6 md:px-12 lg:px-16">
-        <div className="flex items-center gap-1" role="group" aria-label="Choose community photo">
+      <div className="absolute inset-x-0 bottom-8 mx-auto flex max-w-[1440px] flex-col items-center justify-center gap-2 px-6 text-center lg:flex-row lg:items-center lg:justify-between lg:px-16 lg:text-left">
+        <div className="flex items-center justify-center gap-1" role="group" aria-label="Choose community photo">
           {HERO_SLIDES.map((photo, index) => (
             <button key={photo.src} type="button" onClick={() => setCurrentIndex(index)}
               aria-label={`Show photo ${index + 1}: ${photo.caption}`} aria-pressed={index === currentIndex}
@@ -94,10 +93,8 @@ export function HeroSection() {
               <span className={`h-2.5 w-2.5 rounded-full border border-white ${index === currentIndex ? 'bg-brand-gold border-brand-gold' : 'bg-white/20'}`} />
             </button>
           ))}
-          <button type="button" onClick={() => setIsPaused(p => !p)} aria-label={isPaused ? 'Resume photo slideshow' : 'Pause photo slideshow'} aria-pressed={isPaused}
-            className="ml-2 flex h-11 w-11 items-center justify-center border border-white/40 text-sm"><span aria-hidden="true">{isPaused ? '\u25b6' : '\u2161'}</span></button>
         </div>
-        <p className="font-body text-xs text-white/85" aria-live={isPaused ? 'polite' : 'off'}>{HERO_SLIDES[currentIndex].caption}</p>
+        <p className="font-body text-xs text-white/85" aria-live="polite">{HERO_SLIDES[currentIndex].caption}</p>
       </div>
       <div className="hero-paper-edge absolute inset-x-0 bottom-0 h-7 bg-paper md:h-10" aria-hidden="true" />
     </section>

@@ -48,7 +48,7 @@ export function StatCard({ stat, label, sublabel, variant = 'navy', className = 
         {stat}
       </div>
 
-      <div className="relative z-10 flex flex-col items-center text-center md:items-start md:text-left h-full">
+      <div className="relative z-10 flex flex-col items-center text-center lg:items-start lg:text-left h-full">
         <div className={`font-display text-5xl lg:text-6xl font-black leading-none ${accentColor}`}>
           {stat}
         </div>
@@ -82,7 +82,7 @@ interface CTACardProps {
 export function CTACard({ title, description, linkLabel, linkHref, className = '' }: CTACardProps) {
   return (
     <div
-      className={`bg-brand-cream border border-brand-navy/10 shadow-lg hover:shadow-xl rounded-card-lg p-8 flex flex-col items-center text-center md:items-start md:text-left justify-between transition-all duration-300 ${className}`}
+      className={`bg-brand-cream border border-brand-navy/10 shadow-lg hover:shadow-xl rounded-card-lg p-8 flex flex-col items-center text-center lg:items-start lg:text-left justify-between transition-all duration-300 ${className}`}
     >
       <div>
         <h3 className="font-display text-2xl font-bold text-brand-navy leading-tight">{title}</h3>
@@ -92,7 +92,7 @@ export function CTACard({ title, description, linkLabel, linkHref, className = '
       </div>
       <Link
         href={linkHref}
-        className="mt-6 inline-flex items-center justify-center md:justify-start gap-2 font-body text-brand-red-dark font-semibold text-sm hover:gap-3 transition-all duration-200 py-1"
+        className="mt-6 inline-flex items-center justify-center lg:justify-start gap-2 font-body text-brand-red-dark font-semibold text-sm hover:gap-3 transition-all duration-200 py-1"
       >
         {linkLabel}
         <span className="text-brand-gold" aria-hidden="true">→</span>

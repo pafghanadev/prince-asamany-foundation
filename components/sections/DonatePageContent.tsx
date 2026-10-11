@@ -18,7 +18,7 @@ interface DonationRow {
 }
 
 function CopyRow({ value, label }: { value: string; label: string }) {
-  const [copied, setCopied] = useState(false);
+  const [status, setStatus] = useState<'idle' | 'copied' | 'failed'>('idle');
   const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
@@ -27,49 +27,59 @@ function CopyRow({ value, label }: { value: string; label: string }) {
     };
   }, []);
 
-  const handleCopy = async () => {
-    try {
-      await navigator.clipboard.writeText(value);
-    } catch {
-      // Fallback for older browsers
-      const el = document.createElement('textarea');
-      el.value = value;
-      document.body.appendChild(el);
-      el.select();
-      document.execCommand('copy');
-      document.body.removeChild(el);
+  const copyText = async (text: string): Promise<boolean> => {
+    if (navigator.clipboard?.writeText) {
+      try {
+        await navigator.clipboard.writeText(text);
+        return true;
+      } catch {
+        // Clipboard permission can be denied; try the legacy path below.
+      }
     }
-    setCopied(true);
-    if (timeoutRef.current) clearTimeout(timeoutRef.current);
-    timeoutRef.current = setTimeout(() => setCopied(false), 2500);
+    const el = document.createElement('textarea');
+    el.value = text;
+    el.setAttribute('readonly', '');
+    el.style.position = 'fixed';
+    el.style.opacity = '0';
+    document.body.appendChild(el);
+    el.select();
+    const ok = document.execCommand('copy');
+    document.body.removeChild(el);
+    return ok;
   };
 
+  const handleCopy = async () => {
+    const ok = await copyText(value);
+    setStatus(ok ? 'copied' : 'failed');
+    if (timeoutRef.current) clearTimeout(timeoutRef.current);
+    timeoutRef.current = setTimeout(() => setStatus('idle'), 2500);
+  };
+
+  const statusText = status === 'copied' ? 'Copied' : status === 'failed' ? 'Copy failed' : 'Copy';
+
   return (
-    <button
-      type="button"
-      onClick={handleCopy}
-      aria-label={`Copy ${label}`}
-      className="w-full flex items-center justify-between gap-4 px-6 py-4 text-left bg-transparent hover:bg-brand-gold/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold transition-colors duration-200"
-    >
-      <span className="block">
-        <span className="block font-body text-xs text-ink/75 uppercase tracking-wider mb-0.5">{label}</span>
-        <span className="block font-body text-base font-semibold text-ink">{value}</span>
-      </span>
-      <span
-        role="status"
-        aria-live="polite"
-        className={`shrink-0 px-3 py-1.5 rounded-editorial text-xs font-body font-semibold border-2 transition-all duration-200 min-h-[44px] min-w-[80px] text-center ${
-          copied
+    <div className="flex flex-col items-center justify-center gap-4 px-6 py-4 text-center md:flex-row md:justify-between lg:text-left">
+      <div className="min-w-0">
+        <p className="font-body text-xs text-ink/75 uppercase tracking-wider mb-0.5">{label}</p>
+        <p className="font-body text-base font-semibold text-ink break-all">{value}</p>
+      </div>
+      <button
+        type="button"
+        onClick={handleCopy}
+        aria-label={`Copy ${label}`}
+        className={`shrink-0 min-h-11 min-w-24 px-4 py-2 rounded-editorial font-body text-xs font-semibold border-2 transition-colors duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-gold ${
+          status === 'copied'
             ? 'bg-brand-green text-white border-brand-green'
-            : 'bg-transparent text-ink border-brand-navy'
+            : status === 'failed'
+              ? 'bg-brand-red text-white border-brand-red'
+              : 'bg-transparent text-ink border-brand-navy hover:bg-brand-gold/10'
         }`}
       >
-        {copied ? 'Copied' : 'Copy'}
-      </span>
-    </button>
+        <span aria-live="polite" role="status">{statusText}</span>
+      </button>
+    </div>
   );
 }
-
 function DonationCard({
   title,
   subtitle,
@@ -84,7 +94,7 @@ function DonationCard({
   return (
     <div className="rounded-editorial overflow-hidden bg-paper border border-rule ">
       {/* Card header */}
-      <div className="p-6 flex items-center gap-4 border-b border-rule">
+      <div className="p-6 flex flex-col items-center md:flex-row gap-4 border-b border-rule">
         {logo && <div className="shrink-0">{logo}</div>}
         <div>
           <h3 className="font-display text-xl font-bold text-ink">{title}</h3>
@@ -279,7 +289,7 @@ export function DonatePageContent() {
                   'Enables practical skills training and tools for women and youth',
                   'Keeps volunteer medical teams and relief outreaches running on the ground',
                 ].map((item) => (
-                  <li key={item} className="flex items-start gap-3">
+                  <li key={item} className="flex flex-col items-center md:flex-row lg:items-start gap-3">
                     <span className="w-5 h-5 rounded-full bg-brand-gold shrink-0 flex items-center justify-center mt-0.5" aria-hidden="true">
                       <svg width="10" height="8" viewBox="0 0 10 8" fill="none">
                         <path d="M1 4l3 3 5-6" className="stroke-brand-navy" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
@@ -323,7 +333,7 @@ export function DonatePageContent() {
                 key={faq.q}
                 className="group rounded-editorial bg-paper border border-rule px-6 py-4 [&_summary::-webkit-details-marker]:hidden"
               >
-                <summary className="flex cursor-pointer list-none items-center justify-between gap-4 font-body font-semibold text-base text-ink select-none focus-visible:outline-2 focus-visible:outline-brand-navy focus-visible:outline-offset-2 rounded-editorial">
+                <summary className="flex flex-col md:flex-row cursor-pointer list-none items-center justify-center md:justify-between gap-4 font-body font-semibold text-base text-ink select-none focus-visible:outline-2 focus-visible:outline-brand-navy focus-visible:outline-offset-2 rounded-editorial">
                   {faq.q}
                   <svg
                     width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"

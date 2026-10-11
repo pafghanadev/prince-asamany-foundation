@@ -90,7 +90,7 @@ export const MAP_HOTSPOTS: MapHotspot[] = [
     tagColor: 'bg-brand-navy text-white',
     x: 345,
     y: 890,
-    impact: 'Annual "Joy to the Street" relief campaign reaching 800+ street children and vulnerable families.',
+    impact: 'The "Joy to the Street" relief campaign supports street children and vulnerable families.',
   },
   {
     id: 'forestry',

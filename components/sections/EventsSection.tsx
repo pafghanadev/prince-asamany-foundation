@@ -24,7 +24,7 @@ export function EventsSection({ events }: EventsSectionProps) {
 
       <div className="relative z-10 mx-auto max-w-6xl px-6 md:px-12">
         {/* Section Header */}
-        <div className="max-w-2xl mb-12 md:mb-16">
+        <div className="mx-auto mb-12 flex max-w-2xl flex-col items-center text-center md:mb-16 md:mx-0 lg:items-start lg:text-left">
           <div className="inline-flex items-center gap-2 mb-4">
             <Users className="w-3.5 h-3.5 text-brand-red" />
             <span className="font-body text-xs font-semibold uppercase tracking-[0.15em]">
@@ -75,7 +75,7 @@ export function EventsSection({ events }: EventsSectionProps) {
             )}
 
             {/* Centered CTA */}
-            <div className="mt-12 flex justify-start">
+            <div className="mt-12 flex justify-center lg:justify-start">
               <Link
                 href="/events"
                 className="group inline-flex items-center gap-2 rounded-editorial border border-ink px-6 py-3.5 font-body text-sm font-semibold text-ink hover:bg-ink hover:text-paper"
@@ -87,7 +87,7 @@ export function EventsSection({ events }: EventsSectionProps) {
           </div>
         ) : (
           /* Rich, Balanced Outreach Spotlight */
-          <div className="relative border-t-4 border-ink bg-paper p-8 sm:p-12 md:p-14 max-w-3xl">
+          <div className="relative mx-auto border-t-4 border-ink bg-paper p-8 text-center sm:p-12 md:mx-0 md:p-14 lg:text-left max-w-3xl">
             {/* Tricolor top border accent */}
             <div className="absolute top-0 inset-x-0 h-1.5 bg-gradient-to-r from-brand-red via-brand-gold to-brand-green" />
 
@@ -109,8 +109,8 @@ export function EventsSection({ events }: EventsSectionProps) {
             </p>
 
             {/* Active focus chips */}
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-8 max-w-xl mx-auto text-left">
-              <div className="p-3.5 border-t border-rule flex items-center gap-3">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-8 max-w-xl mx-auto text-center lg:text-left">
+              <div className="p-3.5 border-t border-rule flex flex-col items-center md:flex-row gap-3">
                 <div className="w-8 h-8 flex items-center justify-center shrink-0">
                   <Stethoscope className="w-4 h-4 text-brand-red" />
                 </div>
@@ -119,7 +119,7 @@ export function EventsSection({ events }: EventsSectionProps) {
                   <p className="text-[11px] text-ink/60">Ejisu & rural clinics</p>
                 </div>
               </div>
-              <div className="p-3.5 border-t border-rule flex items-center gap-3">
+              <div className="p-3.5 border-t border-rule flex flex-col items-center md:flex-row gap-3">
                 <div className="w-8 h-8 flex items-center justify-center shrink-0">
                   <Wheat className="w-4 h-4 text-amber-600" />
                 </div>
@@ -128,7 +128,7 @@ export function EventsSection({ events }: EventsSectionProps) {
                   <p className="text-[11px] text-ink/60">Equipment & training</p>
                 </div>
               </div>
-              <div className="p-3.5 border-t border-rule flex items-center gap-3">
+              <div className="p-3.5 border-t border-rule flex flex-col items-center md:flex-row gap-3">
                 <div className="w-8 h-8 flex items-center justify-center shrink-0">
                   <Backpack className="w-4 h-4 text-brand-navy" />
                 </div>
@@ -140,7 +140,7 @@ export function EventsSection({ events }: EventsSectionProps) {
             </div>
 
             {/* Balanced CTA buttons */}
-            <div className="flex flex-wrap items-center justify-start gap-4">
+            <div className="flex flex-wrap items-center justify-center gap-4 lg:justify-start">
               <Link
                 href="/get-involved"
                 className="inline-flex items-center gap-2 rounded-editorial bg-ink px-6 py-3 font-body text-sm font-semibold text-paper hover:bg-ink-deep"

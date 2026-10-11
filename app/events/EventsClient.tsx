@@ -60,7 +60,7 @@ export function EventsClient({ events }: EventsClientProps) {
       {/* Controls Bar: Tabs, Categories, and Search */}
       <div className="flex flex-col gap-6 mb-10">
         {/* Main Tab Toggle: Upcoming vs Past */}
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-200 pb-5">
+        <div className="flex flex-col items-center md:flex-row md:justify-between gap-4 border-b border-slate-200 pb-5">
           <div className="flex items-center gap-2 p-1.5 bg-slate-100/90 rounded-editorial w-fit">
             <button
               type="button"
