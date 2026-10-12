@@ -90,8 +90,8 @@ export function Navbar() {
               alt="Prince Asamany Foundation"
               width={800}
               height={427}
-              sizes="160px"
-              className="h-10 w-auto max-w-[10rem] object-contain"
+              sizes="180px"
+              className="h-12 w-auto max-w-[11rem] object-contain"
               priority
             />
           </Link>

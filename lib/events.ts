@@ -2,7 +2,7 @@
  * Events Data Service & Google Sheets Integration
  *
  * Fetches events directly from a published Google Sheet.
- * If no sheet ID is provided or fetch fails, falls back gracefully to starter foundation events.
+ * If the sheet is unavailable, show no unconfirmed schedules.
  */
 
 export interface EventItem {
@@ -24,7 +24,11 @@ export interface EventsResponse {
   upcoming: EventItem[];
   past: EventItem[];
   all: EventItem[];
-  source: 'google_sheets' | 'fallback';
+  source: 'google_sheets' | 'fallback'; // fallback means schedules could not be verified
+}
+
+function unavailableEvents(): EventsResponse {
+  return { upcoming: [], past: [], all: [], source: 'fallback' };
 }
 
 /**
@@ -35,20 +39,53 @@ export function normalizeImageUrl(url?: string): string | undefined {
   if (!url || !url.trim()) return undefined;
   // If multiple files were uploaded, pick the first one
   const firstItem = url.split(',')[0].trim();
+  if (firstItem.startsWith('/') && !firstItem.startsWith('//') && !firstItem.includes('\\')) return firstItem;
+  try {
+    const parsed = new URL(firstItem);
+    if (parsed.protocol !== 'https:' || parsed.username || parsed.password) return undefined;
 
-  // Pattern 1: drive.google.com/file/d/FILE_ID or /file/u/0/d/FILE_ID
-  const driveFileMatch = firstItem.match(/drive\.google\.com\/file\/(?:u\/\d+\/)?d\/([a-zA-Z0-9_-]+)/);
-  if (driveFileMatch && driveFileMatch[1]) {
-    return `https://lh3.googleusercontent.com/d/${driveFileMatch[1]}`;
+    if (parsed.hostname === 'drive.google.com') {
+      const fileMatch = parsed.pathname.match(/^\/file\/(?:u\/\d+\/)?d\/([a-zA-Z0-9_-]+)(?:\/|$)/);
+      const queryId = ['/open', '/uc'].includes(parsed.pathname) ? parsed.searchParams.get('id') : null;
+      const fileId = fileMatch?.[1] || (queryId && /^[a-zA-Z0-9_-]+$/.test(queryId) ? queryId : null);
+      if (fileId) return `https://lh3.googleusercontent.com/d/${fileId}`;
+    }
+    if (['lh3.googleusercontent.com', 'drive.google.com', 'images.unsplash.com'].includes(parsed.hostname)) return parsed.toString();
+  } catch {
+    // Invalid or unsupported image URL: use the local category image instead.
+  }
+  return undefined;
+}
+
+/** Accept only explicit links or contact methods from the public event sheet. */
+export function normalizeRegistrationUrl(value?: string): { href: string; kind: 'web' | 'internal' | 'email' | 'phone' } | null {
+  const raw = value?.trim();
+  if (!raw || /[\r\n\\]/.test(raw)) return null;
+
+  if (raw.startsWith('/') && !raw.startsWith('//')) return { href: raw, kind: 'internal' };
+
+  const email = raw.replace(/^mailto:/i, '');
+  if (/^[^\s@/]+@[^\s@/]+\.[^\s@/]+$/.test(email) && !email.includes('?')) {
+    return { href: `mailto:${email}`, kind: 'email' };
   }
 
-  // Pattern 2: drive.google.com/open?id=FILE_ID or uc?id=FILE_ID (standard Google Forms file upload format)
-  const driveIdMatch = firstItem.match(/[?&]id=([a-zA-Z0-9_-]+)/);
-  if (driveIdMatch && driveIdMatch[1] && firstItem.includes('drive.google.com')) {
-    return `https://lh3.googleusercontent.com/d/${driveIdMatch[1]}`;
+  const phone = raw.replace(/^tel:/i, '');
+  if (/^\+?[\d\s().-]{7,20}$/.test(phone)) {
+    const digits = phone.replace(/[\s().-]/g, '');
+    // Spreadsheet entries often use Ghana's domestic 0-prefix. Make links dialable abroad.
+    const international = /^0\d{9}$/.test(digits) ? `+233${digits.slice(1)}` : digits;
+    return { href: `tel:${international}`, kind: 'phone' };
   }
 
-  return firstItem;
+  try {
+    const parsed = new URL(raw);
+    if (['https:', 'http:'].includes(parsed.protocol) && parsed.hostname && !parsed.username && !parsed.password) {
+      return { href: parsed.toString(), kind: 'web' };
+    }
+  } catch {
+    // Invalid URL: use the foundation contact page instead.
+  }
+  return null;
 }
 
 /**
@@ -101,72 +138,6 @@ function parseCSV(csvText: string): string[][] {
 }
 
 /**
- * Starter fallback events representing real Prince Asamany Foundation initiatives.
- */
-export const fallbackEvents: EventItem[] = [
-  {
-    id: 'cervical-cancer-screening-2026',
-    title: 'Free Community Health Screening & Deworming Outreach',
-    date: '2026-10-24',
-    time: '8:30 AM - 3:30 PM GMT',
-    location: 'Ejisu Community Health Centre, Ashanti Region',
-    category: 'Healthcare',
-    description:
-      'Providing free preventive cervical cancer screenings, blood pressure checks, diabetes screening, and medication administration to over 150 community members and students.',
-    imageUrl: '/media/opt/WhatsApp Image 2026-08-26 at 00.41.26.webp',
-    registrationUrl: '/contact',
-    featured: true,
-    status: 'Published',
-    isPast: false,
-  },
-  {
-    id: 'joy-to-the-street-dec-2026',
-    title: 'Joy to the Street: Annual Festive Relief Drive',
-    date: '2026-12-19',
-    time: '10:00 AM - 4:00 PM GMT',
-    location: 'Akyawkrom & Ejisu Municipal District',
-    category: 'Social Welfare',
-    description:
-      'Distributing food packages, hygiene kits, school supplies, and clothing to vulnerable children, single mothers, and elderly persons across our local communities.',
-    imageUrl: '/media/opt/award-night-poster.webp',
-    registrationUrl: '/get-involved#volunteer',
-    featured: true,
-    status: 'Published',
-    isPast: false,
-  },
-  {
-    id: 'farmers-empowerment-workshop-nov-2026',
-    title: 'Smallholder Farmers Skills Workshop & Tools Distribution',
-    date: '2026-11-14',
-    time: '9:00 AM - 1:00 PM GMT',
-    location: 'Akyawkrom Farmers Cooperative Hall',
-    category: 'Economic Empowerment',
-    description:
-      'Hands-on training in sustainable agricultural methods, preserving harvested crops, and distribution of essential farming gear for local cooperative members.',
-    imageUrl: '/media/opt/IMG-20260713-WA0030.webp',
-    registrationUrl: '/contact',
-    featured: false,
-    status: 'Published',
-    isPast: false,
-  },
-  {
-    id: 'forestry-deworming-past',
-    title: 'Forestry Commission Student Health Initiative',
-    date: '2026-07-27',
-    time: '9:00 AM - 2:00 PM GMT',
-    location: 'Forestry Commission Training Centre, Ejisu',
-    category: 'Healthcare',
-    description:
-      'Organized a targeted health outreach and deworming exercise for 84 students of the Certificate in Natural Resources Management programme.',
-    imageUrl: '/media/opt/IMG-20260727-WA0008.webp',
-    registrationUrl: '/stories#free-deworming-exercise',
-    featured: false,
-    status: 'Published',
-    isPast: true,
-  },
-];
-
-/**
  * Default branded images based on category so that non-technical staff
  * never have to worry about broken images or finding a flyer link.
  */
@@ -197,34 +168,28 @@ export function parseHumanDate(dateStr?: string): Date | null {
   if (!dateStr || !dateStr.trim()) return null;
   const clean = dateStr.trim();
 
-  // Strip ordinal suffixes: "24th" -> "24", "1st" -> "1", etc.
-  const sanitized = clean.replace(/(\d+)(st|nd|rd|th)/gi, '$1');
+  const makeDate = (year: number, month: number, day: number): Date | null => {
+    const date = new Date(Date.UTC(year, month - 1, day));
+    return date.getUTCFullYear() === year && date.getUTCMonth() === month - 1 && date.getUTCDate() === day ? date : null;
+  };
 
-  // Try standard parse
-  const standard = new Date(sanitized);
-  if (!isNaN(standard.getTime())) {
-    return standard;
-  }
+  const isoParts = clean.match(/^(\d{4})-(\d{1,2})-(\d{1,2})$/);
+  if (isoParts) return makeDate(Number(isoParts[1]), Number(isoParts[2]), Number(isoParts[3]));
 
-  // Handle DD/MM/YYYY or DD-MM-YYYY
+  // Explicit numeric parsing comes before Date.parse: 05/11 is 5 November in Ghana.
   const slashParts = clean.match(/^(\d{1,2})[./-](\d{1,2})[./-](\d{4})$/);
   if (slashParts) {
-    const p1 = parseInt(slashParts[1], 10);
-    const p2 = parseInt(slashParts[2], 10);
-    const year = parseInt(slashParts[3], 10);
-    if (p1 > 12) {
-      // Must be DD/MM/YYYY
-      return new Date(year, p2 - 1, p1);
-    } else if (p2 > 12) {
-      // Must be MM/DD/YYYY
-      return new Date(year, p1 - 1, p2);
-    } else {
-      // Default to DD/MM/YYYY (Ghana standard)
-      return new Date(year, p2 - 1, p1);
-    }
+    const first = Number(slashParts[1]);
+    const second = Number(slashParts[2]);
+    const year = Number(slashParts[3]);
+    return second > 12 ? makeDate(year, first, second) : makeDate(year, second, first);
   }
 
-  return null;
+  // Human-readable dates such as "24th October 2026" or "October 24, 2026".
+  const sanitized = clean.replace(/(\d+)(st|nd|rd|th)\b/gi, '$1');
+  if (!/[a-z]/i.test(sanitized)) return null;
+  const parsed = new Date(sanitized);
+  return Number.isNaN(parsed.getTime()) ? null : makeDate(parsed.getFullYear(), parsed.getMonth() + 1, parsed.getDate());
 }
 
 /**
@@ -234,13 +199,23 @@ export function isDatePast(dateStr: string): boolean {
   const parsed = parseHumanDate(dateStr);
   if (!parsed) return false;
 
-  const today = new Date();
-  today.setHours(0, 0, 0, 0);
+  const today = new Date().toISOString().slice(0, 10); // Ghana uses GMT year-round
+  return parsed.toISOString().slice(0, 10) < today;
+}
 
-  const eventDate = new Date(parsed);
-  eventDate.setHours(23, 59, 59, 999);
+/** Present Google Sheets 24-hour times in a readable format, without altering existing AM/PM ranges. */
+export function formatEventTime(value?: string): string | undefined {
+  const time = value?.trim();
+  if (!time) return undefined;
+  return time.replace(/(^|[\s–—-])([01]?\d|2[0-3]):([0-5]\d)(?::[0-5]\d)?(?=$|[\s–—-])(?!\s*(?:AM|PM)\b)/gi, (_match, prefix: string, hourText: string, minute: string) => {
+    const hour = Number(hourText);
+    return `${prefix}${hour % 12 || 12}:${minute} ${hour < 12 ? 'AM' : 'PM'}`;
+  });
+}
 
-  return eventDate < today;
+/** Display compact sheet category tags as readable labels. */
+export function formatEventCategory(value: string): string {
+  return value.trim().replace(/([a-z])([A-Z])/g, '$1 $2').replace(/[_-]+/g, ' ').replace(/\s+/g, ' ');
 }
 
 /**
@@ -248,38 +223,46 @@ export function isDatePast(dateStr: string): boolean {
  */
 export function getGoogleCalendarUrl(event: EventItem): string {
   const title = encodeURIComponent(event.title);
-  const details = encodeURIComponent(`${event.description}\n\nOrganized by Prince Asamany Foundation`);
+  const formattedTime = formatEventTime(event.time);
+  const times = Array.from(formattedTime?.matchAll(/\b(\d{1,2})(?::(\d{2}))?\s*(AM|PM)\b/gi) ?? []);
+  const inferredEndTime = times.length === 1;
+  const details = encodeURIComponent(`${event.description}\n\nOrganized by Prince Asamany Foundation${inferredEndTime ? '\nEnd time unconfirmed; calendar entry uses a one-hour placeholder.' : ''}`);
   const location = encodeURIComponent(event.location);
 
-  // Simple date format YYYYMMDD
-  const cleanDate = event.date.replace(/[^0-9]/g, '');
-  const dates = cleanDate.length === 8 ? `${cleanDate}/${cleanDate}` : '';
+  const parsed = parseHumanDate(event.date);
+  let dates = '';
+  if (parsed) {
+    const day = parsed.toISOString().slice(0, 10).replace(/-/g, '');
+    if (times.length >= 1) {
+      const toMinutes = (match: RegExpMatchArray): number => {
+        const hour = Number(match[1]) % 12 + (match[3].toUpperCase() === 'PM' ? 12 : 0);
+        return hour * 60 + Number(match[2] ?? 0);
+      };
+      const start = toMinutes(times[0]);
+      const end = times.length >= 2 ? toMinutes(times[1]) : start + 60;
+      if (start < 1440 && end < (inferredEndTime ? 1500 : 1440)) {
+        const formatTime = (minutes: number): string => `${String(Math.floor(minutes / 60)).padStart(2, '0')}${String(minutes % 60).padStart(2, '0')}00`;
+        const endDay = new Date(parsed.getTime() + (end <= start || end >= 1440 ? 86400000 : 0)).toISOString().slice(0, 10).replace(/-/g, '');
+        dates = `${day}T${formatTime(start)}/${endDay}T${formatTime(end % 1440)}`;
+      }
+    }
+    if (!dates) {
+      const nextDay = new Date(parsed.getTime() + 86400000).toISOString().slice(0, 10).replace(/-/g, '');
+      dates = `${day}/${nextDay}`; // Google Calendar all-day end date is exclusive.
+    }
+  }
 
-  return `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${title}&details=${details}&location=${location}${dates ? `&dates=${dates}` : ''}`;
+  return `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${title}&details=${details}&location=${location}${dates ? `&dates=${dates}&ctz=Africa%2FAccra` : ''}`;
 }
 
 /**
- * Fetches events from Google Sheets or returns fallback starter events.
+ * Fetches confirmed schedules from Google Sheets. Never presents draft sample entries as live events.
  */
 export async function getEvents(): Promise<EventsResponse> {
   const sheetId = process.env.NEXT_PUBLIC_GOOGLE_SHEET_EVENTS_ID || process.env.GOOGLE_SHEETS_EVENTS_ID;
 
   if (!sheetId) {
-    // Return sorted fallback events
-    const upcoming = fallbackEvents
-      .filter((e) => !e.isPast && e.status === 'Published')
-      .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
-
-    const past = fallbackEvents
-      .filter((e) => e.isPast && e.status === 'Published')
-      .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
-
-    return {
-      upcoming,
-      past,
-      all: fallbackEvents,
-      source: 'fallback',
-    };
+    return unavailableEvents();
   }
 
   try {
@@ -291,27 +274,14 @@ export async function getEvents(): Promise<EventsResponse> {
     });
 
     if (!res.ok) {
-      console.warn(`[Events] Failed to fetch Google Sheet (${res.status}): Falling back to starter data.`);
-      return {
-        upcoming: fallbackEvents.filter((e) => !e.isPast),
-        past: fallbackEvents.filter((e) => e.isPast),
-        all: fallbackEvents,
-        source: 'fallback',
-      };
+      console.warn(`[Events] Failed to fetch Google Sheet (${res.status}).`);
+      return unavailableEvents();
     }
 
     const csvText = await res.text();
     const rows = parseCSV(csvText);
 
-    if (rows.length <= 1) {
-      // Empty sheet or only header row
-      return {
-        upcoming: [],
-        past: [],
-        all: [],
-        source: 'google_sheets',
-      };
-    }
+    if (rows.length === 0) return unavailableEvents();
 
     // Parse header to map columns dynamically - works with both manual sheets and Google Forms
     const header = rows[0].map((h) => h.toLowerCase().replace(/[^a-z0-9]/g, ''));
@@ -328,6 +298,11 @@ export async function getEvents(): Promise<EventsResponse> {
       status: header.findIndex((h) => h.includes('status')),
     };
 
+    if (colIndex.title < 0 || colIndex.date < 0) {
+      console.warn('[Events] Sheet must have title and date columns.');
+      return unavailableEvents();
+    }
+
     const parsedEvents: EventItem[] = [];
 
     for (let r = 1; r < rows.length; r++) {
@@ -336,6 +311,7 @@ export async function getEvents(): Promise<EventsResponse> {
       if (!title.trim()) continue; // Skip blank rows
 
       const rawDate = (colIndex.date !== -1 ? row[colIndex.date] : row[1]) || '';
+      if (!parseHumanDate(rawDate)) continue;
       const time = colIndex.time !== -1 ? row[colIndex.time] : undefined;
       const location = (colIndex.location !== -1 ? row[colIndex.location] : row[3]) || 'Ejisu Municipal District, Ghana';
       const category = (colIndex.category !== -1 ? row[colIndex.category] : row[4]) || 'Community';
@@ -344,7 +320,7 @@ export async function getEvents(): Promise<EventsResponse> {
       const registrationUrl = colIndex.registration !== -1 ? row[colIndex.registration] : undefined;
       const featuredVal = colIndex.featured !== -1 ? row[colIndex.featured]?.toLowerCase() : '';
       const featured = featuredVal === 'true' || featuredVal === 'yes' || featuredVal === '1';
-      const rawStatus = colIndex.status !== -1 ? row[colIndex.status]?.trim() : 'Published';
+      const rawStatus = (colIndex.status !== -1 ? row[colIndex.status]?.trim() : 'Published') || 'Published';
 
       let status: EventItem['status'] = 'Published';
       if (rawStatus.toLowerCase().includes('draft')) status = 'Draft';
@@ -361,9 +337,9 @@ export async function getEvents(): Promise<EventsResponse> {
         id: `event-${r}-${title.toLowerCase().replace(/[^a-z0-9]+/g, '-').slice(0, 30)}`,
         title: title.trim(),
         date: rawDate.trim(),
-        time: time?.trim() || undefined,
+        time: formatEventTime(time),
         location: location.trim(),
-        category: category.trim(),
+        category: formatEventCategory(category),
         description: description.trim(),
         imageUrl: finalImage,
         registrationUrl: registrationUrl?.trim() || undefined,
@@ -376,19 +352,19 @@ export async function getEvents(): Promise<EventsResponse> {
     const visibleEvents = parsedEvents.filter((e) => e.status !== 'Draft');
 
     const upcoming = visibleEvents
-      .filter((e) => !e.isPast)
+      .filter((e) => !e.isPast && e.status === 'Published')
       .sort((a, b) => {
-        const tA = new Date(a.date).getTime();
-        const tB = new Date(b.date).getTime();
+        const tA = parseHumanDate(a.date)?.getTime() ?? 0;
+        const tB = parseHumanDate(b.date)?.getTime() ?? 0;
         if (isNaN(tA) || isNaN(tB)) return 0;
         return tA - tB;
       });
 
     const past = visibleEvents
-      .filter((e) => e.isPast)
+      .filter((e) => e.isPast && e.status === 'Published')
       .sort((a, b) => {
-        const tA = new Date(a.date).getTime();
-        const tB = new Date(b.date).getTime();
+        const tA = parseHumanDate(a.date)?.getTime() ?? 0;
+        const tB = parseHumanDate(b.date)?.getTime() ?? 0;
         if (isNaN(tA) || isNaN(tB)) return 0;
         return tB - tA; // Most recent past first
       });
@@ -401,11 +377,6 @@ export async function getEvents(): Promise<EventsResponse> {
     };
   } catch (err) {
     console.error('[Events] Error loading Google Sheet events:', err);
-    return {
-      upcoming: fallbackEvents.filter((e) => !e.isPast),
-      past: fallbackEvents.filter((e) => e.isPast),
-      all: fallbackEvents,
-      source: 'fallback',
-    };
+    return unavailableEvents();
   }
 }

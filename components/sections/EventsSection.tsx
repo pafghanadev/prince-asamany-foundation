@@ -91,10 +91,10 @@ export function EventsSection({ events }: EventsSectionProps) {
             {/* Tricolor top border accent */}
             <div className="absolute top-0 inset-x-0 h-1.5 bg-gradient-to-r from-brand-red via-brand-gold to-brand-green" />
 
-            {/* Active status badge */}
+            {/* Schedule notice */}
             <div className="inline-flex items-center gap-2 text-xs font-semibold mb-6">
-              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-              <span>Active Field Preparation & Planning</span>
+              <span className="w-2 h-2 rounded-full bg-brand-gold" />
+              <span>Community Calendar</span>
             </div>
 
             <div className="w-16 h-16 rounded-2xl bg-brand-gold/15 text-brand-navy flex items-center justify-center mx-auto mb-5 shadow-sm">
@@ -102,10 +102,10 @@ export function EventsSection({ events }: EventsSectionProps) {
             </div>
 
             <h3 className="font-display text-3xl md:text-4xl mb-3">
-              New Outreaches Currently in Planning
+              Check back for confirmed outreach dates
             </h3>
             <p className="font-body text-ink/75 mb-8 max-w-lg text-base md:text-lg leading-relaxed">
-              Our medical teams and welfare coordinators are actively organizing our next round of healthcare screenings and rural community assistance in the Ejisu Municipality.
+              Upcoming dates will be published once confirmed by the foundation. Explore our programmes or contact our team for the latest information.
             </p>
 
             {/* Active focus chips */}
@@ -152,7 +152,7 @@ export function EventsSection({ events }: EventsSectionProps) {
                 href="/events"
                 className="group inline-flex items-center gap-2 rounded-editorial border border-ink px-6 py-3 font-body text-sm font-semibold text-ink hover:bg-ink hover:text-paper"
               >
-                <span>Explore All Past Outreaches</span>
+                <span>View Events Calendar</span>
                 <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5" />
               </Link>
             </div>

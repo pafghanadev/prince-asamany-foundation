@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Calendar, Clock, MapPin, ExternalLink, CalendarPlus, X, ZoomIn } from 'lucide-react';
-import { EventItem, getGoogleCalendarUrl } from '@/lib/events';
+import { EventItem, getGoogleCalendarUrl, normalizeRegistrationUrl, parseHumanDate } from '@/lib/events';
 
 interface EventCardProps {
   event: EventItem;
@@ -15,17 +15,17 @@ export function EventCard({ event, featured = false }: EventCardProps) {
   const [lightboxOpen, setLightboxOpen] = useState(false);
 
   // Parse date into readable pieces
-  const dateObj = new Date(event.date);
-  const isValidDate = !isNaN(dateObj.getTime());
+  const dateObj = parseHumanDate(event.date);
+  const isValidDate = dateObj !== null;
   
   const monthName = isValidDate
-    ? dateObj.toLocaleDateString('en-US', { month: 'short' }).toUpperCase()
+    ? dateObj.toLocaleDateString('en-US', { month: 'short', timeZone: 'UTC' }).toUpperCase()
     : 'EVENT';
   const dayNumber = isValidDate
-    ? dateObj.toLocaleDateString('en-US', { day: 'numeric' })
+    ? dateObj.toLocaleDateString('en-US', { day: 'numeric', timeZone: 'UTC' })
     : '';
   const fullDateDisplay = isValidDate
-    ? dateObj.toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })
+    ? dateObj.toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' })
     : event.date;
 
   // Category badge colors
@@ -38,6 +38,7 @@ export function EventCard({ event, featured = false }: EventCardProps) {
   };
 
   const calendarUrl = getGoogleCalendarUrl(event);
+  const registrationLink = normalizeRegistrationUrl(event.registrationUrl);
 
   return (
     <>
@@ -73,7 +74,7 @@ export function EventCard({ event, featured = false }: EventCardProps) {
               <button
                 type="button"
                 onClick={() => setLightboxOpen(true)}
-                className="absolute bottom-3 right-3 z-10 inline-flex items-center gap-1 px-2.5 py-1 rounded-md bg-brand-navy/80 hover:bg-ink text-paper text-xs font-medium backdrop-blur-md opacity-0 group-hover:opacity-100 transition-opacity duration-200"
+                className="absolute bottom-3 right-3 z-10 inline-flex items-center gap-1 px-2.5 py-1 rounded-md bg-brand-navy/80 hover:bg-ink text-paper text-xs font-medium backdrop-blur-md transition-colors duration-200"
                 aria-label={`Enlarge flyer for ${event.title}`}
               >
                 <ZoomIn className="w-3.5 h-3.5" />
@@ -98,9 +99,9 @@ export function EventCard({ event, featured = false }: EventCardProps) {
           </div>
 
           {/* Past status tag if applicable */}
-          {event.isPast && (
+          {(event.isPast || event.status === 'Cancelled') && (
             <div className="absolute top-4 right-4 z-10 px-2.5 py-1 rounded-md bg-slate-900/80 text-white text-xs font-medium backdrop-blur-sm">
-              Completed
+              {event.status === 'Cancelled' ? 'Cancelled' : 'Completed'}
             </div>
           )}
         </div>
@@ -149,36 +150,26 @@ export function EventCard({ event, featured = false }: EventCardProps) {
 
           {/* Actions */}
           <div className="pt-4 border-t border-slate-100 flex flex-wrap items-center justify-center md:justify-between gap-3 mt-auto">
-            {event.registrationUrl ? (() => {
-              const raw = event.registrationUrl.trim();
-              const isHttp = raw.startsWith('http');
-              const isPhone = /^[+0-9\s()-]{7,}$/.test(raw);
-              const isMail = raw.includes('@') && !raw.includes('/');
-              const href = isHttp || raw.startsWith('/') ? raw : isMail ? `mailto:${raw}` : isPhone ? `tel:${raw.replace(/\s+/g, '')}` : raw;
-              const isExternal = isHttp || isMail || isPhone;
-              const buttonText = isPhone ? `Call: ${raw}` : isMail ? 'Email Inquiry' : event.isPast ? 'Event Details' : 'Register / RSVP';
-
-              return (
-                <Link
-                  href={href}
-                  target={isExternal ? '_blank' : undefined}
-                  rel={isExternal ? 'noopener noreferrer' : undefined}
-                  className="inline-flex items-center justify-center gap-1.5 px-4 py-2 rounded-editorial bg-ink text-paper hover:bg-brand-navy/90 text-paper text-sm font-semibold  transition-all duration-200"
-                >
-                  <span>{buttonText}</span>
-                  <ExternalLink className="w-3.5 h-3.5" />
-                </Link>
-              );
-            })() : (
+            {event.status !== 'Cancelled' && registrationLink ? (
+              <Link
+                href={registrationLink.href}
+                target={registrationLink.kind === 'web' ? '_blank' : undefined}
+                rel={registrationLink.kind === 'web' ? 'noopener noreferrer' : undefined}
+                className="inline-flex items-center justify-center gap-1.5 px-4 py-2 rounded-editorial bg-ink text-paper hover:bg-brand-navy/90 text-sm font-semibold transition-all duration-200"
+              >
+                <span>{registrationLink.kind === 'phone' ? 'Call to Inquire' : registrationLink.kind === 'email' ? 'Email Inquiry' : event.isPast ? 'Event Details' : 'Register / RSVP'}</span>
+                <ExternalLink className="w-3.5 h-3.5" />
+              </Link>
+            ) : event.status !== 'Cancelled' ? (
               <Link
                 href="/contact"
                 className="inline-flex items-center justify-center gap-1.5 px-4 py-2 rounded-editorial bg-ink text-paper hover:bg-brand-navy/90 text-paper text-sm font-semibold  transition-all duration-200"
               >
                 <span>{event.isPast ? 'Learn More' : 'Inquire / Join'}</span>
               </Link>
-            )}
+            ) : <span className="text-sm font-semibold text-brand-red-dark">Event cancelled</span>}
 
-            {!event.isPast && (
+            {!event.isPast && event.status === 'Published' && isValidDate && (
               <a
                 href={calendarUrl}
                 target="_blank"

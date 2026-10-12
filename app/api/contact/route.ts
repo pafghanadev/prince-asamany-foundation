@@ -1,13 +1,8 @@
 import { NextResponse } from 'next/server';
 import { EMAIL } from '@/lib/site';
+import { checkContactRateLimit } from '@/lib/contact-rate-limit';
 
 export const runtime = 'nodejs';
-
-const MAX_SUBMISSIONS = 10;
-const RATE_WINDOW_MS = 15 * 60 * 1000;
-
-// In-memory rate limiter: IP -> recent submission timestamps.
-const submissions = new Map<string, number[]>();
 
 /**
  * Shared API route for the contact and volunteer forms.
@@ -67,18 +62,6 @@ async function deliverMessage(payload: {
   }
 }
 
-function isRateLimited(ip: string): boolean {
-  const now = Date.now();
-  const timestamps = (submissions.get(ip) || []).filter((t) => now - t < RATE_WINDOW_MS);
-  if (timestamps.length >= MAX_SUBMISSIONS) {
-    submissions.set(ip, timestamps);
-    return true;
-  }
-  timestamps.push(now);
-  submissions.set(ip, timestamps);
-  return false;
-}
-
 export async function POST(request: Request) {
   let body: Record<string, unknown>;
   try {
@@ -94,16 +77,6 @@ export async function POST(request: Request) {
   // Honeypot: bots fill the hidden field; pretend they succeeded without sending email.
   if (typeof body.website === 'string' && body.website.trim() !== '') {
     return NextResponse.json({ ok: true });
-  }
-
-  const forwardedFor = request.headers.get('x-forwarded-for');
-  const ip = forwardedFor ? forwardedFor.split(',')[0].trim() : 'unknown';
-
-  if (isRateLimited(ip)) {
-    return NextResponse.json(
-      { ok: false, error: 'Too many submissions. Please try again later.' },
-      { status: 429 }
-    );
   }
 
   const { type, name, email, subject, message, phone, opportunity } = body;
@@ -141,6 +114,21 @@ export async function POST(request: Request) {
     return NextResponse.json(
       { ok: false, error: 'Opportunity text is too long.' },
       { status: 400 }
+    );
+  }
+
+  try {
+    if (await checkContactRateLimit(request, email.trim())) {
+      return NextResponse.json(
+        { ok: false, error: 'Too many submissions. Please try again later.' },
+        { status: 429, headers: { 'Retry-After': '900' } }
+      );
+    }
+  } catch (error) {
+    console.error('Contact rate limit unavailable:', error);
+    return NextResponse.json(
+      { ok: false, error: 'Contact form is temporarily unavailable. Please try again later.' },
+      { status: 503 }
     );
   }
 

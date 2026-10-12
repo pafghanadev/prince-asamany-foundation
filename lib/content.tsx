@@ -131,8 +131,8 @@ export const stories: Story[] = [
     quote: 'Rather than offering isolated charity, this project is structured as a movement designed to foster community solidarity and provide children with essential educational tools.',
     body: [
       'The foundation\'s hallmark welfare campaign is the annual "Joy to the Street" program. This flagship community outreach focuses warmly on the homeless, low-income families, and vulnerable children across the Ejisu Municipality.',
-      'On Boxing Day, December 26th, 2024, the Prince Asamany Foundation spread holiday cheer to over 800 street children, mentally ill persons, refugees, and other marginalized individuals in Kumasi (Amakom, WAEC Street, Asafo, and Jubilee Park).',
-      'The campaign directly supplied less-privileged families with food staples, clothing, essential toiletries, and critical support worth millions of cedis.',
+      'On Boxing Day, December 26th, 2024, the Prince Asamany Foundation organized holiday relief for vulnerable community members in Kumasi (Amakom, WAEC Street, Asafo, and Jubilee Park).',
+      'The campaign distributed food staples, clothing, toiletries, and other essential items to people in need.',
       'Rather than offering isolated charity, the project is structured as a movement designed to foster social solidarity and provide children with the basic educational tools needed to stay in school.'
     ],
   },

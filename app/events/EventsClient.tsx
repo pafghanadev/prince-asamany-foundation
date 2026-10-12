@@ -58,14 +58,19 @@ export function EventsClient({ events }: EventsClientProps) {
   return (
     <div className="max-w-7xl mx-auto px-5 md:px-8 py-12 md:py-16">
       {/* Controls Bar: Tabs, Categories, and Search */}
+      {events.source === 'fallback' && (
+        <div role="status" className="mb-8 border-l-4 border-brand-gold bg-paper px-5 py-4 text-sm text-ink/80">
+          The event calendar is currently unavailable. Please <Link href="/contact" className="font-semibold underline">contact the foundation</Link> to confirm upcoming dates.
+        </div>
+      )}
       <div className="flex flex-col gap-6 mb-10">
         {/* Main Tab Toggle: Upcoming vs Past */}
         <div className="flex flex-col items-center md:flex-row md:justify-between gap-4 border-b border-slate-200 pb-5">
-          <div className="flex items-center gap-2 p-1.5 bg-slate-100/90 rounded-editorial w-fit">
+          <div className="flex items-center gap-1 md:gap-2 p-1.5 bg-slate-100/90 rounded-editorial w-fit">
             <button
               type="button"
               onClick={() => setActiveTab('upcoming')}
-              className={`flex items-center gap-2 px-5 py-2.5 rounded-editorial font-display text-sm font-bold transition-all duration-200 ${
+              className={`flex items-center gap-2 px-3 md:px-5 py-2.5 rounded-editorial font-display text-sm font-bold transition-all duration-200 ${
                 activeTab === 'upcoming'
                   ? 'bg-ink text-paper '
                   : 'text-ink/75 hover:text-ink'
@@ -86,13 +91,13 @@ export function EventsClient({ events }: EventsClientProps) {
             <button
               type="button"
               onClick={() => setActiveTab('past')}
-              className={`flex items-center gap-2 px-5 py-2.5 rounded-editorial font-display text-sm font-bold transition-all duration-200 ${
+              className={`flex items-center gap-2 px-3 md:px-5 py-2.5 rounded-editorial font-display text-sm font-bold transition-all duration-200 ${
                 activeTab === 'past'
                   ? 'bg-ink text-paper '
                   : 'text-ink/75 hover:text-ink'
               }`}
             >
-              <span>Past Outreaches</span>
+              <span className="md:hidden">Past</span><span className="hidden md:inline">Past Outreaches</span>
               <span
                 className={`px-2 py-0.5 rounded-full text-xs font-semibold ${
                   activeTab === 'past'
@@ -107,7 +112,7 @@ export function EventsClient({ events }: EventsClientProps) {
             <button
               type="button"
               onClick={() => setActiveTab('all')}
-              className={`hidden md:flex items-center gap-2 px-4 py-2.5 rounded-editorial font-display text-sm font-bold transition-all duration-200 ${
+              className={`flex items-center gap-2 px-3 md:px-4 py-2.5 rounded-editorial font-display text-sm font-bold transition-all duration-200 ${
                 activeTab === 'all'
                   ? 'bg-ink text-paper '
                   : 'text-ink/75 hover:text-ink'
@@ -203,6 +208,8 @@ export function EventsClient({ events }: EventsClientProps) {
             <h3 className="font-display text-xl font-bold text-ink mb-2">
               {searchQuery
                 ? 'No matching events found'
+                : events.source === 'fallback'
+                ? 'Event calendar temporarily unavailable'
                 : activeTab === 'upcoming'
                 ? 'No upcoming events scheduled right now'
                 : 'No past events in this category'}
@@ -210,7 +217,9 @@ export function EventsClient({ events }: EventsClientProps) {
             <p className="text-sm text-ink/75 mb-6 leading-relaxed">
               {searchQuery
                 ? `We couldn't find any events matching "${searchQuery}". Try a different keyword or clear your filter.`
-                : 'Stay tuned! We are currently finalizing schedules for our upcoming healthcare and welfare outreaches.'}
+                : events.source === 'fallback'
+                ? 'Confirmed event information will appear here when the foundation calendar is available.'
+                : 'Check back for new outreach dates, or contact the foundation for more information.'}
             </p>
             {searchQuery ? (
               <button
@@ -240,7 +249,7 @@ export function EventsClient({ events }: EventsClientProps) {
       <div className="mt-16 pt-8 border-t border-slate-200/80 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-ink/60 font-body">
         <div className="flex items-center gap-2">
           <FileSpreadsheet className="w-4 h-4 text-brand-green" />
-          <span>Events updated live directly from the Prince Asamany Foundation field calendar.</span>
+          <span>{events.source === 'google_sheets' ? 'Schedules sourced from the foundation event calendar. Confirm details before travelling.' : 'Event schedules are awaiting confirmation from the foundation.'}</span>
         </div>
         <div>
           <span>Questions regarding community schedules? </span>

@@ -2,6 +2,7 @@
 
 import React, { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import dynamic from 'next/dynamic';
 import { siteConfig } from '@/lib/site';
 import { pressItems } from '@/lib/content';
@@ -129,8 +130,18 @@ export function DonatePageContent() {
               Choose your donation method
             </h2>
             <p className="font-body text-base text-ink/75 mt-3 leading-relaxed">
-              Give online in minutes, or use the bank and MoMo details below. Every gift funds
-              health, education, environment and welfare programs across Ejisu Municipal Assembly.
+              Give online in minutes, or use the bank and MoMo details below. Your contribution
+              supports the foundation&apos;s health, education, environment and welfare programmes.
+            </p>
+            <p className="mt-4 font-body text-sm leading-relaxed text-ink/70">
+              See our documented{' '}
+              <Link href="/stories/free-deworming-exercise" className="font-semibold text-brand-red-dark underline underline-offset-4 hover:text-ink">
+                student health outreach
+              </Link>{' '}
+              and{' '}
+              <Link href="/stories/farmers-engagement-akyawkrom" className="font-semibold text-brand-red-dark underline underline-offset-4 hover:text-ink">
+                community farmers&apos; engagement
+              </Link>.
             </p>
           </div>
 
@@ -160,9 +171,13 @@ export function DonatePageContent() {
             ))}
           </ul>
 
+          <p className="-mt-11 mb-12 text-center font-body text-xs leading-relaxed text-ink/65">
+            Giving tiers are suggested amounts. Descriptions illustrate possible support; individual outcomes and purchases are not guaranteed.
+          </p>
+
           <div id="manual-donation" className="flex items-center gap-4 mb-10">
             <div className="h-px bg-brand-navy/10 flex-1"></div>
-            <span className="font-body text-sm font-semibold text-ink/75 uppercase tracking-widest text-center">Or donate manually: tap any row to copy</span>
+            <span className="font-body text-sm font-semibold text-ink/75 uppercase tracking-widest text-center">Or donate manually: use Copy for the details</span>
             <div className="h-px bg-brand-navy/10 flex-1"></div>
           </div>
 
@@ -206,7 +221,7 @@ export function DonatePageContent() {
               <a href={`tel:${siteConfig.phone.tel}`} className="font-semibold text-brand-red-dark hover:underline">
                 {siteConfig.phone.display}
               </a>{' '}
-              to confirm your transfer. We would love to thank you personally.
+              to confirm your transfer. If you need a donation acknowledgement, include the date, amount and transfer reference when contacting our team. Do not send your PIN or account password.
             </p>
           </div>
 

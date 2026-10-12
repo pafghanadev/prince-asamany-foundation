@@ -94,7 +94,7 @@ export default function AboutPage() {
               Who we are
             </h2>
           </div>
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-start">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-start text-left">
             <div>
               <p className="font-body text-lg text-ink/75 leading-relaxed mb-5">
                 The Prince Asamany Foundation was born out of a moment of compassion. While driving
@@ -153,7 +153,7 @@ export default function AboutPage() {
               Achievements
             </h2>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 text-left">
             {achievements.map((item) => (
               <div key={item.title} className="border-t border-rule p-8">
                 <h3 className="font-display text-2xl text-ink mb-3">{item.title}</h3>
@@ -178,7 +178,7 @@ export default function AboutPage() {
               Looking ahead, the Prince Asamany Foundation envisions:
             </p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-left">
             {futurePlans.map((item) => (
               <div key={item.title} className="border-t border-rule p-8">
                 <h3 className="font-display text-2xl text-ink mb-3">{item.title}</h3>

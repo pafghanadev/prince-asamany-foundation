@@ -1,167 +1,96 @@
 'use client';
 
-import React, { useState } from 'react';
-import { motion } from 'framer-motion';
+import { useState } from 'react';
+import Image from 'next/image';
+import Link from 'next/link';
 import { AshantiMap, MAP_HOTSPOTS } from '@/components/ui/illustrations';
-import { CountUp } from '@/components/ui/CountUp';
-
-
-// Icons
-const HeartIcon = () => (
-  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path></svg>
-);
-const MapPinIcon = () => (
-  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
-);
-const ShieldIcon = () => (
-  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
-);
-const AwardIcon = () => (
-  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="8" r="6"></circle><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"></path></svg>
-);
-
-type ThemeColor = 'red' | 'gold' | 'navy' | 'green';
-
-interface Stat {
-  value: string;
-  label: string;
-  description: string;
-  theme: ThemeColor;
-  icon: React.ReactNode;
-}
-
-const stats: Stat[] = [
-  { value: 'Relief', label: 'Joy to the Street', description: 'Outreach for street children and vulnerable families in Kumasi', theme: 'red', icon: <HeartIcon /> },
-  { value: 'Free', label: 'Health Screenings', description: 'Cervical cancer screening and health education with Mansa Memorial Hospital', theme: 'green', icon: <ShieldIcon /> },
-  { value: '2025', label: 'Social Change Advocate', description: 'Founder honored by AFLAG for impact-driven community leadership', theme: 'gold', icon: <AwardIcon /> },
-  { value: 'Ejisu', label: 'Our Base', description: 'Akyawkrom, Ejisu Municipal Assembly, Ashanti Region', theme: 'navy', icon: <MapPinIcon /> },
-];
+import { stories } from '@/lib/content';
+import { blurProps } from '@/lib/media';
 
 export function MapImpact() {
-  const [activeId, setActiveId] = useState<string>('akyawkrom');
-  const activeHotspot = MAP_HOTSPOTS.find((h) => h.id === activeId) ?? MAP_HOTSPOTS[0];
+  const [activeId, setActiveId] = useState('akyawkrom');
+  const activeLocation = MAP_HOTSPOTS.find((location) => location.id === activeId) ?? MAP_HOTSPOTS[0];
+  const activeStory = stories.find((story) => story.id === activeLocation.storyId);
 
   return (
-    <section className="bg-paper text-ink py-20 md:py-28" aria-labelledby="map-heading">
+    <section className="bg-paper py-16 text-ink md:py-24" aria-labelledby="map-heading">
       <div className="mx-auto max-w-6xl px-6 md:px-12">
-        <div className="mx-auto mb-12 max-w-2xl text-center md:mx-0 lg:text-left">
-          <p className="font-body text-xs font-semibold uppercase tracking-[0.18em] text-brand-red-dark">
-            Where We Work
-          </p>
-          <h2
-            id="map-heading"
-            className="mt-3 font-display text-4xl leading-[1.05] md:text-6xl"
-          >
-            Rooted in Ejisu. Connected to our neighbours.
+        <div className="mb-10 max-w-3xl md:mb-12">
+          <p className="font-body text-xs font-semibold uppercase tracking-[0.18em] text-brand-red-dark">Where we work</p>
+          <h2 id="map-heading" className="mt-3 font-display text-4xl leading-[1.05] md:text-6xl">
+            One region. Many ways to show up.
           </h2>
-          <p className="mt-5 font-body text-base leading-relaxed text-ink/75">Explore the communities behind our outreach. Select a location to see the work taking place there.</p>
+          <p className="mt-5 font-body text-base leading-relaxed text-ink/75">
+            Explore field reports connected to the communities we serve. Select a location to see photographs, programme details and what happened on the ground.
+          </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-
-          {/* Interactive Map & Community Impact Locations */}
-          <motion.div
-            initial={{ opacity: 0, x: -24 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, margin: '-60px' }}
-            transition={{ duration: 0.7, ease: 'easeOut' }}
-            className="relative flex flex-col"
-          >
-            <div className="border border-rule p-6">
-              <div className="mb-3 flex flex-col items-center gap-2 text-center md:flex-row md:justify-between lg:text-left">
-                <span className="font-body text-xs font-bold uppercase tracking-wider text-brand-red-dark">
-                  Community Focus Areas
-                </span>
-                <span className="font-body text-xs text-brand-navy/65">
-                  Choose a community to view impact
-                </span>
-              </div>
-
-              <AshantiMap activeId={activeId} onSelect={setActiveId} />
-
-              {/* Location Pill Selector for Ergonomics */}
-              <div
-                className="flex flex-wrap items-center justify-center gap-2 mt-4 pt-4 border-t border-brand-navy/10"
-                role="group"
-                aria-label="Regional impact locations"
-              >
-                {MAP_HOTSPOTS.map((h) => (
-                  <button
-                    key={h.id}
-                    type="button"
-                    aria-pressed={activeId === h.id}
-                    onClick={() => setActiveId(h.id)}
-                    className={`min-h-11 font-body text-xs font-semibold px-3.5 py-1.5 rounded-editorial transition-colors duration-200 focus-visible:outline-2 focus-visible:outline-ink ${
-                      activeId === h.id
-                        ? 'bg-ink text-paper'
-                        : 'border border-rule text-ink/70 hover:text-ink'
-                    }`}
-                  >
-                    {h.name}
-                  </button>
-                ))}
-              </div>
-
-              {/* Active Location Information Callout */}
-              <div aria-live="polite" className="mt-4 p-4 text-center lg:text-left rounded-editorial bg-paper-deep border border-rule">
-                <div className="mb-1.5 flex flex-col items-center gap-2 md:flex-row md:flex-wrap md:justify-between">
-                  <span className="font-display text-base font-bold text-brand-navy flex items-center gap-1.5">
-                    <span className="w-2.5 h-2.5 rounded-full bg-brand-red" aria-hidden="true" />
-                    {activeHotspot.name}
-                  </span>
-                  <span className={`px-2.5 py-0.5 text-[11px] font-body font-bold ${activeHotspot.tagColor}`}>
-                    {activeHotspot.tag}
-                  </span>
-                </div>
-                <p className="font-body text-xs text-brand-navy/70 font-medium mb-1 flex items-center justify-center lg:justify-start gap-1.5">
-                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" className="text-brand-red-dark shrink-0">
-                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" /><circle cx="12" cy="10" r="3" />
-                  </svg>
-                  <span>{activeHotspot.area}</span>
-                </p>
-                <p className="font-body text-sm text-brand-navy/80 leading-relaxed">
-                  {activeHotspot.impact}
-                </p>
-              </div>
+        <div className="grid items-stretch gap-6 lg:grid-cols-2 lg:gap-10">
+          <div className="flex flex-col border border-rule bg-paper-deep/50 p-5 sm:p-7">
+            <div className="mb-2 flex items-baseline justify-between gap-4">
+              <span className="font-body text-xs font-bold uppercase tracking-[0.15em] text-brand-red-dark">Community locations</span>
+              <span className="font-body text-xs text-ink/60">Ashanti Region</span>
             </div>
-          </motion.div>
-
-          {/* Stats: 2x2 on mobile, 2 cols on tablet/desktop */}
-          <div className="grid grid-cols-2 gap-3 sm:gap-6">
-            {stats.map((stat, i) => {
-              const themeClasses = {
-                red: 'bg-ink text-paper border-ink',
-                gold: 'bg-ink text-paper border-ink',
-                navy: 'bg-brand-navy text-white border-brand-navy',
-                green: 'bg-ink text-paper border-ink',
-              }[stat.theme] || 'bg-paper text-ink border-rule';
-
-              return (
-                <motion.div
-                  key={stat.label}
-                  initial={{ opacity: 0, y: 24 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: '-40px' }}
-                  transition={{ duration: 0.5, delay: i * 0.1, ease: 'easeOut' }}
-                  className={`flex flex-col items-center text-center lg:items-start lg:text-left p-4 sm:p-6 min-h-[9rem] sm:min-h-[10rem] rounded-editorial border transition-colors duration-300 group focus-visible:outline-2 focus-visible:outline-ink focus-visible:outline-offset-2 ${themeClasses}`}
+            <AshantiMap activeId={activeId} onSelect={setActiveId} />
+            <div className="mt-3 flex flex-wrap gap-2 border-t border-rule pt-5" role="group" aria-label="Choose an outreach location">
+              {MAP_HOTSPOTS.map((location) => (
+                <button
+                  key={location.id}
+                  type="button"
+                  aria-pressed={activeId === location.id}
+                  onClick={() => setActiveId(location.id)}
+                  className={`min-h-11 rounded-editorial border px-3.5 py-2 font-body text-xs font-semibold transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink ${
+                    activeId === location.id
+                      ? 'border-ink bg-ink text-paper'
+                      : 'border-rule bg-paper text-ink hover:border-ink'
+                  }`}
                 >
-                  <div className="flex items-center justify-center w-9 h-9 sm:w-12 sm:h-12 mb-2 sm:mb-4 bg-white/10 [&>svg]:w-4.5 [&>svg]:h-4.5 sm:[&>svg]:w-6 sm:[&>svg]:h-6">
-                    {stat.icon}
-                  </div>
-                  <div className="font-display text-2xl sm:text-3xl md:text-4xl font-black leading-none mb-1.5 sm:mb-2">
-                    <CountUp value={stat.value} />
-                  </div>
-                  
-                  <div className="w-8 sm:w-10 h-0.5 sm:h-1 my-2 sm:my-3 bg-white/30" aria-hidden="true" />
-                  
-                  <div className="font-body text-xs sm:text-lg font-bold sm:font-semibold mb-1 leading-tight">{stat.label}</div>
-                  <div className="font-body text-xs sm:text-sm leading-relaxed text-white/90">
-                    {stat.description}
-                  </div>
-                </motion.div>
-              );
-            })}
+                  {location.name}
+                </button>
+              ))}
+            </div>
+            <p className="mt-4 font-body text-xs leading-relaxed text-ink/60">
+              Map markers indicate approximate programme areas and are not GPS coordinates.
+            </p>
           </div>
+
+          {activeStory && (
+            <article className="flex flex-col overflow-hidden border border-rule bg-paper" aria-live="polite" aria-atomic="true">
+              <div className="relative aspect-[16/10] shrink-0 overflow-hidden bg-paper-deep sm:aspect-[3/2]">
+                <Image
+                  key={activeStory.image}
+                  src={activeStory.image}
+                  alt={activeStory.imageAlt}
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                  {...blurProps(activeStory.image)}
+                />
+                <span className="absolute bottom-4 left-4 bg-ink px-3 py-1.5 font-body text-xs font-semibold text-paper">
+                  {activeStory.tag}
+                </span>
+              </div>
+              <div className="flex flex-1 flex-col px-6 py-7 sm:px-9 sm:py-9">
+                <p className="font-body text-xs font-semibold uppercase tracking-[0.12em] text-brand-red-dark">
+                  {activeLocation.name} / {activeStory.date ?? 'Community outreach'}
+                </p>
+                <h3 className="mt-3 font-display text-3xl leading-tight sm:text-4xl">{activeStory.name}</h3>
+                <p className="mt-2 font-body text-xs text-ink/65">{activeStory.location}</p>
+                <p className="mt-5 font-body text-base leading-relaxed text-ink/80">{activeStory.body[0]}</p>
+                <div className="mt-auto flex flex-wrap items-center gap-6 pt-7">
+                  <Link
+                    href={`/stories/${activeStory.id}`}
+                    className="inline-flex min-h-11 items-center gap-2 border-b border-ink font-body text-sm font-semibold text-ink transition-colors hover:text-brand-red-dark focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ink"
+                  >
+                    View the field report <span aria-hidden="true">↗</span>
+                  </Link>
+                  <Link href="/get-involved" className="inline-flex min-h-11 items-center font-body text-sm font-semibold text-brand-red-dark hover:underline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ink">
+                    Get involved
+                  </Link>
+                </div>
+              </div>
+            </article>
+          )}
         </div>
       </div>
     </section>

@@ -19,13 +19,16 @@ export function StoryGrid() {
             Impact Stories
           </p>
           <h2 id="stories-heading" className="mt-3 font-display text-4xl leading-[1.05] md:text-6xl">
-            From the field. In their communities.
+            More stories from the field.
           </h2>
+          <p className="mt-5 max-w-xl font-body text-base leading-relaxed text-ink/75">
+            Photographs and field notes from the communities behind our programmes.
+          </p>
         </div>
 
         {/* Three-card grid on desktop, progressive disclosure on mobile */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-          {stories.slice(0, 3).map((story, i) => (
+          {stories.slice(1, 4).map((story, i) => (
             <motion.article
               key={story.id}
               initial={{ opacity: 0, y: 24 }}
@@ -36,7 +39,7 @@ export function StoryGrid() {
                 i > 0 ? (showAllMobile ? 'flex' : 'hidden sm:flex') : 'flex'
               }`}
             >
-              <div className="relative h-64 overflow-hidden shrink-0 rounded-editorial">
+              <div className="relative aspect-[5/4] shrink-0 overflow-hidden rounded-editorial">
                 <Image
                   src={story.image}
                   alt={story.imageAlt}

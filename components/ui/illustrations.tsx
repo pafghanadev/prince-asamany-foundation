@@ -52,6 +52,7 @@ export function GhanaMapSilhouette() {
 
 export interface MapHotspot {
   id: string;
+  storyId: string;
   name: string;
   area: string;
   tag: string;
@@ -64,6 +65,7 @@ export interface MapHotspot {
 export const MAP_HOTSPOTS: MapHotspot[] = [
   {
     id: 'akyawkrom',
+    storyId: 'farmers-engagement-akyawkrom',
     name: 'Akyawkrom',
     area: 'Ejisu Municipal Assembly',
     tag: 'Foundation HQ & Agriculture',
@@ -74,6 +76,7 @@ export const MAP_HOTSPOTS: MapHotspot[] = [
   },
   {
     id: 'ejisu',
+    storyId: 'cervical-cancer-screening',
     name: 'Ejisu Town',
     area: 'Mansa Memorial Hospital',
     tag: 'Preventive Healthcare',
@@ -84,6 +87,7 @@ export const MAP_HOTSPOTS: MapHotspot[] = [
   },
   {
     id: 'kumasi',
+    storyId: 'joy-to-the-street',
     name: 'Kumasi Metro',
     area: 'Amakom, Asafo & WAEC',
     tag: 'Social Welfare',
@@ -94,6 +98,7 @@ export const MAP_HOTSPOTS: MapHotspot[] = [
   },
   {
     id: 'forestry',
+    storyId: 'free-deworming-exercise',
     name: 'Forestry Commission Centre',
     area: 'Akyawkrom Corridor',
     tag: 'Student Wellness',
@@ -118,8 +123,8 @@ export function AshantiMap({
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       className="w-full max-w-sm sm:max-w-md mx-auto select-none"
-      aria-label="Interactive map of Ghana highlighting Prince Asamany Foundation community programs in the Ashanti Region"
-      role="img"
+      aria-label="Select a Prince Asamany Foundation outreach location on the Ghana map"
+      role="group"
     >
       {/* Full Ghana Landmass */}
       <path
@@ -196,7 +201,7 @@ export function AshantiMap({
               className={
                 isActive
                   ? 'pulse-ring stroke-brand-red'
-                  : 'transition-opacity duration-300 stroke-brand-gold opacity-0 group-hover:opacity-75'
+                  : 'transition-opacity duration-300 stroke-brand-gold opacity-0 group-hover:opacity-75 group-focus-visible:opacity-75'
               }
               cx={spot.x}
               cy={spot.y}
@@ -211,7 +216,7 @@ export function AshantiMap({
               cy={spot.y}
               r={isActive ? '15' : '11'}
               className={`transition-all duration-200 ${
-                isActive ? 'fill-brand-red' : 'fill-brand-navy group-hover:fill-brand-red'
+                isActive ? 'fill-brand-red' : 'fill-brand-navy group-hover:fill-brand-red group-focus-visible:fill-brand-red'
               }`}
             />
             <circle

@@ -11,15 +11,16 @@ interface GalleryImage {
   caption: string;
   width: number;
   height: number;
+  position?: string;
 }
 
-/* Intrinsic dimensions of each source photo so the masonry keeps natural
-   aspect ratios - no cropping. */
+/* Original dimensions are retained for the full-size lightbox. Gallery cards
+   use a shared frame so portrait and landscape photos align cleanly. */
 const IMAGES: GalleryImage[] = [
-  { src: '/media/opt/IMG-20251118-WA0038.webp', alt: 'Prince Douglas Asamany on the red carpet holding the 2025 Social Change Advocate Award trophy and citation', caption: 'On the red carpet with the trophy and citation', width: 854, height: 1280 },
+  { src: '/media/opt/IMG-20251118-WA0038.webp', alt: 'Prince Douglas Asamany on the red carpet holding the 2025 Social Change Advocate Award trophy and citation', caption: 'On the red carpet with the trophy and citation', width: 854, height: 1280, position: 'center 43%' },
   { src: '/media/opt/IMG_6934.webp', alt: 'Foundation volunteers in Prince Asamany Foundation shirts celebrating with raised arms outside the Santasi event centre in Kumasi', caption: 'Team celebration after a street outreach in Santasi', width: 1384, height: 1038 },
   { src: '/media/opt/IMG-20251118-WA0040.webp', alt: 'Prince Douglas Asamany with fellow honorees holding their trophies at the Philanthropic Awards & Charity Night', caption: 'With fellow honorees at the Philanthropic Awards & Charity Night', width: 1280, height: 854 },
-  { src: '/media/opt/WhatsApp Image 2026-08-20 at 18.25.51.webp', alt: 'Prince Douglas Asamany holding the Social Change Advocate Award plaque', caption: 'Holding the Social Change Advocate Award plaque', width: 810, height: 1080 },
+  { src: '/media/opt/WhatsApp Image 2026-08-20 at 18.25.51.webp', alt: 'Prince Douglas Asamany holding the Social Change Advocate Award plaque', caption: 'Holding the Social Change Advocate Award plaque', width: 810, height: 1080, position: 'center 42%' },
   { src: '/media/opt/IMG_6846.webp', alt: 'Prince Asamany connecting with the community during the Joy to the Street campaign', caption: 'Connecting with the community during the Joy to the Street campaign', width: 1384, height: 1038 },
   { src: '/media/opt/IMG-20251115-WA0157.webp', alt: 'Prince Douglas Asamany engaging with guests at a foundation event', caption: 'Engaging with guests at a foundation event', width: 1080, height: 810 },
   { src: '/media/opt/IMG_4388.webp', alt: 'Women and children queueing along a fence for food distribution during the Joy to the Street campaign in Kumasi', caption: 'Families queueing for relief supplies during Joy to the Street', width: 1384, height: 1038 },
@@ -32,7 +33,7 @@ const FOCUSABLE_SELECTOR =
   'a[href], button:not([disabled]), textarea:not([disabled]), input:not([disabled]), select:not([disabled]), [tabindex]:not([tabindex="-1"])';
 
 export function AwardGallery() {
-const [active, setActive] = useState<number | null>(null);
+  const [active, setActive] = useState<number | null>(null);
   const dialogRef = useRef<HTMLDivElement>(null);
   const closeBtnRef = useRef<HTMLButtonElement>(null);
   const lastTriggerRef = useRef<HTMLElement | null>(null);
@@ -118,8 +119,8 @@ const [active, setActive] = useState<number | null>(null);
         </p>
       </div>
 
-      {/* Mobile: Horizontal scroll snap. Desktop: Editorial masonry */}
-      <div className="flex overflow-x-auto snap-x snap-mandatory gap-4 pb-8 sm:block sm:columns-2 lg:columns-3 sm:gap-4 md:gap-6 sm:overflow-visible sm:pb-0 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+      {/* Mobile: horizontal scroll. Larger screens: even rows with consistent photo frames. */}
+      <div className="flex items-start overflow-x-auto snap-x snap-mandatory gap-4 pb-8 sm:grid sm:grid-cols-2 lg:grid-cols-3 sm:gap-4 md:gap-6 sm:overflow-visible sm:pb-0 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
         {IMAGES.map((img, i) => (
           <motion.button
             initial={{ opacity: 0, scale: 0.95 }}
@@ -130,18 +131,19 @@ const [active, setActive] = useState<number | null>(null);
             type="button"
             onClick={() => openLightbox(i)}
             aria-label={`View photo: ${img.caption}`}
-            className="group relative shrink-0 snap-center w-[85vw] sm:w-full mb-0 sm:mb-4 md:mb-6 break-inside-avoid block overflow-hidden rounded-editorial border border-white/15  bg-ink text-paper focus-visible:outline-2 focus-visible:outline-brand-gold focus-visible:outline-offset-2"
+            className="group relative block shrink-0 snap-center w-[85vw] sm:w-full min-w-0 overflow-hidden rounded-editorial border border-white/15 bg-ink text-paper focus-visible:outline-2 focus-visible:outline-brand-gold focus-visible:outline-offset-2"
           >
-            {/* Main Image - natural aspect ratio, never cropped */}
-            <Image
-              src={img.src}
-              alt={img.alt}
-              width={img.width}
-              height={img.height}
-              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-              className="w-full h-auto transition-transform duration-700 group-hover:scale-[1.03]"
-              {...blurProps(img.src)}
-            />
+            <div className="relative aspect-[5/4] w-full overflow-hidden">
+              <Image
+                src={img.src}
+                alt={img.alt}
+                fill
+                sizes="(max-width: 640px) 85vw, (max-width: 1024px) 50vw, 33vw"
+                style={{ objectPosition: img.position ?? 'center' }}
+                className="object-cover transition-transform duration-700 group-hover:scale-[1.03]"
+                {...blurProps(img.src)}
+              />
+            </div>
             
             {/* Gradient Scrim for text visibility */}
             <span
@@ -150,15 +152,15 @@ const [active, setActive] = useState<number | null>(null);
             />
             
             {/* Caption */}
-            <div className="absolute bottom-0 left-0 right-0 p-5 md:p-6 z-20 text-center lg:text-left transform transition-transform duration-300 translate-y-2 group-hover:translate-y-0">
-              <span className="font-body text-sm md:text-base font-medium text-white drop-">
+            <div className="absolute bottom-0 left-0 right-0 p-5 md:p-6 z-20 text-center lg:text-left md:translate-y-2 md:group-hover:translate-y-0 transition-transform duration-300">
+              <span className="font-body text-sm md:text-base font-medium text-white">
                 {img.caption}
               </span>
             </div>
             
             {/* Hover Zoom Icon */}
             <div
-              className="absolute top-5 right-5 w-10 h-10 z-20 rounded-full bg-black/40 backdrop-blur-md border border-white/20 flex items-center justify-center text-white opacity-0 group-hover:opacity-100 transition-all duration-300 group-hover:scale-110 pointer-events-none"
+              className="absolute top-4 right-4 w-10 h-10 z-20 rounded-full bg-black/40 backdrop-blur-md border border-white/20 flex items-center justify-center text-white opacity-100 sm:opacity-0 sm:group-hover:opacity-100 sm:group-focus-visible:opacity-100 transition-all duration-300 group-hover:scale-110 pointer-events-none"
               aria-hidden="true"
             >
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">

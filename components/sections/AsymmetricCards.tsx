@@ -1,46 +1,47 @@
-import React from 'react';
+import Image from 'next/image';
 import Link from 'next/link';
-import { PhotoCaption } from '@/components/ui/editorial';
+import { blurProps } from '@/lib/media';
 
 export function AsymmetricCards() {
+  const photo = '/media/opt/IMG-20260727-WA0008.webp';
+
   return (
-    <section className="bg-paper text-ink py-20 md:py-28" aria-labelledby="impact-cards-heading">
-      <div className="mx-auto grid max-w-6xl grid-cols-1 gap-12 px-6 lg:grid-cols-[minmax(0,1.2fr)_minmax(0,0.9fr)_minmax(0,0.9fr)] md:gap-8 md:px-12 lg:gap-10">
-        <div className="flex flex-col items-center text-center lg:items-start lg:pt-10 lg:text-left">
-          <p className="font-body text-xs font-semibold uppercase tracking-[0.18em] text-brand-red-dark">Our Impact</p>
-          <h2 id="impact-cards-heading" className="mt-3 font-display text-4xl leading-[1.08] md:text-6xl">
-            Practical care. Personal connections.
-          </h2>
-          <p className="mt-6 max-w-md font-body text-lg leading-relaxed text-ink/75">
-            Free health screenings. Support for students. Relief packages shared with families. Our work starts with people and the needs they bring to us.
-          </p>
-          <Link
-            href="/stories"
-            className="mt-8 inline-flex min-h-12 items-center justify-center rounded-editorial bg-brand-gold px-6 font-semibold text-brand-navy"
-          >
-            Read our outreach stories ↗
-          </Link>
+    <section className="bg-paper-deep py-16 text-ink md:py-24" aria-labelledby="impact-cards-heading">
+      <div className="mx-auto max-w-6xl px-6 md:px-12">
+        <div className="mb-8 flex items-center gap-5 md:mb-10">
+          <span className="shrink-0 font-body text-xs font-bold uppercase tracking-[0.18em] text-brand-red-dark">Field report / 01</span>
+          <span className="h-px flex-1 bg-rule" aria-hidden="true" />
+          <span className="hidden font-body text-xs text-ink/65 sm:block">July 2026 · Student health</span>
         </div>
-
-        <div className="text-center lg:text-left">
-          <PhotoCaption
-            src="/media/opt/IMG_6848.webp"
-            alt="Close-up of a community member's hands during a foundation event"
-            caption="Community hands, foundation event"
-            aspect="aspect-[4/5]"
-          />
-        </div>
-
-        <div className="flex flex-col items-center text-center lg:mt-12 lg:items-start lg:text-left">
-          <PhotoCaption
-            src="/media/opt/IMG_6917.webp"
-            alt="Prince Asamany handing a care package to a boy during a street outreach in Ejisu"
-            caption="Street outreach, Ejisu"
-            aspect="aspect-[4/5]"
-          />
-          <Link href="/programs" className="mt-4 inline-block border-b border-ink pb-1 text-sm font-semibold">
-            See our programs →
-          </Link>
+        <div className="grid items-stretch lg:grid-cols-[1.08fr_0.92fr]">
+          <figure className="relative min-h-[18rem] overflow-hidden sm:min-h-[26rem] lg:min-h-[35rem]">
+            <Image
+              src={photo}
+              alt="Students at the Forestry Commission Training Centre holding medication during the free deworming exercise"
+              fill
+              className="object-cover object-center"
+              sizes="(max-width: 1024px) 100vw, 55vw"
+              {...blurProps(photo)}
+            />
+            <figcaption className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-ink/85 to-transparent px-5 pb-5 pt-16 font-body text-xs text-white sm:px-7">
+              Forestry Commission Training Centre · Ashanti Region
+            </figcaption>
+          </figure>
+          <div className="flex flex-col justify-center bg-ink px-7 py-10 text-paper sm:px-12 sm:py-14 lg:px-14">
+            <p className="font-body text-xs font-semibold uppercase tracking-[0.18em] text-brand-gold">The work behind the numbers</p>
+            <p className="mt-6 font-display text-7xl leading-none text-brand-gold sm:text-8xl">84</p>
+            <h2 id="impact-cards-heading" className="mt-4 font-display text-3xl leading-[1.1] sm:text-4xl lg:text-5xl">
+              Students reached through preventive care.
+            </h2>
+            <p className="mt-6 max-w-md font-body text-base leading-relaxed text-paper/80">
+              In July 2026, students received free deworming medication alongside guidance on hygiene and sanitation. The exercise reached 84 students in the Forestry Commission training programme and Ejisu Akyawkrom community.
+            </p>
+            <div className="mt-8 border-t border-white/20 pt-6">
+              <Link href="/stories/free-deworming-exercise" className="inline-flex min-h-12 items-center gap-3 border-b border-brand-gold pb-1 font-body text-sm font-semibold text-brand-gold transition-colors hover:text-white focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-gold">
+                See the photographs and full report <span aria-hidden="true">↗</span>
+              </Link>
+            </div>
+          </div>
         </div>
       </div>
     </section>

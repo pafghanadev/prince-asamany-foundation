@@ -5,7 +5,7 @@ import { DonatePageContent } from '@/components/sections/DonatePageContent';
 export const metadata: Metadata = {
   title: 'Donate',
   description:
-    'Support Prince Asamany Foundation via Paystack, bank transfer, or MTN MoMo. Every gift directly funds clean water access, environmental projects, and skills training for families across Ejisu, Ghana.',
+    'Support Prince Asamany Foundation via Paystack, bank transfer, or MTN MoMo. Explore documented community health, education and welfare outreach in Ghana.',
 };
 
 export default function DonatePage() {

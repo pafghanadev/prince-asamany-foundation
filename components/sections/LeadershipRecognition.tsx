@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useSyncExternalStore } from 'react';
 import Image from 'next/image';
 import { motion, useReducedMotion } from 'framer-motion';
 import { AwardGallery } from '@/components/sections/AwardGallery';
@@ -13,8 +13,14 @@ const EASE: [number, number, number, number] = [0.22, 1, 0.36, 1];
 const VIDEO_POSTER = '/media/opt/award-night-poster.webp';
 /* AFLAG honoree card frame extracted at 0:95 - strong representative poster, not frame 0 */
 
+const subscribe = () => () => {};
+const getClientSnapshot = () => true;
+const getServerSnapshot = () => false;
+
 export function LeadershipRecognition() {
   const reducedMotion = useReducedMotion();
+  const mounted = useSyncExternalStore(subscribe, getClientSnapshot, getServerSnapshot);
+
   return (
     <section id="leadership" className="bg-ink text-paper py-20 md:py-28 overflow-hidden">
       <div className="max-w-7xl mx-auto px-5 md:px-8">
@@ -69,7 +75,7 @@ export function LeadershipRecognition() {
             <div className="absolute -inset-8 bg-brand-gold/[0.07] blur-3xl rounded-full pointer-events-none" aria-hidden="true" />
 
             <figure className="overflow-hidden border border-white/10">
-              {reducedMotion !== false ? (
+              {!mounted || reducedMotion !== false ? (
                 <div className="relative aspect-video">
                   <Image src={VIDEO_POSTER} alt="Prince Asamany receiving the 2025 Social Change Advocate Award" fill sizes="(min-width: 1024px) 58vw, 100vw" className="object-cover" {...blurProps(VIDEO_POSTER)} />
                 </div>
